@@ -1,0 +1,11 @@
+.avatar_img_update {
+    height:200px;
+    width: 200px;
+    margin:5px;
+}
+
+.text_label{
+    font-family: "Microsoft Yahei";
+    font-weight: normal;
+    font-size: 1.2em;
+}

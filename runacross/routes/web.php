@@ -11,4 +11,8 @@
 |
 */
 
-Route::get('/', 'LoginController@showUsers');
+//Route::get('/', 'LoginController@showUsers');
+
+Route::get('/', function (){
+    return view('login');
+});

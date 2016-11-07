@@ -1,0 +1,11 @@
+.text_compete {
+    font-family: "Microsoft Yahei";
+    font-weight: 400;
+    font-size: 1.2em;
+}
+
+.avatar_img_competition{
+    height:50px;
+    width: 50px;
+    margin-top:5px;
+}

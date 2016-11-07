@@ -1,0 +1,45 @@
+.avatar_username{
+    font-family: "Roboto", sans-serif;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+
+.logo{
+    font-family: "Roboto", sans-serif;
+    font-weight: normal;
+    font-size:   30px;
+    margin-left:16px;
+}
+
+
+
+
+
+.card{
+     padding: 10px;
+}
+
+body{
+
+    font-family :
+    "Microsoft Yahei",
+    "Microsoft YaHei UI",
+    "WenQuanYi Micro Hei",
+    "WenQuanYi Zen Hei",
+    "Noto Sans CJK SC",
+    "Microsoft JhengHei UI",
+    "Microsoft JhengHei",
+    "PingFang TC",
+    "Lantinghei TC",
+    "Noto Sans CJK TC",
+    "Helvetica Neue",
+    "Helvetica",
+    "PingFang SC";
+}
+
+.container{
+    width: 80%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}

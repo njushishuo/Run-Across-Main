@@ -1,0 +1,18 @@
+.avatar_img_friends {
+    height:70px;
+    width: 80px;
+    padding-right:10px;
+
+}
+
+.text_username {
+    font-family: "Microsoft Yahei";
+    font-weight: 400;
+    font-size: 1.2em;
+}
+
+.text_userloc {
+    font-family: "Microsoft Yahei";
+    font-weight: 400;
+    font-size: 1em;
+}
