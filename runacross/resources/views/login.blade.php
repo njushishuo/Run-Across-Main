@@ -109,20 +109,19 @@
     </div>
 </main>
 
-<footer class="page-footer">
-    <div class="container">
-        <div class="row">
-            <div class="col l6 s12">
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+<footer class="blue lighten-1 grey-text text-lighten-4">
+    <div class="row">
+        <div class="col s4 offset-s8">
+            <div class="container">
+                <p class="grey-text text-lighten-4">
+                    欢迎注册并使用本网站 © 2016 Copyright
+                </p>
             </div>
         </div>
+
+
     </div>
-    <div class="footer-copyright">
-        <div class="container">
-            © 2014 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-        </div>
-    </div>
+
 </footer>
 
 </body>
