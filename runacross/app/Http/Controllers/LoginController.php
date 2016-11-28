@@ -8,15 +8,20 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    //
-    protected $user;
+
+    protected $User;
 
     public function __construct(User $user)
     {
-        $this->user=$user;
+        $this->User=$user;
     }
 
-    public function showUsers(){
-        $this->user->getAllUsers();
+    public function verify(Request $requeste){
+         $pass = $this->User->verify($requeste->input('username') , $requeste->input('password'));
+        if($pass){
+            return view();
+        }else{
+            return view();
+        }
     }
 }

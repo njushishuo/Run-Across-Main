@@ -19,4 +19,12 @@ class User extends Model
             echo $user->user_name;
         }
     }
+
+    public function verify($username , $password){
+        $user = User::where('user_name', $username)->get();
+        if($user.$password == $password){
+            return true;
+        }
+        return false;
+    }
 }
