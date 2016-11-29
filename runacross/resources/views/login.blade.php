@@ -9,8 +9,6 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script type="text/javascript" src="{{URL::asset('js/jquery-2.2.4.min.js') }}"></script>
-    <script type="text/javascript" src="{{URL::asset('js/materialize.min.js') }}"></script>
 </head>
 
 
@@ -56,17 +54,18 @@
                             </div>
                             <div class="card-stacked">
                                 <div class="card-content" >
-                                    <form type="post" action="validation" >
+
+                                    <form  method="post" id="loginForm" >
                                         <div class="container input-field">
-                                            <input  id="username" type="text" class="validate" >
+                                            <input  name="username" type="text" class="validate" >
                                             <label for="username" >用户名</label>
                                         </div>
                                         <div class="container input-field" >
-                                            <input  id="password" type="text" class="validate" >
+                                            <input  name="password" type="text" class="validate" >
                                             <label for="password">密码</label>
                                         </div>
                                         <div class="container input-field center">
-                                            <button class="btn blue lighten-2 waves-effect waves-light " type="submit" name="action">
+                                            <button type="button" onclick="loginVerify()" class="btn blue lighten-2 waves-effect waves-light " >
                                                 登陆
                                             </button>
                                         </div>
@@ -81,17 +80,18 @@
                             </div>
                             <div class="card-stacked">
                                 <div class="card-content" >
-                                    <form type="post" action="validation" >
+
+                                    <form method="post" id="registerForm">
                                         <div class="container input-field">
-                                            <input  id="r_username" type="text" class="validate" >
+                                            <input  name="r_username" type="text" class="validate" >
                                             <label for="username" >用户名</label>
                                         </div>
                                         <div class="container input-field" >
-                                            <input  id="r_password" type="text" class="validate" >
+                                            <input  name="r_password" type="text" class="validate" >
                                             <label for="password">密码</label>
                                         </div>
                                         <div class="container input-field center">
-                                            <button class="btn blue lighten-2 waves-effect waves-light " type="submit" name="action">
+                                            <button type="button" onclick="register()"  class="btn blue lighten-2 waves-effect waves-light " >
                                                 注册
                                             </button>
                                         </div>
@@ -118,11 +118,13 @@
                 </p>
             </div>
         </div>
-
-
     </div>
-
 </footer>
+
+
+<script type="text/javascript" src="{{URL::asset('js/jquery-2.2.4.min.js') }}"></script>
+<script type="text/javascript" src="{{URL::asset('js/materialize.min.js') }}"></script>
+<script type="text/javascript" src="{{URL::asset('js/login.js') }}"></script>
 
 </body>
 </html>

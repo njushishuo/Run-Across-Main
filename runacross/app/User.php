@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Log;
 
 class User extends Model
 {
@@ -21,10 +22,26 @@ class User extends Model
     }
 
     public function verify($username , $password){
-        $user = User::where('user_name', $username)->get();
-        if($user.$password == $password){
-            return true;
+
+        Log::info("get username:".$username);
+
+        $user = User::where('user_name', $username)->first();
+
+        Log::info("user",['user'=>$user]);
+
+        if($user==null){
+            Log::info("user is null");
+            return null;
         }
-        return false;
+
+
+        if($user->password == $password){
+            Log::info("验证通过");
+            return $user;
+        }
+
+        return null;
     }
+
+
 }

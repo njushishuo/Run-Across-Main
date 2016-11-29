@@ -11,7 +11,7 @@
 |
 */
 
-//Route::get('/', 'LoginController@showUsers');
+/*Login*/
 
 Route::get('/', function (){
     return view('login');
@@ -21,4 +21,9 @@ Route::get('/login', function (){
     return view('login');
 });
 
-Route::post('/login','LoginController@verify');
+Route::post('/login','LoginController@postLogin');
+
+
+/*Moments*/
+
+Route::get('/user/{userId}/related-moments','MomentController@getRelatedMoments');
