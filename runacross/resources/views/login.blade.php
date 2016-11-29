@@ -50,7 +50,7 @@
 
                         <div class="z-depth-0 card horizontal" id="login">
                             <div class="card-image">
-                                <img src="img/login.jpg">
+                                <img src="img/login.jpg" alt="赶快登陆吧！">
                             </div>
                             <div class="card-stacked">
                                 <div class="card-content" >

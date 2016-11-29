@@ -4,7 +4,7 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="{{URL::asset('css/materialize.min.css') }}" media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="{{URL::asset('css/common.css') }}" media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="{{URL::asset('css/moments_board.css') }}" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{URL::asset('css/moments_mine.css') }}" media="screen,projection"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
@@ -73,9 +73,8 @@
 
             <div class="row ">
                 <!--Moments Create board and list-->
-                <div class="col s12 m12 l8" >
+                <div class="col s12 m12 l8 offset-l2" >
                     <!--Post new moment board-->
-
                     <div class="card white">
                         <div class="card-content black-text">
 
@@ -125,89 +124,62 @@
 
                         </div>
                     </div>
-
-
-                    @foreach( $moments as $moment)
+                @foreach( $moments as $moment)
                     <!--Moments come here-->
                     <div class="card">
-                        <!--Avatar here-->
-                        <div class="row" style="margin-bottom: 0px">
-                            <div class="col s12 m12 l2" style="padding:5px">
-                                <img  class="avatar_img_moment" src="{{ $moment->Author->avatar }}" alt="Contact Person">
+                            <!--Avatar here-->
+                            <div class="row" style="margin-bottom: 0px">
+                                <div class="col s2" style="padding:5px">
+                                    <img  class="avatar_img_moment" src="{{ $moment->Author->avatar }}" alt="Contact Person">
+                                </div>
+                                <div class="input-field col s8" style="padding-left: 0px;">
+                                    <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $moment->Author->nick_name }}</span><br>
+                                    <span class="grey-text lighten-2" style="font-size: 1em;font-weight:300">@NanJing</span>
+                                </div>
+                                <div class="input-field col s2" style="padding-left: 0px;">
+                                    <a href="#confirm_delete_modal" class="white-text  waves-effect waves-light btn red lighten-1 ">删除</a>
+
+                                    <div id="confirm_delete_modal" class="modal modal-fixed-footer">
+                                        <div class="modal-content">
+                                            <h4>Modal Header</h4>
+                                            <p>A bunch of text</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                                            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
                             </div>
-                            <div class="input-field col s12 m12 l10" style="padding-left: 0px;">
-                                <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $moment->Author->nick_name }}</span><br>
-                                <span class="grey-text lighten-2" style="font-size: 1em;font-weight:300">@NanJing</span>
+                            <hr style=" opacity:0.3;">
+                            <!--img here-->
+                            <div class="card-image">
+                                <img src="{{$moment->picture}}">
+                            </div>
+                            <!--discription here-->
+                            <div class="card-content">
+                                <p> {{ $moment->content }} </p>
+                            </div>
+                            <!--Actions here-->
+                            <div class="card-action">
+                                <label>
+                                    <i class="material-icons">thumb_up</i>
+                                    <span style="font-size: 2.2em;">18</span>
+                                </label>
+                                <label>
+                                    <span class="text_postDate right">发表于&nbsp{{$moment->created_at}}</span>
+                                </label>
                             </div>
                         </div>
-                        <hr style=" opacity:0.3;">
-                        <!--img here-->
-                        <div class="card-image">
-                            <img src="{{$moment->picture}}">
-                        </div>
-                        <!--discription here-->
-                        <div class="card-content">
-                            <p> {{ $moment->content }} </p>
-                        </div>
-                        <!--Actions here-->
-                        <div class="card-action">
-                            <label>
-                                <i class="material-icons">thumb_up</i>
-                                <span style="font-size: 2.2em;">18</span>
-                            </label>
-                            <label>
-                                <span class="text_post_date right">发表于&nbsp{{$moment->created_at}}</span>
-                            </label>
-                        </div>
-                    </div>
-                    @endforeach
+
+                @endforeach
+
+
 
                 </div>
 
-                <!--TODO Suggested Or Rank-->
-                <div class="col s12 m12 l4">
-                    <div class="card z-depth-0">
-
-                        <span class="blue-text lighten-2" style="font-size: 1.2em;font-weight:300">推荐动态</span>
-
-                        @foreach( $moments as $moment)
-                            <!--Moments come here-->
-                            <div class="card">
-                                <!--Avatar here-->
-                                <div class="row" style="margin-bottom: 0px">
-                                    <div class="col s12 m12 l2" style="padding:5px">
-                                        <img  class="avatar_img_moment" src="{{ $moment->Author->avatar }}" alt="Contact Person">
-                                    </div>
-                                    <div class="input-field col s12 m12 l10" style="padding-left: 0px;">
-                                        <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $moment->Author->nick_name }}</span><br>
-                                        <span class="grey-text lighten-2" style="font-size: 1em;font-weight:300">@NanJing</span>
-                                    </div>
-                                </div>
-                                <hr style=" opacity:0.3;">
-                                <!--img here-->
-                                <div class="card-image">
-                                    <img src="{{$moment->picture}}">
-                                </div>
-                                <!--discription here-->
-                                <div class="card-content">
-                                    <p> {{ $moment->content }} </p>
-                                </div>
-                                <!--Actions here-->
-                                <div class="card-action">
-                                    <label>
-                                        <i class="material-icons">thumb_up</i>
-                                        <span style="font-size: 2.2em;">18</span>
-                                    </label>
-
-                                    <label>
-                                        <span class="text_post_date right">发表于&nbsp{{$moment->created_at}}</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                        @endforeach
-                    </div>
-                </div>
             </div>
 
         </div>
@@ -219,5 +191,6 @@
 
 <script type="text/javascript" src="{{URL::asset('js/jquery-2.2.4.min.js') }}"></script>
 <script type="text/javascript" src="{{URL::asset('js/materialize.min.js') }}"></script>
+<script type="text/javascript" src="{{URL::asset('js/moments_mine.js') }}"></script>
 </body>
 </html>

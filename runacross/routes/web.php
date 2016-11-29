@@ -24,6 +24,13 @@ Route::get('/login', function (){
 Route::post('/login','LoginController@postLogin');
 
 
-/*Moments*/
+/*Related-Moments*/
 
 Route::get('/user/{userId}/related-moments','MomentController@getRelatedMoments');
+
+Route::post('/user/{userId}/related-moments','MomentController@createMomentBoard');
+
+/*My-Moments*/
+Route::get('/user/{userId}/moments','MomentController@getMyMoments');
+
+Route::post('/user/{userId}/moments','MomentController@createMomentMine');

@@ -13,6 +13,7 @@ class User extends Model
     *
     */
     protected $table = 'user';
+    public $timestamps = false;
 
     public function getAllUsers(){
         $users = User::all();

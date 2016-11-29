@@ -25,16 +25,17 @@ class LoginController extends Controller
 
         if($user!=null){
 
+            Log::info("login success");
+
             $url = "/user/".$user->id."/related-moments";
 
-            Log::info("sucess");
-            Log::info("$url");
+            $request->session()->put('user',$user);
 
             return ['result'=>true , 'url'=>$url];
 
         }else{
 
-            Log::info("fail");
+            Log::info("login fail");
 
             return ['result'=>false];
 

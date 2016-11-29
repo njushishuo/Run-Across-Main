@@ -13,6 +13,7 @@ class Friend extends Model
      *
      */
     protected $table = 'friendship';
+    public $timestamps = false;
 
     public function getAllFriendsIdByUserId($userId){
 
