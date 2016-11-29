@@ -76,8 +76,28 @@ class MomentController extends Controller
 
         $url = "/user/".$userId."/moments";
         return redirect($url);
-
     }
 
+    public function deleteMoment($userId,$momentId){
+
+        $moment = Moment::find($momentId);
+
+        if($moment!=null){
+
+            Log::info("delete moment id = ".$moment->id);
+            $moment->delete();
+
+            $url = "/user/".$userId."/moments/";
+            return ['result'=>true , 'url'=>$url];
+
+        }else{
+
+            Log::info("not found moment id = ".$moment->id);
+
+            return ['result'=>false ];
+        }
+
+
+    }
 
 }

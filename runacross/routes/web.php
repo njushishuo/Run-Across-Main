@@ -34,3 +34,5 @@ Route::post('/user/{userId}/related-moments','MomentController@createMomentBoard
 Route::get('/user/{userId}/moments','MomentController@getMyMoments');
 
 Route::post('/user/{userId}/moments','MomentController@createMomentMine');
+
+Route::delete('user/{userId}/moments/{momentId}','MomentController@deleteMoment');

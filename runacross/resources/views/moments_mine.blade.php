@@ -9,6 +9,8 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
 </head>
 
 <body>
@@ -78,7 +80,7 @@
                     <div class="card white">
                         <div class="card-content black-text">
 
-                            <form  method="post" id="postForm" action="/user/{{Session::get('user')->id}}/related-moments">
+                            <form  method="post" id="postForm" action="/user/{{Session::get('user')->id}}/moments">
                                 <!--Photo add bt-->
                                 <div class="row" style="margin-bottom: 0px">
                                     <div class="col s12">
@@ -97,7 +99,7 @@
                                     <div class="col s12">
                                         <div class="row">
                                             <div class="col s12 m12 l2">
-                                                <img class="avatar_img_create" src="{{ Session::get('user')->avatar }}" alt="用户头像">
+                                                <img class="avatar_img_create" src="{{URL::asset('img/avatar4.jpg') }}" alt="用户头像">
                                             </div>
                                             <div class="input-field col s12 m12 l10">
                                                 <label for="moment_content">想说点什么?</label>
@@ -126,32 +128,21 @@
                     </div>
                 @foreach( $moments as $moment)
                     <!--Moments come here-->
-                    <div class="card">
+                    <div class="card" >
                             <!--Avatar here-->
                             <div class="row" style="margin-bottom: 0px">
                                 <div class="col s2" style="padding:5px">
-                                    <img  class="avatar_img_moment" src="{{ $moment->Author->avatar }}" alt="Contact Person">
+                                    <img  class="avatar_img_moment" src="{{URL::asset('img/avatar4.jpg') }}" alt="头像">
                                 </div>
                                 <div class="input-field col s8" style="padding-left: 0px;">
                                     <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $moment->Author->nick_name }}</span><br>
                                     <span class="grey-text lighten-2" style="font-size: 1em;font-weight:300">@NanJing</span>
                                 </div>
                                 <div class="input-field col s2" style="padding-left: 0px;">
-                                    <a href="#confirm_delete_modal" class="white-text  waves-effect waves-light btn red lighten-1 ">删除</a>
-
-                                    <div id="confirm_delete_modal" class="modal modal-fixed-footer">
-                                        <div class="modal-content">
-                                            <h4>Modal Header</h4>
-                                            <p>A bunch of text</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-                                            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-                                        </div>
-                                    </div>
-
+                                    <button data-target="confirm_delete_modal"
+                                            class="btn red lighten-1  modal-trigger white-text  waves-effect waves-light"
+                                    >删除</button>
                                 </div>
-
                             </div>
                             <hr style=" opacity:0.3;">
                             <!--img here-->
@@ -176,7 +167,17 @@
 
                 @endforeach
 
-
+                    <div id="confirm_delete_modal" class="modal modal-fixed-footer">
+                        <div class="modal-content">
+                            <h3>动态删除提醒</h3>
+                            <p>确定删除此动态吗？</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class=" modal-action modal-close waves-effect waves-green btn-flat">否</button>
+                            <button onclick="deleteMomentById( {{ Session::get('user')->id.",".$moment->id }} )"
+                                    class=" modal-action modal-close waves-effect waves-green btn-flat">是</button>
+                        </div>
+                    </div>
 
                 </div>
 
