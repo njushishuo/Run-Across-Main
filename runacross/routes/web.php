@@ -36,3 +36,22 @@ Route::get('/user/{userId}/moments','MomentController@getMyMoments');
 Route::post('/user/{userId}/moments','MomentController@createMomentMine');
 
 Route::delete('user/{userId}/moments/{momentId}','MomentController@deleteMoment');
+
+
+
+/*Competitions*/
+Route::get('/competitions','CompetitionController@getAllCompetitions');
+
+Route::post('/user/{userId}/competitions','CompetitionController@createCompetitionBoard');
+
+Route::post('/competitions/{competitionId}/users/{userId}','CompetitionController@joinCompetition');
+
+Route::delete('/competitions/{competitionId}/users/{userId}','CompetitionController@quitCompetition');
+
+
+/*My-Competitions*/
+Route::get('/user/{userId}/competitions','CompetitionController@getCompetitionsByUserId');
+
+Route::post('/user/{userId}/competitions','CompetitionController@createCompetitionMine');
+
+Route::delete('/competitions/{competitionId}','CompetitionController@deleteCompetition');
