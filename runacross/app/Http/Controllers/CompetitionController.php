@@ -25,6 +25,12 @@ class CompetitionController extends Controller
      */
     public function getAllCompetitions(){
 
+        $individualCompetitions=$this->Competition->findIndividualCompetitions();
+        $teamCompetitions = $this->Competition->findTeamCompetitions();
+        $curTime = date('y-m-d H:i:s',time()+8*60*60);
+
+        return view('competition_board',['individualCompetitions'=>$individualCompetitions,
+                            'teamCompetitions'=>$teamCompetitions , 'curTime'=>$curTime]);
 
     }
 

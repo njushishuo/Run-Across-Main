@@ -15,12 +15,24 @@ class Competition extends Model
     public $timestamps = false;
 
     /**
-     * 返回系统中全部的活跃中的竞赛(尚未开始与尚未结束的竞赛)
+     * 返回系统中全部的活跃中的个人竞赛(尚未开始与尚未结束的竞赛),按创建时间降序
      */
-    public function findAll(){
+    public function findIndividualCompetitions(){
 
-        $competitions = Competition::findAll();
-        return $competitions;
+        $curTime = date('y-m-d H:i:s',time()+8*60*60);
+        $competitions = Competition::where('end_at','>',$curTime)->where('type','=','individual')->get();
+        return  $competitions;
+
+    }
+
+    /**
+     * 返回系统中全部的活跃中的个人竞赛(尚未开始与尚未结束的竞赛),按创建时间降序
+     */
+    public function findTeamCompetitions(){
+
+        $curTime = date('y-m-d H:i:s',time()+8*60*60);
+        $competitions = Competition::where('end_at','>',$curTime)->where('type','=','team')->get();
+        return  $competitions;
 
     }
 }

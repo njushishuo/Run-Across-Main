@@ -25,8 +25,8 @@
                         <span class="logo" > Logo</span>
                     </a>
                     <ul id="nav-mobile" class="right">
-                        <li class="active"><a href="moments_board.html"><span class="white-text center-align">动态</span></a></li>
-                        <li><a href="competition_board.html"><span class="white-text center-align">竞赛</span></a></li>
+                        <li class="active"><a href="'/user/{{ Session::get('user')->id }}/related-moments'"><span class="white-text center-align">动态</span></a></li>
+                        <li><a href="/competitions"><span class="white-text center-align">竞赛</span></a></li>
                         <li >
                             <a class="dropdown-button" href="" data-activates='dropdown1'>
                                 <div class="valign-wrapper">
@@ -49,7 +49,6 @@
         </div>
     </div>
 </header>
-
 
 <main>
     <div class="row white">
@@ -175,10 +174,10 @@
                             <div class="card">
                                 <!--Avatar here-->
                                 <div class="row" style="margin-bottom: 0px">
-                                    <div class="col s12 m12 l2" style="padding:5px">
+                                    <div class="col s4 " style="padding:5px">
                                         <img  class="avatar_img_moment" src="{{ $moment->Author->avatar }}" alt="Contact Person">
                                     </div>
-                                    <div class="input-field col s12 m12 l10" style="padding-left: 0px;">
+                                    <div class="input-field col s8" style="padding-left: 0px;">
                                         <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $moment->Author->nick_name }}</span><br>
                                         <span class="grey-text lighten-2" style="font-size: 1em;font-weight:300">@NanJing</span>
                                     </div>
@@ -216,6 +215,17 @@
 
 </main>
 
+<footer class="blue lighten-1 grey-text text-lighten-4">
+    <div class="row">
+        <div class="col s4 offset-s8">
+            <div class="container">
+                <p class="grey-text text-lighten-4">
+                    欢迎注册并使用本网站 © 2016 Copyright
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
 
 <script type="text/javascript" src="{{URL::asset('js/jquery-2.2.4.min.js') }}"></script>
 <script type="text/javascript" src="{{URL::asset('js/materialize.min.js') }}"></script>

@@ -27,8 +27,8 @@
                         <span class="logo" > Logo</span>
                     </a>
                     <ul id="nav-mobile" class="right">
-                        <li class="active"><a href="moments_board.html"><span class="white-text center-align">动态</span></a></li>
-                        <li><a href="competition_board.html"><span class="white-text center-align">竞赛</span></a></li>
+                        <li class="active"><a href="'/user/{{ Session::get('user')->id }}/related-moments'"><span class="white-text center-align">动态</span></a></li>
+                        <li><a href="/competitions"><span class="white-text center-align">竞赛</span></a></li>
                         <li >
                             <a class="dropdown-button" href="" data-activates='dropdown1'>
                                 <div class="valign-wrapper">
@@ -189,7 +189,17 @@
 
 </main>
 
-
+<footer class="blue lighten-1 grey-text text-lighten-4">
+    <div class="row">
+        <div class="col s4 offset-s8">
+            <div class="container">
+                <p class="grey-text text-lighten-4">
+                    欢迎注册并使用本网站 © 2016 Copyright
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
 <script type="text/javascript" src="{{URL::asset('js/jquery-2.2.4.min.js') }}"></script>
 <script type="text/javascript" src="{{URL::asset('js/materialize.min.js') }}"></script>
 <script type="text/javascript" src="{{URL::asset('js/moments_mine.js') }}"></script>
