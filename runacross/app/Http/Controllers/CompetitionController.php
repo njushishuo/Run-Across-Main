@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Competition;
 use App\IndividualCmpt;
 use App\TeamCmpt;
+use App\VO\CompetitionVO;
+use App\VO\UserVO;
 use Illuminate\Http\Request;
+use Log;
 
 class CompetitionController extends Controller
 {
@@ -20,51 +23,48 @@ class CompetitionController extends Controller
         $this->TeamCmpt = $teamCmpt;
     }
 
+/*---------------------------------------------------------------------------------------------------------*/
+
     /**
      * 竞赛板界面
      */
-    public function getAllCompetitions(){
+    public function getAllCmpts(){
+
+        Log::info("getAllComt");
 
         $individualCompetitions=$this->Competition->findIndividualCompetitions();
         $teamCompetitions = $this->Competition->findTeamCompetitions();
-        $curTime = date('y-m-d H:i:s',time()+8*60*60);
 
-        return view('competition_board',['individualCompetitions'=>$individualCompetitions,
-                            'teamCompetitions'=>$teamCompetitions , 'curTime'=>$curTime]);
+        $individualCompetitionVOs = array();
+        $individualPlayers = array();
 
-    }
+        for ($i=0;$i<count($individualCompetitions);$i++){
 
-    /**
-     * 竞赛板界面发布新的竞赛
-     * @param Request $request
-     * @param $userId
-     */
-    public function createCompetitionBoard(Request $request , $userId){
+            $individualCompetitionVOs[$i] = new CompetitionVO($individualCompetitions[$i]);
+            $competitionId = $individualCompetitions[$i]->id;
+            $individualPlayers[$i] = $this->IndividualCmpt->getMemberRecords($competitionId);
+        }
 
-    }
+        $teamCompetitionVOs = array();
+        $teamPlayers =array();
+        for ($i=0;$i<count($teamCompetitions);$i++){
 
-    /**
-     * 加入竞赛
-     * @param $competitionId
-     * @param $userId
-     */
-    public function joinCompetition($competitionId,$userId){
-
-    }
+            $teamCompetitionVOs[$i] = new CompetitionVO($teamCompetitions[$i]);
+            $competitionId = $teamCompetitions[$i]->id;
+            $teamPlayers[$i] =$this->TeamCmpt->getMemberRecords($competitionId);
+        }
 
 
-    /**
-     * 退出竞赛
-     * @param $competitionId
-     * @param $userId
-     */
-    public function quitCompetition($competitionId,$userId){
+
+
+        return view('competition_board',['idvCmptVOs'=>$individualCompetitionVOs,
+                            'tmCmptVOs'=>$teamCompetitionVOs ,
+                            'idvPlayers'=>$individualPlayers,
+                            'teamPlayers'=>$teamPlayers]);
 
     }
 
-
-
- /*---------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------*/
 
 
     /**
@@ -76,19 +76,53 @@ class CompetitionController extends Controller
     }
 
     /**
-     * 用户个人的竞赛界面发布新的竞赛
-     * @param Request $request
-     * @param $userId
-     */
-    public function createCompetitionMine(Request $request , $userId){
-
-    }
-
-    /**
      * 取消竞赛
      * @param $competitionId
      */
     public function deleteCompetition($competitionId){
+
+    }
+
+
+/*---------------------------------------------------------------------------------------------------------*/
+
+
+    /**
+     * 发布新的竞赛
+     * @param Request $request
+     * @param $userId
+     */
+    public function createCmpt(Request $request , $userId){
+
+    }
+
+
+    /**
+     * 加入个人竞赛
+     * @param $competitionId
+     * @param $userId
+     */
+    public function joinIdvCmpt(Request $request, $competitionId,$userId){
+
+
+    }
+
+    /**
+     * 加入团队竞赛
+     * @param $competitionId
+     * @param $userId
+     */
+    public function joinTeamCmpt(Request $request,$competitionId,$userId,$team){
+
+    }
+
+
+    /**
+     * 退出竞赛
+     * @param $competitionId
+     * @param $userId
+     */
+    public function quitCmpt(Request $request,$competitionId,$userId){
 
     }
 

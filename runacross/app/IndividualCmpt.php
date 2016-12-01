@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Log;
 
 class IndividualCmpt extends Model
 {
@@ -15,20 +16,46 @@ class IndividualCmpt extends Model
     protected $table = 'individual_competition';
     public $timestamps = false;
 
+    public function competition(){
+        return $this->hasOne('App\Competition','id','competition_id');
+    }
 
+    public function user(){
+        return $this->hasOne('App\User','id','user_id');
+    }
 
     /**
      * @param $id 竞赛Id
+     * 返回当前每个成员的状态记录的数组, comptid,userid,stride;
      */
-    public function getMembers($id){
-        $users = IndividualCmpt::
-                join('user', 'user.id', '=', 'individual_competition.user_id')
-                ->where('competition_id',$id)
-                ->orderBy('stride_count','desc')
-                ->get();
+    public function getMemberRecords($id){
 
-        return $users;
+        $records = IndividualCmpt::where('competition_id',$id)->orderBy('stride_count','desc')->get();
+
+//        Log::info($records[0]);
+//
+//        Log::info('尝试使用$record->user');
+//
+//        Log::alert($records[0]->user);
+
+        return $records;
     }
+
+
+    public function joinCompetition($competitionId,$userId){
+        $record = new IndividualCmpt();
+        $record->competition_id = $competitionId;
+        $record->user_id = $userId;
+        $record->stride_count=0;
+    }
+
+    public function quitCompetition($competitionId,$userId){
+        $record = IndividualCmpt::where('competition_id',$competitionId)->where('user_id',$userId)->first();
+        if($record!=null){
+            $record->delete();
+        }
+    }
+
 
     /**
      * 获取个人竞赛的比赛结果,返回每个成员的奖金，里程数，按里程数降序排序

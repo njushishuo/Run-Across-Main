@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Log;
 
 class Competition extends Model
 {
@@ -14,12 +15,16 @@ class Competition extends Model
     protected $table = 'competition';
     public $timestamps = false;
 
+    public function Author(){
+        return $this->belongsTo('App\User');
+    }
+
     /**
      * 返回系统中全部的活跃中的个人竞赛(尚未开始与尚未结束的竞赛),按创建时间降序
      */
     public function findIndividualCompetitions(){
 
-        $curTime = date('y-m-d H:i:s',time()+8*60*60);
+        $curTime = time()+8*60*60;
         $competitions = Competition::where('end_at','>',$curTime)->where('type','=','individual')->get();
         return  $competitions;
 
@@ -30,8 +35,13 @@ class Competition extends Model
      */
     public function findTeamCompetitions(){
 
-        $curTime = date('y-m-d H:i:s',time()+8*60*60);
+        $curTime = time()+8*60*60;
         $competitions = Competition::where('end_at','>',$curTime)->where('type','=','team')->get();
+
+        Log::info("getTeamCompetition");
+
+        Log::alert($competitions);
+
         return  $competitions;
 
     }

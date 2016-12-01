@@ -39,19 +39,15 @@ Route::delete('user/{userId}/moments/{momentId}','MomentController@deleteMoment'
 
 
 
-/*Competitions*/
-Route::get('/competitions','CompetitionController@getAllCompetitions');
-
-Route::post('/user/{userId}/competitions','CompetitionController@createCompetitionBoard');
-
-Route::post('/competitions/{competitionId}/users/{userId}','CompetitionController@joinCompetition');
-
-Route::delete('/competitions/{competitionId}/users/{userId}','CompetitionController@quitCompetition');
-
+/*Competitions-Board*/
+Route::get('/competitions','CompetitionController@getAllCmpts');
 
 /*My-Competitions*/
 Route::get('/user/{userId}/competitions','CompetitionController@getCompetitionsByUserId');
-
-Route::post('/user/{userId}/competitions','CompetitionController@createCompetitionMine');
-
 Route::delete('/competitions/{competitionId}','CompetitionController@deleteCompetition');
+
+/*Competitions-Common*/
+Route::post('/user/{userId}/competitions','CompetitionController@createCmpt');
+Route::post('/competitions/{competitionId}/{userId}','CompetitionController@joinIdvCmpt');
+Route::post('/competitions/{competitionId}/{userId}/{team}','CompetitionController@joinTeamCmpt');
+Route::delete('/competitions/{competitionId}/{userId}','CompetitionController@quitCmpt');

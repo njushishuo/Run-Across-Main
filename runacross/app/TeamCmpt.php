@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Log;
 
 class TeamCmpt extends Model
 {
@@ -15,23 +16,43 @@ class TeamCmpt extends Model
     protected $table = 'team_competition';
     public $timestamps = false;
 
-    /**
-     *
-     * @param $id 竞赛Id
-     * 返回Red Team
-     */
-    public function getRedTeamMembers($id){
+    public function competition(){
+        return $this->hasOne('App\Competition','id','competition_id');
+    }
 
-
-
+    public function user(){
+        return $this->hasOne('App\User','id','user_id');
     }
 
     /**
      * @param $id 竞赛Id
-     * 返回Red Team
+     * 返回当前每个成员的状态记录的数组, comptid,userid,team,stride;
      */
-    public function getBlueTeamMembers($id){
+    public function getMemberRecords($id){
 
+        $records = TeamCmpt::where('competition_id',$id)->orderBy('stride_count','desc')->get();
+
+//        Log::info("teamRecord!!");
+//
+//        Log::alert($records);
+
+        return $records;
+    }
+
+    public function joinCompetition($competitionId,$userId ,$team){
+        $record = new TeamCmpt();
+        $record->competition_id = $competitionId;
+        $record->user_id = $userId;
+        $record->team = $team;
+        $record->stride_count=0;
+    }
+
+    public function quitCompetition($competitionId,$userId){
+
+        $record = TeamCmpt::where('competition_id',$competitionId)->where('user_id',$userId)->first();
+        if($record!=null){
+            $record->delete();
+        }
     }
 
 
