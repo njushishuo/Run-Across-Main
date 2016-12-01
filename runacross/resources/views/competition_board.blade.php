@@ -60,7 +60,7 @@
             <hr>
             <div class="row white" style="margin: 0px" >
                 <div class="col s1 offset-s5">
-                    <a href="competition_board.html" >
+                    <a href="/competitions" >
                         <span class="blue-text center-align waves-effect waves-light">竞赛场</span>
                     </a>
                 </div>
@@ -72,9 +72,7 @@
             </div>
             <hr>
 
-
             <div class="row ">
-
                 <div class="col s10 " >
                     <!--Competitions list here-->
                     <div id="individual" class="section scrollspy">
@@ -84,117 +82,76 @@
                                 <span class="black-text lighten-2" style="font-size: 1.5em" >个人竞赛</span>
                             </div>
                         </div>
-                        <!--List-->
+                        <!--Individual Competitions List-->
                         <div class="row">
                             <div class="col s12">
                                 @for($i=0; $i<count($idvCmptVOs);$i++)
-                                    @if( !($idvCmptVOs[$i]->hasBegun) )
-                                        <!--Individual Waiting-->
-                                            <div class="card center-align" style="padding: 0px">
-                                                <div class="row yellow white-text">
-                                                    <div class="col s12">
+                                    <div class="card center-align" style="padding: 0px">
+                                        @if( !($idvCmptVOs[$i]->hasBegun) )
+                                            <div class="row yellow white-text">
+                                                <div class="col s12">
                                                         <span class="text_compete">等待中</span>
-                                                    </div>
-                                                </div>
-                                                <div class="card-content ">
-                                                    <div class="row" style="margin-bottom: 0px">
-                                                        <div class="col s12 m2 ">
-                                                            <!--<span>Creator</span><br>-->
-                                                            <img src="{{$idvCmptVOs[$i]->competition->author->avatar}}" class="avatar_img_competition circle">
-                                                        </div>
-                                                        <div class="col s12 m3 ">
-                                                            <span>标题</span><br>
-                                                            <p  style="margin: 0px">
-                                                                <span class="text_compete">{{ $idvCmptVOs[$i]->competition->title}}</span>
-                                                            </p>
-                                                        </div>
-                                                        <div class="col s12 m3">
-                                                            <span>距离开始时间</span><br>
-                                                            <span class="text_compete green-text">{{$idvCmptVOs[$i]->hour}}</span><span>h</span>
-                                                            <span class="text_compete green-text">{{$idvCmptVOs[$i]->min}}</span><span>m</span>
-                                                            <span class="text_compete green-text">{{$idvCmptVOs[$i]->sec}}</span><span>s</span>
-                                                        </div>
-                                                        <div class="col s12 m2">
-                                                            <span>奖金</span><br>
-                                                            <span class="text_compete yellow-text">{{$idvCmptVOs[$i]->competition->reward}}</span>
-                                                        </div>
-                                                        <div class="col s12 m2">
-                                                            <span>发布时间</span><br>
-                                                             {{$idvCmptVOs[$i]->createDate}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-action  " style="padding: 10px">
-                                                    <div class="row" style="margin-bottom:0px">
-                                                        <div class="col s2 offset-s8">
-                                                            <a data-target="idv_players_modal"
-                                                               class="btn-flat modal-trigger waves-effect waves-light">
-                                                                竞赛成员
-                                                            </a>
-                                                        </div>
-                                                        <div class="col s2 ">
-                                                            <a class="btn-flat  waves-effect waves-light">
-                                                                加入竞赛
-                                                            </a>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
-                                    @endif
-                                    @if($idvCmptVOs[$i]->hasBegun)
-                                        <!--Individual Begun-->
-                                            <div class="card center-align" style="padding: 0px">
-                                                <div class="row green white-text">
-                                                    <div class="col s12">
-                                                        <span class="text_compete">进行中</span>
-                                                    </div>
-                                                </div>
-                                                <div class="card-content">
-                                                    <div class="row" style="margin-bottom: 0px">
-                                                        <div class="col s12 m2 ">
-                                                            <!--<span>Creator</span><br>-->
-                                                            <img src="{{$idvCmptVOs[$i]->competition->author->avatar}}" class="avatar_img_competition circle">
-                                                        </div>
-                                                        <div class="col s12 m3 ">
-                                                            <span>标题</span><br>
-                                                            <p  style="margin: 0px">
-                                                                <span class="text_compete">{{ $idvCmptVOs[$i]->competition->title}}</span>
-                                                            </p>
-                                                        </div>
-                                                        <div class="col s12 m3">
-                                                            <span>距离结束时间</span><br>
-                                                            <span class="text_compete green-text">{{$idvCmptVOs[$i]->hour}}</span><span>h</span>
-                                                            <span class="text_compete green-text">{{$idvCmptVOs[$i]->min}}</span><span>m</span>
-                                                            <span class="text_compete green-text">{{$idvCmptVOs[$i]->sec}}</span><span>s</span>
-                                                        </div>
-                                                        <div class="col s12 m2">
-                                                            <span>奖金</span><br>
-                                                            <span class="text_compete yellow-text">{{$idvCmptVOs[$i]->competition->reward}}</span>
-                                                        </div>
-                                                        <div class="col s12 m2">
-                                                            <span>发布时间</span><br>
-                                                            {{$idvCmptVOs[$i]->createDate}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-action  " style="padding: 10px">
-                                                    <div class="row" style="margin-bottom:0px">
-                                                        <div class="col s2 offset-s8">
-                                                            <a data-target="idv_players_modal"
-                                                               class="btn-flat modal-trigger waves-effect waves-light">
-                                                                竞赛成员
-                                                            </a>
-                                                        </div>
-                                                        <div class="col s2 ">
-                                                            <a class="btn-flat  waves-effect waves-light">
-                                                                加入竞赛
-                                                            </a>
-                                                        </div>
-                                                    </div>
+                                        @endif
+                                        @if( ($idvCmptVOs[$i]->hasBegun) )
+                                            <div class="row green white-text">
+                                                <div class="col s12">
+                                                    <span class="text_compete">进行中</span>
                                                 </div>
                                             </div>
-                                    @endIf
-
+                                        @endif
+                                        <div class="card-content ">
+                                            <div class="row" style="margin-bottom: 0px">
+                                                <div class="col s12 m2 ">
+                                                    <!--<span>Creator</span><br>-->
+                                                    <img src="{{$idvCmptVOs[$i]->competition->author->avatar}}" class="avatar_img_competition circle">
+                                                </div>
+                                                <div class="col s12 m3 ">
+                                                    <span>标题</span><br>
+                                                    <p  style="margin: 0px">
+                                                        <span class="text_compete">{{ $idvCmptVOs[$i]->competition->title}}</span>
+                                                    </p>
+                                                </div>
+                                                <div class="col s12 m3">
+                                                    @if( !($idvCmptVOs[$i]->hasBegun) )
+                                                        <span>距离开始时间</span><br>
+                                                    @endif
+                                                    @if( $idvCmptVOs[$i]->hasBegun )
+                                                        <span>距离结束时间</span><br>
+                                                    @endif
+                                                    <span class="text_compete green-text">{{$idvCmptVOs[$i]->hour}}</span><span>h</span>
+                                                    <span class="text_compete green-text">{{$idvCmptVOs[$i]->min}}</span><span>m</span>
+                                                    <span class="text_compete green-text">{{$idvCmptVOs[$i]->sec}}</span><span>s</span>
+                                                </div>
+                                                <div class="col s12 m2">
+                                                    <span>奖金</span><br>
+                                                    <span class="text_compete yellow-text">{{$idvCmptVOs[$i]->competition->reward}}</span>
+                                                </div>
+                                                <div class="col s12 m2">
+                                                    <span>发布时间</span><br>
+                                                     {{$idvCmptVOs[$i]->createDate}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-action  " style="padding: 10px">
+                                            <div class="row" style="margin-bottom:0px">
+                                                <div class="col s2 offset-s8">
+                                                    <a data-target="idv_players_modal"
+                                                       class="btn-flat modal-trigger waves-effect waves-light">
+                                                        竞赛成员
+                                                    </a>
+                                                </div>
+                                                <div class="col s2 ">
+                                                    {{--加入个人竞赛--}}
+                                                    <button onclick="joinIdvCmpt(
+                                                    {{$idvCmptVOs[$i]->competition->id.",".Session::get('user')->id}} )" class=" btn-flat  waves-effect waves-light">
+                                                        加入竞赛
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!-- Modal Structure -->
                                     <div id="idv_players_modal" class="modal">
                                         <div class="modal-content">
@@ -237,186 +194,143 @@
                                 <span class="black-text lighten-2" style="font-size: 1.5em" >团队竞赛</span>
                             </div>
                         </div>
-                        <!--List-->
+                        <!--team Competitions List-->
                         <div class="row">
                             <div class="col s12">
                             @for($i=0; $i<count($tmCmptVOs);$i++)
-                                @if( !($tmCmptVOs[$i]->hasBegun) )
-                                    <!--team Waiting-->
-                                        <div class="card center-align" style="padding: 0px">
-                                            <div class="row yellow white-text">
-                                                <div class="col s12">
-                                                    <span class="text_compete">等待中</span>
-                                                </div>
-                                            </div>
-                                            <div class="card-content ">
-                                                <div class="row" style="margin-bottom: 0px">
-                                                    <div class="col s12 m2 ">
-                                                        <!--<span>Creator</span><br>-->
-                                                        <img src="{{$tmCmptVOs[$i]->competition->author->avatar}}" class="avatar_img_competition circle">
-                                                    </div>
-                                                    <div class="col s12 m3 ">
-                                                        <span>标题</span><br>
-                                                        <p  style="margin: 0px">
-                                                            <span class="text_compete">{{ $tmCmptVOs[$i]->competition->title}}</span>
-                                                        </p>
-                                                    </div>
-                                                    <div class="col s12 m3">
-                                                        <span>距离开始时间</span><br>
-                                                        <span class="text_compete green-text">{{$tmCmptVOs[$i]->hour}}</span><span>h</span>
-                                                        <span class="text_compete green-text">{{$tmCmptVOs[$i]->min}}</span><span>m</span>
-                                                        <span class="text_compete green-text">{{$tmCmptVOs[$i]->sec}}</span><span>s</span>
-                                                    </div>
-                                                    <div class="col s12 m2">
-                                                        <span>奖金</span><br>
-                                                        <span class="text_compete yellow-text">{{$tmCmptVOs[$i]->competition->reward}}</span>
-                                                    </div>
-                                                    <div class="col s12 m2">
-                                                        <span>发布时间</span><br>
-                                                        {{$tmCmptVOs[$i]->createDate}}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-action  " style="padding: 10px">
-                                                <div class="row" style="margin-bottom:0px">
-                                                    <div class="col s2 offset-s8">
-                                                        <a data-target="tm_players_modal"
-                                                           class="btn-flat modal-trigger waves-effect waves-light">
-                                                            竞赛成员
-                                                        </a>
-                                                    </div>
-                                                    <div class="col s2 ">
-                                                        <a class="btn-flat  waves-effect waves-light">
-                                                            加入竞赛
-                                                        </a>
-                                                    </div>
-                                                </div>
+                                <div class="card center-align" style="padding: 0px">
+                                    @if( !($tmCmptVOs[$i]->hasBegun) )
+                                        <div class="row yellow white-text">
+                                            <div class="col s12">
+                                                <span class="text_compete">等待中</span>
                                             </div>
                                         </div>
-                                @endif
-                                @if($tmCmptVOs[$i]->hasBegun)
-                                    <!--team Begun-->
-                                        <div class="card center-align" style="padding: 0px">
-                                            <div class="row green white-text">
-                                                <div class="col s12">
-                                                    <span class="text_compete">进行中</span>
-                                                </div>
-                                            </div>
-                                            <div class="card-content">
-                                                <div class="row" style="margin-bottom: 0px">
-                                                    <div class="col s12 m2 ">
-                                                        <!--<span>Creator</span><br>-->
-                                                        <img src="{{$tmCmptVOs[$i]->competition->author->avatar}}" class="avatar_img_competition circle">
-                                                    </div>
-                                                    <div class="col s12 m3 ">
-                                                        <span>标题</span><br>
-                                                        <p  style="margin: 0px">
-                                                            <span class="text_compete">{{ $tmCmptVOs[$i]->competition->title}}</span>
-                                                        </p>
-                                                    </div>
-                                                    <div class="col s12 m3">
-                                                        <span>距离结束时间</span><br>
-                                                        <span class="text_compete green-text">{{$tmCmptVOs[$i]->hour}}</span><span>h</span>
-                                                        <span class="text_compete green-text">{{$tmCmptVOs[$i]->min}}</span><span>m</span>
-                                                        <span class="text_compete green-text">{{$tmCmptVOs[$i]->sec}}</span><span>s</span>
-                                                    </div>
-                                                    <div class="col s12 m2">
-                                                        <span>奖金</span><br>
-                                                        <span class="text_compete yellow-text">{{$tmCmptVOs[$i]->competition->reward}}</span>
-                                                    </div>
-                                                    <div class="col s12 m2">
-                                                        <span>发布时间</span><br>
-                                                        {{$tmCmptVOs[$i]->createDate}}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-action  " style="padding: 10px">
-                                                <div class="row" style="margin-bottom:0px">
-                                                    <div class="col s2 offset-s8">
-                                                        <a data-target="tm_players_modal"
-                                                           class="btn-flat modal-trigger waves-effect waves-light">
-                                                            竞赛成员
-                                                        </a>
-                                                    </div>
-                                                    <div class="col s2 ">
-                                                        <a class="btn-flat  waves-effect waves-light">
-                                                            加入竞赛
-                                                        </a>
-                                                    </div>
-                                                </div>
+                                    @endif
+                                    @if( $tmCmptVOs[$i]->hasBegun )
+                                        <div class="row green white-text">
+                                            <div class="col s12">
+                                                <span class="text_compete">进行中</span>
                                             </div>
                                         </div>
-                                @endIf
-
-                                    <!-- Modal Structure -->
-                                        <div id="tm_players_modal" class="modal wider">
-                                            <div class="modal-content">
-                                                <div class = "row center-align">
-                                                    <div class="col s6 ">
-                                                        <span class="text_red_team" >队伍1</span>
-                                                    </div>
-                                                    <div class="col s6">
-                                                        <span class="text_blue_team" >队伍2</span>
-                                                    </div>
-                                                </div>
-                                                <div class = "row">
-                                                    <div class = "col s6">
-                                                        <ul class="collection">
-                                                            @for($j=0;$j<count($teamPlayers[$i]);$j++)
-                                                                @if($teamPlayers[$i][$j]->team == 'red')
-                                                                    <li class="collection-item">
-                                                                        <div class="row" style="margin-bottom: 0px">
-                                                                            <div class="col s4" style="padding:5px">
-                                                                                <img  class="avatar_img_competition" src="{{ $teamPlayers[$i][$j]->user->avatar }}" alt="Contact Person">
-                                                                            </div>
-
-                                                                            <div class="input-field col s4" style="padding-left: 0px;">
-                                                                                <span class="text_stride" style="font-size: 1em;font-weight:300">步数:</span>
-                                                                                <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $teamPlayers[$i][$j]->stride_count }}</span>
-                                                                            </div>
-
-                                                                            <div class="input-field col s4" style="padding-left: 0px;">
-                                                                                <span class="text_rank" style="font-size: 1em;font-weight:300">名次:</span>
-                                                                                <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $j+1 }}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </li>
-                                                                @endif
-                                                            @endfor
-                                                        </ul>
-                                                    </div>
-                                                    <div class = "col s6">
-                                                        <ul class="collection">
-                                                            @for($j=0;$j<count($teamPlayers[$i]);$j++)
-                                                                @if($teamPlayers[$i][$j]->team == 'blue')
-                                                                    <li class="collection-item">
-                                                                        <div class="row" style="margin-bottom: 0px">
-                                                                            <div class="col s4" style="padding:5px">
-                                                                                <img  class="avatar_img_competition" src="{{ $teamPlayers[$i][$j]->user->avatar }}" alt="Contact Person">
-                                                                            </div>
-
-                                                                            <div class="input-field col s4" style="padding-left: 0px;">
-                                                                                <span class="text_stride" style="font-size: 1em;font-weight:300">步数:</span>
-                                                                                <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $teamPlayers[$i][$j]->stride_count }}</span>
-                                                                            </div>
-
-                                                                            <div class="input-field col s4" style="padding-left: 0px;">
-                                                                                <span class="text_rank" style="font-size: 1em;font-weight:300">名次:</span>
-                                                                                <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $j+1 }}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </li>
-                                                                @endif
-                                                            @endfor
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                    @endif
+                                    <div class="card-content ">
+                                        <div class="row" style="margin-bottom: 0px">
+                                            <div class="col s12 m2 ">
+                                                <!--<span>Creator</span><br>-->
+                                                <img src="{{$tmCmptVOs[$i]->competition->author->avatar}}" class="avatar_img_competition circle">
                                             </div>
-                                            <div class="modal-footer">
-                                                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">确定</a>
+                                            <div class="col s12 m3 ">
+                                                <span>标题</span><br>
+                                                <p  style="margin: 0px">
+                                                    <span class="text_compete">{{ $tmCmptVOs[$i]->competition->title}}</span>
+                                                </p>
+                                            </div>
+                                            <div class="col s12 m3">
+                                                @if(!($tmCmptVOs[$i]->hasBegun))
+                                                    <span>距离开始时间</span><br>
+                                                @endif
+                                                @if($tmCmptVOs[$i]->hasBegun)
+                                                    <span>距离结束时间</span><br>
+                                                @endif
+                                                <span class="text_compete green-text">{{$tmCmptVOs[$i]->hour}}</span><span>h</span>
+                                                <span class="text_compete green-text">{{$tmCmptVOs[$i]->min}}</span><span>m</span>
+                                                <span class="text_compete green-text">{{$tmCmptVOs[$i]->sec}}</span><span>s</span>
+                                            </div>
+                                            <div class="col s12 m2">
+                                                <span>奖金</span><br>
+                                                <span class="text_compete yellow-text">{{$tmCmptVOs[$i]->competition->reward}}</span>
+                                            </div>
+                                            <div class="col s12 m2">
+                                                <span>发布时间</span><br>
+                                                {{$tmCmptVOs[$i]->createDate}}
                                             </div>
                                         </div>
-                                @endfor
+                                    </div>
+                                    <div class="card-action  " style="padding: 10px">
+                                        <div class="row" style="margin-bottom:0px">
+                                            <div class="col s2 offset-s8">
+                                                <a data-target="tm_players_modal"
+                                                   class="btn-flat modal-trigger waves-effect waves-light">
+                                                    竞赛成员
+                                                </a>
+                                            </div>
+                                            <div class="col s2 ">
+                                                <a class="btn-flat  waves-effect waves-light">
+                                                    加入竞赛
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal Structure -->
+                                <div id="tm_players_modal" class="modal wider">
+                                    <div class="modal-content">
+                                        <div class = "row center-align">
+                                            <div class="col s6 ">
+                                                <span class="text_red_team" >队伍1</span>
+                                            </div>
+                                            <div class="col s6">
+                                                <span class="text_blue_team" >队伍2</span>
+                                            </div>
+                                        </div>
+                                        <div class = "row">
+                                            <div class = "col s6">
+                                                <ul class="collection">
+                                                    @for($j=0;$j<count($teamPlayers[$i]);$j++)
+                                                        @if($teamPlayers[$i][$j]->team == 'red')
+                                                            <li class="collection-item">
+                                                                <div class="row" style="margin-bottom: 0px">
+                                                                    <div class="col s4" style="padding:5px">
+                                                                        <img  class="avatar_img_competition" src="{{ $teamPlayers[$i][$j]->user->avatar }}" alt="Contact Person">
+                                                                    </div>
+
+                                                                    <div class="input-field col s4" style="padding-left: 0px;">
+                                                                        <span class="text_stride" style="font-size: 1em;font-weight:300">步数:</span>
+                                                                        <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $teamPlayers[$i][$j]->stride_count }}</span>
+                                                                    </div>
+
+                                                                    <div class="input-field col s4" style="padding-left: 0px;">
+                                                                        <span class="text_rank" style="font-size: 1em;font-weight:300">名次:</span>
+                                                                        <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $j+1 }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        @endif
+                                                    @endfor
+                                                </ul>
+                                            </div>
+                                            <div class = "col s6">
+                                                <ul class="collection">
+                                                    @for($j=0;$j<count($teamPlayers[$i]);$j++)
+                                                        @if($teamPlayers[$i][$j]->team == 'blue')
+                                                            <li class="collection-item">
+                                                                <div class="row" style="margin-bottom: 0px">
+                                                                    <div class="col s4" style="padding:5px">
+                                                                        <img  class="avatar_img_competition" src="{{ $teamPlayers[$i][$j]->user->avatar }}" alt="Contact Person">
+                                                                    </div>
+
+                                                                    <div class="input-field col s4" style="padding-left: 0px;">
+                                                                        <span class="text_stride" style="font-size: 1em;font-weight:300">步数:</span>
+                                                                        <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $teamPlayers[$i][$j]->stride_count }}</span>
+                                                                    </div>
+
+                                                                    <div class="input-field col s4" style="padding-left: 0px;">
+                                                                        <span class="text_rank" style="font-size: 1em;font-weight:300">名次:</span>
+                                                                        <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $j+1 }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        @endif
+                                                    @endfor
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">确定</a>
+                                    </div>
+                                </div>
+                            @endfor
                             </div>
                         </div>
                     </div>

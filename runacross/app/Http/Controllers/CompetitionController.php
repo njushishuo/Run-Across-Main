@@ -99,11 +99,16 @@ class CompetitionController extends Controller
 
     /**
      * 加入个人竞赛
+     * @param Request $request
      * @param $competitionId
      * @param $userId
+     * @return array
      */
     public function joinIdvCmpt(Request $request, $competitionId,$userId){
 
+        $this->IndividualCmpt->joinCompetition($competitionId,$userId);
+        Log::info("path: $request->path()");
+        return ["result"=>true , "url"=>$request->path()];
 
     }
 

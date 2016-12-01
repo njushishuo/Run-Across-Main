@@ -40,11 +40,20 @@ class TeamCmpt extends Model
     }
 
     public function joinCompetition($competitionId,$userId ,$team){
-        $record = new TeamCmpt();
-        $record->competition_id = $competitionId;
-        $record->user_id = $userId;
-        $record->team = $team;
-        $record->stride_count=0;
+
+        if($competitionId==null || $userId == null){
+            return;
+        }
+        $exist = TeamCmpt::where('competition_id',$competitionId)->where('user_id',$userId)->first();
+        if($exist==null){
+            $record = new TeamCmpt();
+            $record->competition_id = $competitionId;
+            $record->user_id = $userId;
+            $record->team = $team;
+            $record->stride_count=0;
+            $record->save();
+        }
+        Log::info("try to save cmptid: $competitionId userId: $userId");
     }
 
     public function quitCompetition($competitionId,$userId){

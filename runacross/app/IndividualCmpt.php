@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rules\In;
 use Log;
 
 class IndividualCmpt extends Model
@@ -43,10 +44,19 @@ class IndividualCmpt extends Model
 
 
     public function joinCompetition($competitionId,$userId){
-        $record = new IndividualCmpt();
-        $record->competition_id = $competitionId;
-        $record->user_id = $userId;
-        $record->stride_count=0;
+        if($competitionId==null || $userId== null){
+            return;
+        }
+
+        $exist = IndividualCmpt::where('competition_id',$competitionId)->where('user_id',$userId)->first();
+        if($exist==null){
+            $record = new IndividualCmpt();
+            $record->competition_id = $competitionId;
+            $record->user_id = $userId;
+            $record->stride_count=0;
+            $record->save();
+        }
+        Log::info("try to save cmptid: $competitionId userId: $userId");
     }
 
     public function quitCompetition($competitionId,$userId){

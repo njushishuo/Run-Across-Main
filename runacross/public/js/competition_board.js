@@ -12,3 +12,26 @@ $(document).ready(function(){
     //对话框
     $('.modal-trigger').leanModal();
 });
+
+
+function joinIdvCmpt( $competitionId , $userId) {
+
+    $.ajax({
+
+        type: "post",
+        url: "/competitions/"+$competitionId+"/"+$userId,
+        success: function(msg){
+            console.log(msg);
+
+            if(msg.result){
+                alert("加入成功"+"正在跳转"+msg.url);
+                window.location.href = msg.url;
+            }else{
+                alert("加入失败");
+            }
+
+        }
+    });
+
+}
+
