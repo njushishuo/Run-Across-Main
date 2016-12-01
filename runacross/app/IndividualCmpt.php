@@ -45,7 +45,7 @@ class IndividualCmpt extends Model
 
     public function joinCompetition($competitionId,$userId){
         if($competitionId==null || $userId== null){
-            return;
+            return "不存在这样的竞赛";
         }
 
         $exist = IndividualCmpt::where('competition_id',$competitionId)->where('user_id',$userId)->first();
@@ -55,8 +55,14 @@ class IndividualCmpt extends Model
             $record->user_id = $userId;
             $record->stride_count=0;
             $record->save();
+            Log::info("try to save cmptid: $competitionId userId: $userId");
+            return "加入成功";
+        }else{
+            return "你已经在这个竞赛中啦";
         }
-        Log::info("try to save cmptid: $competitionId userId: $userId");
+
+
+
     }
 
     public function quitCompetition($competitionId,$userId){

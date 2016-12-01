@@ -37,11 +37,6 @@ class Competition extends Model
 
         $curTime = time()+8*60*60;
         $competitions = Competition::where('end_at','>',$curTime)->where('type','=','team')->get();
-
-        Log::info("getTeamCompetition");
-
-        Log::alert($competitions);
-
         return  $competitions;
 
     }

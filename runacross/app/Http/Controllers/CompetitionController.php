@@ -8,6 +8,7 @@ use App\TeamCmpt;
 use App\VO\CompetitionVO;
 use App\VO\UserVO;
 use Illuminate\Http\Request;
+
 use Log;
 
 class CompetitionController extends Controller
@@ -22,6 +23,8 @@ class CompetitionController extends Controller
         $this->IndividualCmpt = $individualCmpt;
         $this->TeamCmpt = $teamCmpt;
     }
+
+
 
 /*---------------------------------------------------------------------------------------------------------*/
 
@@ -88,27 +91,49 @@ class CompetitionController extends Controller
 
 
     /**
-     * 发布新的竞赛
      * @param Request $request
      * @param $userId
+     * @return \Illuminate\Http\RedirectResponse|
      */
     public function createCmpt(Request $request , $userId){
+        $input = $request->all();
+        Log::info($input);
+        $competition = new Competition();
+        $competition->type =$input['type'];
+        $competition->title = $input['title'];
+        $competition->reward = $input['reward'];
+        $competition->author_id = $userId;
+        $competition->start_at =$this->handleDateString($input['start_at']);
+        $competition->end_at =$this->handleDateString($input['end_at']);
+        $competition->created_at =time()+8*3600;
+        $competition->save();
+        return redirect('/competitions');
+    }
 
+
+    private function handleDateString($inputDate){
+        str_replace('T',' ',$inputDate);
+        $inputDate.":00";
+        Log::info($inputDate);
+        $time = strtotime($inputDate);
+        $converted = date("Y-m-d H:i:s",$time);
+        Log::info("$inputDate convert to");
+        Log::info($converted);
+        Log::info("time : $time");
+        return $time;
     }
 
 
     /**
      * 加入个人竞赛
-     * @param Request $request
      * @param $competitionId
      * @param $userId
      * @return array
      */
-    public function joinIdvCmpt(Request $request, $competitionId,$userId){
+    public function joinIdvCmpt( $competitionId,$userId){
 
-        $this->IndividualCmpt->joinCompetition($competitionId,$userId);
-        Log::info("path: $request->path()");
-        return ["result"=>true , "url"=>$request->path()];
+        $info=$this->IndividualCmpt->joinCompetition($competitionId,$userId);
+        return ["result"=>true,"info"=>$info];
 
     }
 
@@ -116,9 +141,12 @@ class CompetitionController extends Controller
      * 加入团队竞赛
      * @param $competitionId
      * @param $userId
+     * @param $team
+     * @return array
      */
-    public function joinTeamCmpt(Request $request,$competitionId,$userId,$team){
-
+    public function joinTeamCmpt($competitionId,$userId,$team){
+        $info=$this->TeamCmpt->joinCompetition($competitionId,$userId,$team);
+        return ["result"=>true,"info"=>$info];
     }
 
 
