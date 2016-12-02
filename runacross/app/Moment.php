@@ -23,7 +23,7 @@ class Moment extends Model
 
 
     public function getMomentsByUserId( $userId ){
-        $moments = Moment::where('author_id',$userId)->get();
+        $moments = Moment::where('author_id',$userId)->orderBy('created_at','desc')->get();
         return $moments;
     }
 

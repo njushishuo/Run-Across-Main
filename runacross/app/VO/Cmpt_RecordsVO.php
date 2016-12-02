@@ -12,13 +12,13 @@ namespace App\VO;
 class Cmpt_RecordsVO
 {
     //记录了竞赛本身的全部信息
-    public $competitionVO;
+    public $cmptVO;
     //记录了cmpt_id,user_id,stride,如果是多人竞赛的话，还有team，按照步数降序
     public $playerRecords;
 
     public function __construct($comptVO , $records)
     {
-        $this->competitionVO = $comptVO;
+        $this->cmptVO = $comptVO;
         $this->playerRecords = $records;
     }
 }

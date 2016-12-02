@@ -71,7 +71,7 @@ class MomentController extends Controller
         $moment->content = $request->input('moment_content');
         $moment->picture = "http://cdnimg.erun360.com/Utility/Uploads/2016-01-14/678ecb7b-3eec-4036-bbdb-83e5f8d0782a.jpg";
         $moment->author_id = $userId;
-        $moment->created_at = date('y-m-d H:i:s',time()+8*60*60);
+        $moment->created_at =time()+8*60*60;
         $moment->save();
 
         $url = "/user/".$userId."/moments";

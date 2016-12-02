@@ -139,7 +139,7 @@
                                     <span class="grey-text lighten-2" style="font-size: 1em;font-weight:300">@NanJing</span>
                                 </div>
                                 <div class="input-field col s2" style="padding-left: 0px;">
-                                    <button data-target="confirm_delete_modal"
+                                    <button data-target="{{$moment->id.'modal'}}"
                                             class="btn red lighten-1  modal-trigger white-text  waves-effect waves-light"
                                     >删除</button>
                                 </div>
@@ -165,19 +165,21 @@
                             </div>
                         </div>
 
+                        <div id="{{$moment->id.'modal'}}" class="modal modal-fixed-footer">
+                            <div class="modal-content">
+                                <h3>动态删除提醒</h3>
+                                <p>确定删除此动态吗？</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class=" modal-action modal-close waves-effect waves-green btn-flat">否</button>
+                                <button onclick="deleteMomentById( {{ Session::get('user')->id.",".$moment->id }} )"
+                                        class=" modal-action modal-close waves-effect waves-green btn-flat">是</button>
+                            </div>
+                        </div>
+
                 @endforeach
 
-                    <div id="confirm_delete_modal" class="modal modal-fixed-footer">
-                        <div class="modal-content">
-                            <h3>动态删除提醒</h3>
-                            <p>确定删除此动态吗？</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button class=" modal-action modal-close waves-effect waves-green btn-flat">否</button>
-                            <button onclick="deleteMomentById( {{ Session::get('user')->id.",".$moment->id }} )"
-                                    class=" modal-action modal-close waves-effect waves-green btn-flat">是</button>
-                        </div>
-                    </div>
+
 
                 </div>
 

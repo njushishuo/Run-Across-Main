@@ -81,6 +81,7 @@ class CompetitionController extends Controller
 
         $idvCmps_created =$this->Competition->getIdvCmptsCreatedBy($userId);
         $tmCmps_created =$this->Competition->getTmCmptsCreatedBy($userId);
+
         $idvCmps_joined =$this->IndividualCmpt->getIdvCmptsJoinedBy($userId);
         $tmCmps_joined =$this->TeamCmpt->getTmCmptsJoinedBy($userId);
 
@@ -105,18 +106,30 @@ class CompetitionController extends Controller
             $cmptType = $cmpts[$i]->type;
             if($cmptType=='individual'){
                 $records =$this->IndividualCmpt->getMemberRecords($cmptId);
+            }else{
+                $records =$this->TeamCmpt->getMemberRecords($cmptId);
             }
             $cmptsRecordVOs[$i]=new Cmpt_RecordsVO($cmptsVO,$records);
-            Log::info($cmptsRecordVOs[$i]);
+           // Log::info('cmptRecordVO',['cmptRecordVOs'=>$cmptsRecordVOs[$i] ]);
         }
         return $cmptsRecordVOs;
     }
 
     /**
-     * 取消竞赛
      * @param $competitionId
+     * @return array
      */
     public function deleteCompetition($competitionId){
+        $cmpt = Competition::where('id',$competitionId)->first();
+        if($cmpt!=null){
+
+            Log::info("delete moment id = ".$cmpt->id);
+            $cmpt->delete();
+
+            return ['result'=>true , 'info'=>'删除成功'];
+        }else{
+            return ['result'=>false , 'info'=>'不存在该竞赛'];
+        }
 
     }
 
@@ -196,8 +209,29 @@ class CompetitionController extends Controller
      * 退出竞赛
      * @param $competitionId
      * @param $userId
+     * @return array
      */
-    public function quitCmpt(Request $request,$competitionId,$userId){
+    public function quitCmpt($competitionId,$userId){
+        $cmpt = Competition::find($competitionId);
+
+        if($cmpt==null){
+            $result=false;
+            $info = '不存在该竞赛: '.$competitionId;
+            return  ['result'=>$result , 'info'=>$info];
+        }
+
+        if($cmpt->type == 'individual'){
+            $result=$this->IndividualCmpt->quitCompetition($competitionId,$userId);
+        }else{
+            $result=$this->TeamCmpt->quitCompetition($competitionId,$userId);
+        }
+
+        if($result){
+            $info='退出成功';
+        }else{
+            $info='退出失败';
+        }
+        return  ['result'=>$result , 'info'=>$info];
 
     }
 

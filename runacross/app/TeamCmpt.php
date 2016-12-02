@@ -70,14 +70,20 @@ class TeamCmpt extends Model
 
         $record = TeamCmpt::where('competition_id',$competitionId)->where('user_id',$userId)->first();
         if($record!=null){
-            $record->delete();
+
+            TeamCmpt::where('competition_id',$competitionId)->where('user_id',$userId)->delete();
+            return true;
         }
+        return false;
     }
 
     public function getTmCmptsJoinedBy($userId){
         $cmptIds = TeamCmpt::select('competition_id')->where('user_id',$userId)->get();
         $cmpts = Competition::whereIn('id',$cmptIds)->get();
-        return $cmpts;
+        if($cmpts==null){
+            return array();
+        }
+        return $cmpts->all();
     }
 
     /**

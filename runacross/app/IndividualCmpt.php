@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Validation\Rules\In;
 use Log;
 
 class IndividualCmpt extends Model
@@ -67,14 +66,24 @@ class IndividualCmpt extends Model
     public function quitCompetition($competitionId,$userId){
         $record = IndividualCmpt::where('competition_id',$competitionId)->where('user_id',$userId)->first();
         if($record!=null){
-            $record->delete();
+
+            Log::info("delete record: $record->competition_id , $record->user_id ,$record->stride_count");
+
+            IndividualCmpt::where('competition_id',$competitionId)->where('user_id',$userId)->delete();
+
+            return true;
         }
+
+        return false;
     }
 
     public function getIdvCmptsJoinedBy($userId){
         $cmptIds = IndividualCmpt::select('competition_id')->where('user_id',$userId)->get();
         $cmpts = Competition::whereIn('id',$cmptIds)->get();
-        return $cmpts;
+        if($cmpts==null){
+            return array();
+        }
+        return $cmpts->all();
 
     }
 

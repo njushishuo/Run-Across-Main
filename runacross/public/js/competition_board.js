@@ -41,9 +41,8 @@ function joinTmCmpt( competitionId , userId ) {
         success: function(msg){
             console.log(msg);
             if(msg.result){
-
-                alert(msg.info);
                 $('team_confirm_modal').closeModal();
+                alert(msg.info);
                 window.location.reload();
             }else{
                 alert("加入失败");

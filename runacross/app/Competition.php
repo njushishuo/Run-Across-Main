@@ -25,7 +25,10 @@ class Competition extends Model
     public function findIndividualCompetitions(){
 
         $curTime = time()+8*60*60;
-        $competitions = Competition::where('end_at','>',$curTime)->where('type','=','individual')->get();
+        $competitions = Competition::where('end_at','>',$curTime)
+                                    ->where('type','=','individual')
+                                    ->orderBy('created_at','desc')
+                                    ->get();
         return  $competitions;
 
     }
@@ -36,20 +39,30 @@ class Competition extends Model
     public function findTeamCompetitions(){
 
         $curTime = time()+8*60*60;
-        $competitions = Competition::where('end_at','>',$curTime)->where('type','=','team')->get();
+        $competitions = Competition::where('end_at','>',$curTime)
+                                    ->where('type','=','team')
+                                    ->orderBy('created_at','desc')
+                                    ->get();
         return  $competitions;
 
     }
 
 
     public function getIdvCmptsCreatedBy($userId){
+
         $cmpts = Competition::where('type','individual')->where('author_id',$userId)->get();
-        return $cmpts;
+        if($cmpts==null){
+            return array();
+        }
+        return $cmpts->all();
 
     }
 
     public function getTmCmptsCreatedBy($userId){
         $cmpts = Competition::where('type','team')->where('author_id',$userId)->get();
-        return $cmpts;
+        if($cmpts==null){
+            return array();
+        }
+        return $cmpts->all();
     }
 }
