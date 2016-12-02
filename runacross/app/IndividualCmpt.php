@@ -42,7 +42,6 @@ class IndividualCmpt extends Model
         return $records;
     }
 
-
     public function joinCompetition($competitionId,$userId){
         if($competitionId==null || $userId== null){
             return "不存在这样的竞赛";
@@ -72,6 +71,12 @@ class IndividualCmpt extends Model
         }
     }
 
+    public function getIdvCmptsJoinedBy($userId){
+        $cmptIds = IndividualCmpt::select('competition_id')->where('user_id',$userId)->get();
+        $cmpts = Competition::whereIn('id',$cmptIds)->get();
+        return $cmpts;
+
+    }
 
     /**
      * 获取个人竞赛的比赛结果,返回每个成员的奖金，里程数，按里程数降序排序

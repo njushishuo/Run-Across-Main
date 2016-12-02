@@ -66,7 +66,7 @@
                     </a>
                 </div>
                 <div class="col s1 ">
-                    <a href="" >
+                    <a href="/user/{{Session::get('user')->id}}/competitions" >
                         <span class="blue-text center-align waves-effect waves-light">我的竞赛</span>
                     </a>
                 </div>
@@ -76,14 +76,14 @@
             <div class="row ">
                 <div class="col s10 " >
                     <!--Competitions list here-->
-                    <div id="individual" class="section scrollspy">
+                    <div id="created" class="section scrollspy">
                         <!--Header-->
                         <div class="row">
                             <div class="col s6">
-                                <span class="black-text lighten-2" style="font-size: 1.5em" >个人竞赛</span>
+                                <span class="black-text lighten-2" style="font-size: 1.5em" >我创建的</span>
                             </div>
                         </div>
-                        <!--Individual Competitions List-->
+                        <!--Created Competitions List-->
                         <div class="row">
                             <div class="col s12">
                                 @for($i=0; $i<count($idvCmptVOs);$i++)
@@ -187,15 +187,14 @@
                         </div>
 
                     </div>
-
-                    <div id="team" class="section scrollspy">
+                    <div id="participated" class="section scrollspy">
                         <!--Header-->
                         <div class="row">
                             <div class="col s6">
-                                <span class="black-text lighten-2" style="font-size: 1.5em" >团队竞赛</span>
+                                <span class="black-text lighten-2" style="font-size: 1.5em" >我参与的</span>
                             </div>
                         </div>
-                        <!--team Competitions List-->
+                        <!--Joined Competitions List-->
                         <div class="row">
                             <div class="col s12">
                                 @for($i=0; $i<count($tmCmptVOs);$i++)
@@ -368,13 +367,13 @@
                         <hr style=" opacity:0.3;">
                         <ul class="section table-of-contents" style="margin-top: 0px;padding-top:0px;">
                             <li>
-                                <a href="#individual">
-                                    <span >个人竞赛</span>
+                                <a href="#created">
+                                    <span >我创建的</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#team">
-                                    <span >团队竞赛</span>
+                                <a href="#participated">
+                                    <span >我参与的</span>
                                 </a>
                             </li>
                         </ul>
@@ -469,5 +468,6 @@
 <script type="text/javascript" src="{{URL::asset('js/jquery-2.2.4.min.js') }}"></script>
 <script type="text/javascript" src="{{URL::asset('js/materialize.min.js') }}"></script>
 <script type="text/javascript" src="{{URL::asset('js/competition_board.js') }}"></script>
+<script type="text/javascript" src="{{URL::asset('js/competition_mine.js') }}"></script>
 </body>
 </html>

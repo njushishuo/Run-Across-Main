@@ -74,6 +74,11 @@ class TeamCmpt extends Model
         }
     }
 
+    public function getTmCmptsJoinedBy($userId){
+        $cmptIds = TeamCmpt::select('competition_id')->where('user_id',$userId)->get();
+        $cmpts = Competition::whereIn('id',$cmptIds)->get();
+        return $cmpts;
+    }
 
     /**
      * 获取团队竞赛的比赛结果,返回获胜队伍每个成员的奖金，里程数，按里程数降序排序

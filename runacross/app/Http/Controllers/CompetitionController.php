@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Competition;
 use App\IndividualCmpt;
 use App\TeamCmpt;
+use App\VO\Cmpt_RecordsVO;
 use App\VO\CompetitionVO;
 use App\VO\UserVO;
 use Illuminate\Http\Request;
@@ -70,12 +71,45 @@ class CompetitionController extends Controller
 /*---------------------------------------------------------------------------------------------------------*/
 
 
+
     /**
      * 用户个人的竞赛界面(用户创建和参与的竞赛)
      * @param $userId
+     * @return
      */
     public function getCompetitionsByUserId($userId){
 
+        $idvCmps_created =$this->Competition->getIdvCmptsCreatedBy($userId);
+        $tmCmps_created =$this->Competition->getTmCmptsCreatedBy($userId);
+        $idvCmps_joined =$this->IndividualCmpt->getIdvCmptsJoinedBy($userId);
+        $tmCmps_joined =$this->TeamCmpt->getTmCmptsJoinedBy($userId);
+
+        $cmpts_created = array_merge($idvCmps_created,$tmCmps_created);
+        $cmpts_joined = array_merge($idvCmps_joined,$tmCmps_joined);
+
+        $cmpts_created_recordVOs = $this->getCmpt_RecordsVOsByCmpts($cmpts_created);
+        $cmpts_joined_recordVOs = $this->getCmpt_RecordsVOsByCmpts($cmpts_joined);
+
+        return view('competition_mine' ,
+            ['createdVOs'=>$cmpts_created_recordVOs , 'joinedVOs'=>$cmpts_joined_recordVOs]);
+    }
+
+
+    private function getCmpt_RecordsVOsByCmpts($cmpts){
+        $cmptsRecordVOs =array();
+
+        for ($i=0;$i<count($cmpts);$i++){
+            $cmptsVO = new CompetitionVO($cmpts[$i]);
+
+            $cmptId = $cmpts[$i]->id;
+            $cmptType = $cmpts[$i]->type;
+            if($cmptType=='individual'){
+                $records =$this->IndividualCmpt->getMemberRecords($cmptId);
+            }
+            $cmptsRecordVOs[$i]=new Cmpt_RecordsVO($cmptsVO,$records);
+            Log::info($cmptsRecordVOs[$i]);
+        }
+        return $cmptsRecordVOs;
     }
 
     /**
@@ -107,6 +141,14 @@ class CompetitionController extends Controller
         $competition->end_at =$this->handleDateString($input['end_at']);
         $competition->created_at =time()+8*3600;
         $competition->save();
+
+        Log::info("id: $competition->id");
+
+        if($competition->type == "individual"){
+            $this->joinIdvCmpt($competition->id , $userId);
+        }else{
+            $this->joinTeamCmpt($competition->id , $userId , "red");
+        }
         return redirect('/competitions');
     }
 

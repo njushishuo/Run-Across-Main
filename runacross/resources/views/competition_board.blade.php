@@ -65,7 +65,7 @@
                     </a>
                 </div>
                 <div class="col s1 ">
-                    <a href="" >
+                    <a href="/user/{{Session::get('user')->id}}/competitions" >
                         <span class="blue-text center-align waves-effect waves-light">我的竞赛</span>
                     </a>
                 </div>

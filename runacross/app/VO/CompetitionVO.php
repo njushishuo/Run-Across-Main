@@ -6,6 +6,7 @@ class CompetitionVO
 {
     public $competition;
     public $hasBegun;
+    public $hasEnded;
     public $hour;
     public $min;
     public $sec;
@@ -26,12 +27,18 @@ class CompetitionVO
             $this->sec  = $interval - $this->hour*3600-$this->min*60;
 
         }else{
-
+            //进行中
             $this->hasBegun=true;
+            $this->hasEnded=false;
             $interval = $this->competition->end_at - $curTime;
             $this->hour =  (Integer)($interval/3600);
             $this->min  = (Integer)(($interval - $this->hour*3600)/60);
             $this->sec  = $interval - $this->hour*3600-$this->min*60;
+
+            //已经结束
+            if($this->competition->end_at < $curTime){
+                $this->hasEnded=true;
+            }
         }
 
     }

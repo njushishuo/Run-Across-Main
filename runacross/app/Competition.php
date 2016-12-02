@@ -40,4 +40,16 @@ class Competition extends Model
         return  $competitions;
 
     }
+
+
+    public function getIdvCmptsCreatedBy($userId){
+        $cmpts = Competition::where('type','individual')->where('author_id',$userId)->get();
+        return $cmpts;
+
+    }
+
+    public function getTmCmptsCreatedBy($userId){
+        $cmpts = Competition::where('type','team')->where('author_id',$userId)->get();
+        return $cmpts;
+    }
 }
