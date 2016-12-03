@@ -32,7 +32,7 @@
                             <a class="dropdown-button" href="" data-activates='dropdown'>
                                 <div class="valign-wrapper">
                                     <img  class="valign  circle" style="width: 40px ; height: 40px;"  src="{{ Session::get('user')->avatar }} " alt="ME">
-                                    <span class="valign white-text"> &nbsp {{ Session::get('user')->user_name }}</span>
+                                    <span class="valign white-text"> &nbsp {{ Session::get('user')->nick_name }}</span>
                                     <i class="material-icons right">arrow_drop_down</i>
                                 </div>
                             </a>
@@ -105,75 +105,59 @@
                                 <form class="col s10 offset-s1 black-text">
                                     <div class="row" style="margin:0px">
                                         <div class="input-field col s12">
-                                            <Span class="text_label grey-text">用户名</Span> <br>
-                                            <input value="ss14" id="username" type="text" class="validate" >
+                                            <input value="{{Session::get('user')->nick_name}}"
+                                                   id="nick_name" name="nick_name" type="text" class="validate" >
+                                            <label for="nick_name">昵称</label>
                                         </div>
                                     </div>
                                     <div class="row" >
-                                        <div class="input-field col s3">
-                                            <Span class="text_label grey-text">性别</Span> <br>
-                                            <p>
-                                                <input checked="checked" name="gender" type="radio" id="male" />
-                                                <label for="male">男生</label>
-                                            </p>
+                                        <div class="input-field col s3" style="margin-top: 0px ">
+                                            <input checked="checked" id="male" name="gender" type="radio"  />
+                                            <label for="male">男生</label>
                                         </div>
-                                        <div class="input-field col s3">
-                                            <br>
-                                            <p>
-                                                <input name="gender" type="radio" id="famale" />
-                                                <label for="famale">女生</label>
-                                            </p>
+                                        <div class="input-field col s3" style="margin-top: 0px">
+                                            <input  id="famale" name="gender" type="radio"  />
+                                            <label for="famale">女生</label>
                                         </div>
                                     </div>
-                                    <br> <br>
-
+                                    <br/>
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <span class="text_label grey-text">生日</span><br>
-                                            <input value="19 October, 2016" id="birthday" type="date" class="datepicker"/>
+                                            <input value="{{Session::get('user')->birthday}}" id="birthday" name="birthday" type="date"
+                                                   class="datepicker"/>
+                                            <label for="birthday">生日</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <span class="text_label grey-text">邮件</span><br>
-                                            <input value="675342907@qq.com" id="email" type="email" class="validate">
-
+                                            <input value="{{Session::get('user')->email}}" id="email" name="email" type="email" class="validate">
+                                            <label for="email">邮箱</label>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="input-field col s3">
-                                            <p>
-                                                <Span class="text_label grey-text">兴趣</Span> <br>
-                                                <input type="checkbox" id="Jogging"  />
-                                                <label for="Jogging">慢跑</label>
-                                            </p>
+                                        <div class="input-field col s3" style="margin-top: 0px">
+                                            <input type="checkbox" id="short_distance" name="talent" checked="checked"/>
+                                            <label for="Jogging">短跑</label>
                                         </div>
-                                        <div class="input-field col s3">
-                                            <p>
-                                                <br>
-                                                <input type="checkbox" id="Running" checked="checked" />
-                                                <label for="Running">跑步</label>
-                                            </p>
+                                        <div class="input-field col s3" style="margin-top: 0px">
+                                            <input type="checkbox" id="medium_distance" name="talent"/>
+                                            <label for="Running">中长步</label>
                                         </div>
-                                        <div class="input-field col s3">
-                                            <p>
-                                                <br>
-                                                <input type="checkbox" id="Cycling"  />
-                                                <label for="Cycling">骑行</label>
-                                            </p>
+                                        <div class="input-field col s3" style="margin-top: 0px">
+                                            <input type="checkbox" id="long_distance" name="talent"/>
+                                            <label for="Cycling">长跑</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <span class="text_label grey-text">自我介绍</span><br>
-                                            <textarea  id="textarea1" class="materialize-textarea"></textarea>
-
+                                            <textarea  id="bio" name="bio" class="materialize-textarea"></textarea>
+                                            <label for="bio">自我介绍</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s4 offset-s4">
-                                            <button class="btn yellow lighten-2 waves-effect waves-light " type="submit" name="action">
-                                                更新
+                                            <button class="center btn yellow lighten-2 waves-effect waves-light " type="submit" name="action">
+                                                更新个人信息
                                             </button>
                                         </div>
                                     </div>

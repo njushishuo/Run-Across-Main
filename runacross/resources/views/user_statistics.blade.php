@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="css/common.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{URL::asset('css/materialize.min.css') }}" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{URL::asset('css/common.css') }}" media="screen,projection"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-    <script type="text/javascript" src="js/common.js"></script>
-    <script src="js/eCharts/echarts.js"></script>
-    <script src="js/eCharts/theme/infographic.js"></script>
-    <script src="js/eCharts/theme/macarons.js"></script>
-    <script src="js/user_stats.js"></script>
+
+
 
 </head>
 
@@ -32,24 +28,24 @@
                         <span class="logo" > Logo</span>
                     </a>
                     <ul id="nav-mobile" class="right">
-                        <li><a href="moments_board.html"><span class="white-text center-align">动态</span></a></li>
-                        <li ><a href="competition_board.html"><span class="white-text center-align">竞赛</span></a></li>
+
+                        <li ><a href="/user/{{ Session::get('user')->id }}/related-moments" ><span class="white-text center-align">动态</span></a></li>
+                        <li class="active"><a  href= "/competitions" ><span class="white-text center-align">竞赛</span></a></li>
                         <li >
-                            <a class="dropdown-button" href="" data-activates='dropdown1'>
+                            <a class="dropdown-button" href="" data-activates='dropdown'>
                                 <div class="valign-wrapper">
-                                    <img  class="valign  circle" style="width: 40px ; height: 40px;"  src="img/avatar.jpeg" alt="ME">
-                                    <span class="valign white-text">Shuo</span>
+                                    <img  class="valign  circle" style="width: 40px ; height: 40px;"  src="{{ Session::get('user')->avatar }} " alt="ME">
+                                    <span class="valign white-text"> &nbsp {{ Session::get('user')->nick_name }}</span>
                                     <i class="material-icons right">arrow_drop_down</i>
                                 </div>
                             </a>
                         </li>
                         <!-- Dropdown Structure -->
-                        <ul id='dropdown1' class='dropdown-content'>
-                            <li><a href="user_stats.html">我的账号</a></li>
+                        <ul id='dropdown' class='dropdown-content'>
+                            <li><a href="/user/{{Session::get('user')->id}}/statistics">我的账号</a></li>
                             <li class="divider"></li>
-                            <li><a href="#!">登出</a></li>
+                            <li><a href="/login">登出</a></li>
                         </ul>
-
                     </ul>
                 </div>
             </nav>
@@ -66,28 +62,26 @@
             <hr>
             <div class="row white" style="margin: 0px" >
                 <div class="col s1 offset-s4">
-                    <a href="user_profile.html" >
+                    <a href="/user/{{Session::get('user')->id}}/userInfo" >
                         <span class="blue-text center-align waves-effect waves-light">个人资料</span>
                     </a>
                 </div>
 
                 <div class="col s1 ">
-                    <a href="user_record.html" >
+                    <a href="/user/{{Session::get('user')->id}}/deviceRecords/2016-12-03" >
                         <span class="blue-text center-align waves-effect waves-light">运动记录</span>
                     </a>
                 </div>
                 <div class="col s1 ">
-                    <a href="user_stats.html" >
+                    <a href="/user/{{Session::get('user')->id}}/statistics" >
                         <span class="blue-text center-align waves-effect waves-light">数据统计</span>
                     </a>
                 </div>
                 <div class="col s1 ">
-                    <a href="user_friends.html" >
+                    <a href="/user/{{Session::get('user')->id}}/friends" >
                         <span class="blue-text center-align waves-effect waves-light">我的朋友</span>
                     </a>
                 </div>
-
-
             </div>
             <hr>
             <div class="row center-align">
@@ -209,5 +203,13 @@
         </div>
     </div>
 </footer>
+
+<script type="text/javascript" src="{{URL::asset('js/jquery-2.2.4.min.js') }}"></script>
+<script type="text/javascript" src="{{URL::asset('js/materialize.min.js') }}"></script>
+<script type="text/javascript" src="{{URL::asset('js/user_stats.js') }}"></script>
+<script type="text/javascript" src="{{URL::asset('js/eCharts/echarts.js') }}"></script>
+<script type="text/javascript" src="{{URL::asset('js/eCharts/theme/infographic.js') }}"></script>
+<script type="text/javascript" src="{{URL::asset('js/eCharts/theme/macarons.js') }}"></script>
+
 </body>
 </html>

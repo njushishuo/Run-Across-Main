@@ -2,19 +2,13 @@
 <html>
 <head>
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="css/common.css" media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="css/user_record.css" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{URL::asset('css/materialize.min.css') }}" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{URL::asset('css/common.css') }}" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{URL::asset('css/user_record.css') }}" media="screen,projection"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-    <script type="text/javascript" src="js/date_picker/picker.date.js"></script>
-    <script type="text/javascript" src="js/date_picker/picker.js"></script>
-    <script type="text/javascript" src="js/user_profile.js"></script>
-    <script type="text/javascript" src="js/common.js"></script>
 </head>
 
 <body>
@@ -37,7 +31,7 @@
                             <a class="dropdown-button" href="" data-activates='dropdown'>
                                 <div class="valign-wrapper">
                                     <img  class="valign  circle" style="width: 40px ; height: 40px;"  src="{{ Session::get('user')->avatar }} " alt="ME">
-                                    <span class="valign white-text"> &nbsp {{ Session::get('user')->user_name }}</span>
+                                    <span class="valign white-text"> &nbsp {{ Session::get('user')->nick_name }}</span>
                                     <i class="material-icons right">arrow_drop_down</i>
                                 </div>
                             </a>
@@ -64,28 +58,26 @@
             <hr>
             <div class="row white" style="margin: 0px" >
                 <div class="col s1 offset-s4">
-                    <a href="user_profile.html" >
+                    <a href="/user/{{Session::get('user')->id}}/userInfo" >
                         <span class="blue-text center-align waves-effect waves-light">个人资料</span>
                     </a>
                 </div>
 
                 <div class="col s1 ">
-                    <a href="user_record.html" >
+                    <a href="/user/{{Session::get('user')->id}}/deviceRecords/2016-12-03" >
                         <span class="blue-text center-align waves-effect waves-light">运动记录</span>
                     </a>
                 </div>
                 <div class="col s1 ">
-                    <a href="user_stats.html" >
+                    <a href="/user/{{Session::get('user')->id}}/statistics" >
                         <span class="blue-text center-align waves-effect waves-light">数据统计</span>
                     </a>
                 </div>
                 <div class="col s1 ">
-                    <a href="user_friends.html" >
+                    <a href="/user/{{Session::get('user')->id}}/friends" >
                         <span class="blue-text center-align waves-effect waves-light">我的朋友</span>
                     </a>
                 </div>
-
-
             </div>
             <hr>
 
@@ -215,5 +207,11 @@
         </div>
     </div>
 </footer>
+<script type="text/javascript" src="{{URL::asset('js/jquery-2.2.4.min.js') }}"></script>
+<script type="text/javascript" src="{{URL::asset('js/materialize.min.js') }}"></script>
+<script type="text/javascript" src="{{URL::asset('js/user_record.js') }}"></script>
+<script type="text/javascript" src="{{URL::asset('js/date_picker/picker.date.js') }}"></script>
+<script type="text/javascript" src="{{URL::asset('js/date_picker/picker.js') }}"></script>
+
 </body>
 </html>

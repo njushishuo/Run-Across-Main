@@ -34,7 +34,7 @@
                             <a class="dropdown-button" href="" data-activates='dropdown'>
                                 <div class="valign-wrapper">
                                     <img  class="valign  circle" style="width: 40px ; height: 40px;"  src="{{ Session::get('user')->avatar }} " alt="ME">
-                                    <span class="valign white-text"> &nbsp {{ Session::get('user')->user_name }}</span>
+                                    <span class="valign white-text"> &nbsp {{ Session::get('user')->nick_name }}</span>
                                     <i class="material-icons right">arrow_drop_down</i>
                                 </div>
                             </a>
