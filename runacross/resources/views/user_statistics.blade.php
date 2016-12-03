@@ -89,25 +89,25 @@
                 <div class="col s12 m3 hide-on-small-only" style="padding:0px">
                     <div class="card ">
                         <div class="card-image">
-                            <img src="img/avatar.jpeg">
+                            <img src="{{Session::get('user')->avatar}}">
                         </div>
                         <div class="card-content">
-                            <span style="font-size: 2em">Shi Shuo</span>
+                            <span style="font-size: 2em">{{Session::get('user')->nick_name}}</span>
                         </div>
 
                         <hr style="opacity: 0.3">
 
                         <div>
-                            <a class="orange-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="卡币余额:1000">
+                            <a class="orange-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="卡币余额:{{Session::get('user')->gold_corn}}">
                                 <i class="material-icons">attach_money</i>
                             </a>
                             <a class="orange-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="所在地:南京">
                                 <i class="material-icons">location_on</i>
                             </a>
-                            <a class="orange-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="生日:1996:08:04">
+                            <a class="orange-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="生日:{{Session::get('user')->birthday}}">
                                 <i class="material-icons">cake</i>
                             </a>
-                            <a class="orange-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="关注的人:9">
+                            <a class="orange-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="关注的人:{{Session::get('user')->follow_count}}">
                                 <i class="material-icons">stars</i>
                             </a>
                         </div>
@@ -127,7 +127,7 @@
                                     <i class="valign large material-icons " >directions_run</i>
                                     <p class="valign ">
                                         <span >累计运动距离</span><br>
-                                        <span class="text_stats " >100</span>
+                                        <span class="text_stats " >{{$summary->total_distance}}</span>
                                         <span>公里</span>
                                     </p>
                                 </div>
@@ -137,7 +137,7 @@
                                     <i class="valign large material-icons ">access_alarm</i>
                                     <p class="valign">
                                         <span>累计运动时间</span><br>
-                                        <span class="text_stats">78</span>
+                                        <span class="text_stats">{{$summary->total_duration}}</span>
                                         <span>小时</span>
                                     </p>
                                 </div>
@@ -147,7 +147,7 @@
                                     <i class="valign large material-icons ">whatshot</i>
                                     <p class="valign">
                                         <span>累计燃烧大卡</span><br>
-                                        <span class="text_stats">790</span>
+                                        <span class="text_stats">{{$summary->total_colarie}}</span>
                                         <span>大卡</span>
                                     </p>
                                 </div>

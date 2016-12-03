@@ -87,195 +87,33 @@
                     <div class="card">
                         <div class="card-content" >
                             <div class="row">
-                                <div class="col s12 m6 l6">
+                                <div class="col s10 offset-s1">
+                                    {{--followees 被用户关注的人--}}
+                                    <span>我的 {{count($followees)}} 个关注</span>
                                     <ul class="collection">
-                                        <li class="collection-item" >
-                                            <div class="row " style="margin-bottom: 0px">
-                                                <div class="col s8">
-                                                    <div class="valign-wrapper">
-                                                        <img src="img/avatar1.png" alt="" class="valign avatar_img_friends ">
-                                                        <p>
+                                        @for($i=0;$i<count($followees);$i++)
+                                            <li class="collection-item">
+                                                <div class="row " style="margin-bottom: 0px">
+                                                    <div class="col s8">
+                                                        <div class="valign-wrapper">
+                                                            <img src="{{$followees[$i]->avatar}}" alt="" class="valign avatar_img_friends ">
+                                                            <p>
                                                             <span class="text_username blue-text">
-                                                                ss14
+                                                               {{$followees[$i]->nick_name}}
                                                             </span>
-                                                            <br>
-                                                            <span class="text_userloc grey-text text-lighten-1 ">
-                                                                @南京
-                                                            </span>
-                                                        </p>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col s4" style="padding: 0px">
+                                                        <br>
+                                                        <a href="#!" id="followees.{{$followees[$i]->id}}" class="yellow-text text-lighten-1 float right" ><i class=" material-icons">grade</i></a>
                                                     </div>
                                                 </div>
-                                                <div class="col s4" style="padding: 0px">
-                                                    <br>
-                                                    <a href="#!" class="green-text text-lighten-1 float right" ><i class=" material-icons">grade</i></a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="collection-item" >
-                                            <div class="row " style="margin-bottom: 0px">
-                                                <div class="col s8">
-                                                    <div class="valign-wrapper">
-                                                        <img src="img/avatar2.jpg" alt="" class="valign avatar_img_friends ">
-                                                        <p>
-                                                            <span class="text_username blue-text">
-                                                                星际笨哥
-                                                            </span>
-                                                            <br>
-                                                            <span class="text_userloc grey-text text-lighten-1 ">
-                                                                @北京
-                                                            </span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="col s4" style="padding: 0px">
-                                                    <br>
-                                                    <a href="#!" class="green-text text-lighten-1 float right" ><i class=" material-icons">grade</i></a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="collection-item" >
-                                            <div class="row " style="margin-bottom: 0px">
-                                                <div class="col s8">
-                                                    <div class="valign-wrapper">
-                                                        <img src="img/avatar.jpeg" alt="" class="valign avatar_img_friends ">
-                                                        <p>
-                                                            <span class="text_username blue-text">
-                                                                狼爷
-                                                            </span>
-                                                            <br>
-                                                            <span class="text_userloc grey-text text-lighten-1 ">
-                                                                @上海
-                                                            </span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="col s4" style="padding: 0px">
-                                                    <br>
-                                                    <a href="#!" class="green-text text-lighten-1 float right" ><i class=" material-icons">grade</i></a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="collection-item" >
-                                            <div class="row " style="margin-bottom: 0px">
-                                                <div class="col s8">
-                                                    <div class="valign-wrapper">
-                                                        <img src="img/avatar1.png" alt="" class="valign avatar_img_friends ">
-                                                        <p>
-                                                            <span class="text_username blue-text">
-                                                                ss14
-                                                            </span>
-                                                            <br>
-                                                            <span class="text_userloc grey-text text-lighten-1 ">
-                                                                @南京
-                                                            </span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="col s4" style="padding: 0px">
-                                                    <br>
-                                                    <a href="#!" class="green-text text-lighten-1 float right" ><i class=" material-icons">grade</i></a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col s12 m6 l6">
-                                    <ul class="collection">
-                                        <li class="collection-item" >
-                                            <div class="row " style="margin-bottom: 0px">
-                                                <div class="col s8">
-                                                    <div class="valign-wrapper">
-                                                        <img src="img/avatar1.png" alt="" class="valign avatar_img_friends ">
-                                                        <p>
-                                                            <span class="text_username blue-text">
-                                                                ss14
-                                                            </span>
-                                                            <br>
-                                                            <span class="text_userloc grey-text text-lighten-1 ">
-                                                                @南京
-                                                            </span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="col s4" style="padding: 0px">
-                                                    <br>
-                                                    <a href="#!" class="green-text text-lighten-1 float right" ><i class=" material-icons">grade</i></a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="collection-item" >
-                                            <div class="row " style="margin-bottom: 0px">
-                                                <div class="col s8">
-                                                    <div class="valign-wrapper">
-                                                        <img src="img/avatar2.jpg" alt="" class="valign avatar_img_friends ">
-                                                        <p>
-                                                            <span class="text_username blue-text">
-                                                                星际笨哥
-                                                            </span>
-                                                            <br>
-                                                            <span class="text_userloc grey-text text-lighten-1 ">
-                                                                @北京
-                                                            </span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="col s4" style="padding: 0px">
-                                                    <br>
-                                                    <a href="#!" class="green-text text-lighten-1 float right" ><i class=" material-icons">grade</i></a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="collection-item" >
-                                            <div class="row " style="margin-bottom: 0px">
-                                                <div class="col s8">
-                                                    <div class="valign-wrapper">
-                                                        <img src="img/avatar.jpeg" alt="" class="valign avatar_img_friends ">
-                                                        <p>
-                                                            <span class="text_username blue-text">
-                                                                狼爷
-                                                            </span>
-                                                            <br>
-                                                            <span class="text_userloc grey-text text-lighten-1 ">
-                                                                @上海
-                                                            </span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="col s4" style="padding: 0px">
-                                                    <br>
-                                                    <a href="#!" class="green-text text-lighten-1 float right" ><i class=" material-icons">grade</i></a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="collection-item" >
-                                            <div class="row " style="margin-bottom: 0px">
-                                                <div class="col s8">
-                                                    <div class="valign-wrapper">
-                                                        <img src="img/avatar1.png" alt="" class="valign avatar_img_friends ">
-                                                        <p>
-                                                            <span class="text_username blue-text">
-                                                                ss14
-                                                            </span>
-                                                            <br>
-                                                            <span class="text_userloc grey-text text-lighten-1 ">
-                                                                @南京
-                                                            </span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="col s4" style="padding: 0px">
-                                                    <br>
-                                                    <a href="#!" class="green-text text-lighten-1 float right" ><i class=" material-icons">grade</i></a>
-                                                </div>
-                                            </div>
-                                        </li>
+                                            </li>
+                                        @endfor
                                     </ul>
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="card-action">
-                            <a href="#">This is a link</a>
                         </div>
                     </div>
                 </div>

@@ -45,4 +45,9 @@ class User extends Model
     }
 
 
+    public function getUserByIds($userIds){
+        $users = User::whereIn('id',$userIds)->get();
+        return $users;
+    }
+
 }
