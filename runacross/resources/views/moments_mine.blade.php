@@ -27,10 +27,11 @@
                         <span class="logo" > Logo</span>
                     </a>
                     <ul id="nav-mobile" class="right">
-                        <li class="active"><a href="'/user/{{ Session::get('user')->id }}/related-moments'"><span class="white-text center-align">动态</span></a></li>
-                        <li><a href="/competitions"><span class="white-text center-align">竞赛</span></a></li>
+
+                        <li ><a href="/user/{{ Session::get('user')->id }}/related-moments" ><span class="white-text center-align">动态</span></a></li>
+                        <li class="active"><a  href= "/competitions" ><span class="white-text center-align">竞赛</span></a></li>
                         <li >
-                            <a class="dropdown-button" href="" data-activates='dropdown1'>
+                            <a class="dropdown-button" href="" data-activates='dropdown'>
                                 <div class="valign-wrapper">
                                     <img  class="valign  circle" style="width: 40px ; height: 40px;"  src="{{ Session::get('user')->avatar }} " alt="ME">
                                     <span class="valign white-text"> &nbsp {{ Session::get('user')->user_name }}</span>
@@ -39,12 +40,11 @@
                             </a>
                         </li>
                         <!-- Dropdown Structure -->
-                        <ul id='dropdown1' class='dropdown-content'>
-                            <li><a href="user_stats.html">我的账号</a></li>
+                        <ul id='dropdown' class='dropdown-content'>
+                            <li><a href="/user/{{Session::get('user')->id}}/statistics">我的账号</a></li>
                             <li class="divider"></li>
                             <li><a href="/login">登出</a></li>
                         </ul>
-
                     </ul>
                 </div>
             </nav>
