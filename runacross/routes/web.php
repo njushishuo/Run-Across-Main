@@ -54,10 +54,12 @@ Route::delete('/competitions/{competitionId}/{userId}','CompetitionController@qu
 
 /*User-Profile*/
 Route::get('/user/{userId}/userInfo','UserInfoController@getUserInfo');
+Route::post('/user/{userId}/userInfo','UserInfoController@updateUserInfo');
 
 /*User-Record*/
-Route::get('/user/{userId}/deviceRecords/{date}','DeviceRecordController@getDeviceRecordsByDate');
-
+Route::get('/user/{userId}/deviceRecords/default','DeviceRecordController@getDeviceRecord');
+Route::get('/user/{userId}/deviceRecords/{date}','DeviceRecordController@getDeviceRecordByDate');
+Route::put('/user/{userId}/deviceRecords/{date}','DeviceRecordController@getRecordAjax');
 
 /*User-Statistics*/
 Route::get('/user/{userId}/statistics','UserStatsController@getUserStats');

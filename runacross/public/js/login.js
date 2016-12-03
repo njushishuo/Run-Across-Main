@@ -32,7 +32,7 @@ function register(){
             console.log(msg);
 
             if(msg.result){
-                alert("登陆成功"+"正在跳转"+msg.url);
+                alert("注册成功"+"正在跳转"+msg.url);
                 window.location.href = msg.url;
             }else{
                 alert("登陆失败");

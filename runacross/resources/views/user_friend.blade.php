@@ -65,7 +65,7 @@
                 </div>
 
                 <div class="col s1 ">
-                    <a href="/user/{{Session::get('user')->id}}/deviceRecords/2016-12-03" >
+                    <a href="/user/{{Session::get('user')->id}}/deviceRecords/default" >
                         <span class="blue-text center-align waves-effect waves-light">运动记录</span>
                     </a>
                 </div>

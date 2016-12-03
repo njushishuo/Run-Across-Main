@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="col s1 ">
-                    <a href="/user/{{Session::get('user')->id}}/deviceRecords/2016-12-03" >
+                    <a href="/user/{{Session::get('user')->id}}/deviceRecords/default" >
                         <span class="blue-text center-align waves-effect waves-light">运动记录</span>
                     </a>
                 </div>
@@ -86,25 +86,31 @@
                     <div class="card">
                         <div class="card-content">
                             <div class="row">
-                                <div class="col s12 m4" style="max-width: 160px">
-                                    <input  placeholder="12 December,2016" id="date" type="date" class="datepicker">
+                                <div class="col s6" >
+                                    <input id="datePicker" type="text"   placeholder="12 December,2016"
+                                           class="datepicker picker__input" style="max-width: 150px">
+                                </div>
+                                <div class="col s6 ">
+                                    <button onclick="updateRecord({{Session::get('user')->id}})"
+                                            class="right waves-effect waves-light btn">查看</button>
                                 </div>
                             </div>
+                            @if($record!=null)
                             <div class="row">
-                                <div class="col s12 m8 center-align" >
+                                <div class="col s8 center-align" >
                                     <span style="font-size: 6em">
-                                        6.7
+                                        {{ $record->distance }}
                                     </span>
                                     <span style="font-size: 2em">
                                         km
                                     </span>
                                 </div>
-                                <div class="col s12 m4">
+                                <div class="col s4">
                                     <div class="grey-text lighten-3" style="font-size: 2em; font-weight: 300">
                                         <p style="margin-top:20px">
                                             跑步
                                             <br>
-                                            18:27
+                                            {{$record->start_at}}
                                         </p>
                                     </div>
                                 </div>
@@ -118,13 +124,13 @@
                                                     时长:
                                                 </div>
                                                 <div class="col s12 m3" >
-                                                    00:45:08
+                                                    {{$record->duration}}
                                                 </div>
                                                 <div class="col s12 m3">
                                                     平均配速(分钟/公里):
                                                 </div>
                                                 <div class="col s12 m3" >
-                                                    11'14''
+                                                    {{$record->avg_pace}}
                                                 </div>
                                             </div>
 
@@ -135,13 +141,13 @@
                                                     卡路里(大卡):
                                                 </div>
                                                 <div class="col s6 m3" >
-                                                    409.4
+                                                    {{$record->calorie}}
                                                 </div>
                                                 <div class="col s6 m3">
                                                     平均速度(公里/小时):
                                                 </div>
                                                 <div class="col s6 m3" >
-                                                    12
+                                                    {{$record->avg_speed}}
                                                 </div>
                                             </div>
                                         </li>
@@ -151,13 +157,13 @@
                                                     步频(步/分钟):
                                                 </div>
                                                 <div class="col s6 m3" >
-                                                    80
+                                                    {{$record->stride_frequency}}
                                                 </div>
                                                 <div class="col s6 m3">
                                                     平均步幅(厘米):
                                                 </div>
                                                 <div class="col s6 m3" >
-                                                    120
+                                                    {{$record->avg_stride}}
                                                 </div>
                                             </div>
                                         </li>
@@ -167,26 +173,28 @@
                                                     步数:
                                                 </div>
                                                 <div class="col s6 m3" >
-                                                    2870
+                                                    {{$record->total_stride}}
                                                 </div>
                                                 <div class="col s6 m3">
                                                     心率(bpm):
                                                 </div>
                                                 <div class="col s6 m3" >
-                                                    175
+                                                    {{$record->heart_rate}}
                                                 </div>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
+                            @endif
+                            @if($record==null)
+                                <div class="row">
+                                    <div class="col s12" >
+                                        <span>今天好像没有运动记录哦</span>
+                                    </div>
+                                </div>
+                            @endif
 
-
-
-
-                        </div>
-                        <div class="card-action">
-                            <a href="#">This is a link</a>
                         </div>
                     </div>
                 </div>

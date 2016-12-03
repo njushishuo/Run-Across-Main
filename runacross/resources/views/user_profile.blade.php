@@ -63,7 +63,7 @@
                 </div>
 
                 <div class="col s1 ">
-                    <a href="/user/{{Session::get('user')->id}}/deviceRecords/2016-12-03" >
+                    <a href="/user/{{Session::get('user')->id}}/deviceRecords/default" >
                         <span class="blue-text center-align waves-effect waves-light">运动记录</span>
                     </a>
                 </div>
@@ -84,25 +84,26 @@
                     <div class="card white lighten-1">
                         <div class="card-content">
                             <!--更换头像-->
-                            <div class="row">
-                                <div class="col s3 offset-s1 ">
-                                    <img class="avatar_img_update" src="{{Session::get('user')->avatar}}" alt="头像" >
-                                </div>
-                                <div class="col s3 offset-s1 ">
-                                    <br> <br> <br>
-                                    <form action="#">
+                            <form action="#">
+                                <div class="row">
+                                    <div class="col s3 offset-s1 ">
+                                        <img class="avatar_img_update" src="{{Session::get('user')->avatar}}" alt="头像" >
+                                    </div>
+                                    <div class="col s3 offset-s1 ">
+                                        <br> <br> <br>
                                         <div class="file-field input-field">
                                             <div class="waves-effect waves-light btn-large white lighten-2">
                                                 <span class="grey-text" >上传新头像</span>
                                                 <input type="file">
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                             <!--基础信息-->
                             <div class="row">
-                                <form class="col s10 offset-s1 black-text">
+                                <form  id="basicInfoForm" method="post"
+                                       class="col s10 offset-s1 black-text">
                                     <div class="row" style="margin:0px">
                                         <div class="input-field col s12">
                                             <input value="{{Session::get('user')->nick_name}}"
@@ -136,16 +137,16 @@
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s3" style="margin-top: 0px">
-                                            <input type="checkbox" id="short_distance" name="talent" checked="checked"/>
-                                            <label for="Jogging">短跑</label>
+                                            <input type="radio" value="short_distance" id="short_distance" name="talent" checked="checked"/>
+                                            <label for="short_distance">短跑</label>
                                         </div>
                                         <div class="input-field col s3" style="margin-top: 0px">
-                                            <input type="checkbox" id="medium_distance" name="talent"/>
-                                            <label for="Running">中长步</label>
+                                            <input type="radio" value="medium_distance" id="medium_distance" name="talent"/>
+                                            <label for="medium_distance">中长步</label>
                                         </div>
                                         <div class="input-field col s3" style="margin-top: 0px">
-                                            <input type="checkbox" id="long_distance" name="talent"/>
-                                            <label for="Cycling">长跑</label>
+                                            <input type="radio" value="long_distance" id="long_distance" name="talent"/>
+                                            <label for="long_distance">长跑</label>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -156,7 +157,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s4 offset-s4">
-                                            <button class="center btn yellow lighten-2 waves-effect waves-light " type="submit" name="action">
+                                            <button type="button" onclick="updateInfo({{Session::get('user')->id}})" class="center btn yellow lighten-2 waves-effect waves-light " >
                                                 更新个人信息
                                             </button>
                                         </div>
