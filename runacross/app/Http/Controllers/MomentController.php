@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Friend;
 use App\Moment;
+use App\Star;
+use App\VO\MomentVO;
 use Log;
 use Illuminate\Http\Request;
 
@@ -11,11 +13,14 @@ class MomentController extends Controller
 {
     protected $Moment;
     protected $Friend;
+    protected $Star;
 
-    public function __construct(Moment $moment , Friend $friend)
+    public function __construct(Moment $moment , Friend $friend, Star $star)
     {
         $this->Moment=$moment;
         $this->Friend=$friend;
+        $this->Star=$star;
+
     }
 
 
@@ -32,8 +37,14 @@ class MomentController extends Controller
         $relatedIds[]=$userId;
 
         $moments =  $this->Moment->getMomentsByUserIds($relatedIds);
+        $momentVOs =array();
+        for($i =0;$i<count($moments);$i++){
+            $hasVote = $this->Star->hasVote($moments[$i]->id , $userId);
+            $count = $this->Star->getVoteCount($moments[$i]->id);
+            $momentVOs[$i]= new MomentVO($moments[$i],$hasVote , $count);
+        }
 
-        return view('moments_board' , ['moments'=>$moments]);
+        return view('moments_board' , ['momentVOs'=>$momentVOs]);
 
     }
 
@@ -62,7 +73,13 @@ class MomentController extends Controller
         /*用户关注的人*/
 
         $moments =  $this->Moment->getMomentsByUserId($userId);
-        return view('moments_mine' , ['moments'=>$moments]);
+        $momentVOs =array();
+        for($i =0;$i<count($moments);$i++){
+            $hasVote = $this->Star->hasVote($moments[$i]->id , $userId);
+            $count = $this->Star->getVoteCount($moments[$i]->id);
+            $momentVOs[$i]= new MomentVO($moments[$i],$hasVote , $count);
+        }
+        return view('moments_mine' , ['momentVOs'=>$momentVOs]);
 
     }
 
@@ -99,5 +116,21 @@ class MomentController extends Controller
 
 
     }
+
+
+    public function vote($momentId , $userId){
+        $this->Star->vote($momentId,$userId);
+
+        return ['result'=>true];
+
+    }
+
+    public function unVote($momentId , $userId){
+        $this->Star->unVote($momentId,$userId);
+
+        return ['result'=>true];
+
+    }
+
 
 }

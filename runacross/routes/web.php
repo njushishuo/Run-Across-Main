@@ -27,8 +27,9 @@ Route::post('/login','LoginController@postLogin');
 /*Related-Moments*/
 
 Route::get('/user/{userId}/related-moments','MomentController@getRelatedMoments');
-
 Route::post('/user/{userId}/related-moments','MomentController@createMomentBoard');
+Route::post('/moment/{momentId}/user/{userId}','MomentController@vote');
+Route::delete('/moment/{momentId}/user/{userId}','MomentController@unVote');
 
 /*My-Moments*/
 Route::get('/user/{userId}/moments','MomentController@getMyMoments');
@@ -60,6 +61,9 @@ Route::post('/user/{userId}/userInfo','UserInfoController@updateUserInfo');
 Route::get('/user/{userId}/deviceRecords/default','DeviceRecordController@getDeviceRecord');
 Route::get('/user/{userId}/deviceRecords/{date}','DeviceRecordController@getDeviceRecordByDate');
 Route::put('/user/{userId}/deviceRecords/{date}','DeviceRecordController@getRecordAjax');
+
+
+Route::post('/deviceRecords','DeviceRecordController@saveDeviceRecord');
 
 /*User-Statistics*/
 Route::get('/user/{userId}/statistics','UserStatsController@getUserStats');

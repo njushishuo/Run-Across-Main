@@ -1,46 +1,35 @@
-
-
-function follow(userId, followId) {
-
-    userDetial = {
-        username:'',
-        age:'',
-        goal:'',
-        location:'',
-        followId :null
-    }
-
+function vote(momentId,userId) {
     $.ajax({
         type: "post",
-        url: "/user/"+userId+"/watch/"+followId,
+        url: "/moment/"+momentId+"/user/"+userId,
         success: function(msg){
 
             console.log(msg);
 
             if(msg.result){
-                userDetial.followId = followId;
+
                 window.location.reload();
             }else{
-
+                alert("点赞失败");
             }
 
         }
     });
 }
 
-function unfollow(userId, followId) {
-
+function unVote(momentId,userId) {
     $.ajax({
         type: "delete",
-        url: "/user/"+userId+"/watch/"+followId,
+        url: "/moment/"+momentId+"/user/"+userId,
         success: function(msg){
 
             console.log(msg);
 
             if(msg.result){
+
                 window.location.reload();
             }else{
-
+                alert("取消点赞失败");
             }
 
         }

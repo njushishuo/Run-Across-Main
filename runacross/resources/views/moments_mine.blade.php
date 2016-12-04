@@ -126,53 +126,65 @@
 
                         </div>
                     </div>
-                @foreach( $moments as $moment)
+
+
+
+                @foreach( $momentVOs as $momentVO)
                     <!--Moments come here-->
-                    <div class="card" >
+                        <div class="card">
                             <!--Avatar here-->
                             <div class="row" style="margin-bottom: 0px">
                                 <div class="col s2" style="padding:5px">
-                                    <img  class="avatar_img_moment" src="{{URL::asset('img/avatar4.jpg') }}" alt="头像">
-                                </div>
-                                <div class="input-field col s8" style="padding-left: 0px;">
-                                    <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $moment->Author->nick_name }}</span><br>
-                                    <span class="grey-text lighten-2" style="font-size: 1em;font-weight:300">@NanJing</span>
+                                    <img  class="avatar_img_moment" src="{{ $momentVO->moment->Author->avatar }}" alt="Contact Person">
                                 </div>
                                 <div class="input-field col s2" style="padding-left: 0px;">
-                                    <button data-target="{{$moment->id.'modal'}}"
-                                            class="btn red lighten-1  modal-trigger white-text  waves-effect waves-light"
+                                    <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $momentVO->moment->Author->nick_name }}</span><br>
+                                    <span class="grey-text lighten-2" style="font-size: 1em;font-weight:300">@NanJing</span>
+                                </div>
+                                <div class="input-field col s6" style="padding-left: 0px;">
+                                    <button data-target="{{$momentVO->moment->id.'modal'}}"
+                                            class="right btn red lighten-1  modal-trigger white-text  waves-effect waves-light"
                                     >删除</button>
                                 </div>
                             </div>
                             <hr style=" opacity:0.3;">
                             <!--img here-->
                             <div class="card-image">
-                                <img src="{{$moment->picture}}">
+                                <img src="{{$momentVO->moment->picture}}">
                             </div>
                             <!--discription here-->
                             <div class="card-content">
-                                <p> {{ $moment->content }} </p>
+                                <p> {{$momentVO->moment->content }} </p>
                             </div>
                             <!--Actions here-->
                             <div class="card-action">
+                                <div class="valign-wrapper">
+                                    @if($momentVO->hasVoted)
+                                        <button class="btn-flat" onclick="unVote({{$momentVO->moment->id.",".Session::get('user')->id}})">
+                                            <i id="{{$momentVO->moment->id}}.star" class="orange-text material-icons">thumb_up</i>
+                                        </button>
+                                    @endif
+                                    @if(!$momentVO->hasVoted)
+                                        <button class="btn-flat" onclick="vote({{$momentVO->moment->id.",".Session::get('user')->id}})">
+                                            <i id="{{$momentVO->moment->id}}.star" class=" material-icons">thumb_up</i>
+                                        </button>
+                                    @endif
+                                    <span style="font-size: 2.2em;">{{$momentVO->count}}</span>
+                                </div>
                                 <label>
-                                    <i class="material-icons">thumb_up</i>
-                                    <span style="font-size: 2.2em;">18</span>
-                                </label>
-                                <label>
-                                    <span class="text_postDate right">发表于&nbsp{{$moment->created_at}}</span>
+                                    <span class="text_post_date right">发表于&nbsp{{$momentVO->moment->created_at}}</span>
                                 </label>
                             </div>
                         </div>
 
-                        <div id="{{$moment->id.'modal'}}" class="modal modal-fixed-footer">
+                        <div id="{{$momentVO->moment->id.'modal'}}" class="modal modal-fixed-footer">
                             <div class="modal-content">
                                 <h3>动态删除提醒</h3>
                                 <p>确定删除此动态吗？</p>
                             </div>
                             <div class="modal-footer">
                                 <button class=" modal-action modal-close waves-effect waves-green btn-flat">否</button>
-                                <button onclick="deleteMomentById( {{ Session::get('user')->id.",".$moment->id }} )"
+                                <button onclick="deleteMomentById( {{ Session::get('user')->id.",".$momentVO->moment->id }} )"
                                         class=" modal-action modal-close waves-effect waves-green btn-flat">是</button>
                             </div>
                         </div>
@@ -205,5 +217,6 @@
 <script type="text/javascript" src="{{URL::asset('js/jquery-2.2.4.min.js') }}"></script>
 <script type="text/javascript" src="{{URL::asset('js/materialize.min.js') }}"></script>
 <script type="text/javascript" src="{{URL::asset('js/moments_mine.js') }}"></script>
+<script type="text/javascript" src="{{URL::asset('js/moments_board.js') }}"></script>
 </body>
 </html>

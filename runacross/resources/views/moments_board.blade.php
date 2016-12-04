@@ -9,6 +9,8 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <meta name="keywords" content="运动跑步社交">
 </head>
 
 <body>
@@ -125,36 +127,45 @@
                     </div>
 
 
-                    @foreach( $moments as $moment)
+                    @foreach( $momentVOs as $momentVO)
                     <!--Moments come here-->
                     <div class="card">
                         <!--Avatar here-->
                         <div class="row" style="margin-bottom: 0px">
                             <div class="col s12 m12 l2" style="padding:5px">
-                                <img  class="avatar_img_moment" src="{{ $moment->Author->avatar }}" alt="Contact Person">
+                                <img  class="avatar_img_moment" src="{{ $momentVO->moment->Author->avatar }}" alt="Contact Person">
                             </div>
                             <div class="input-field col s12 m12 l10" style="padding-left: 0px;">
-                                <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $moment->Author->nick_name }}</span><br>
+                                <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $momentVO->moment->Author->nick_name }}</span><br>
                                 <span class="grey-text lighten-2" style="font-size: 1em;font-weight:300">@NanJing</span>
                             </div>
                         </div>
                         <hr style=" opacity:0.3;">
                         <!--img here-->
                         <div class="card-image">
-                            <img src="{{$moment->picture}}">
+                            <img src="{{$momentVO->moment->picture}}">
                         </div>
                         <!--discription here-->
                         <div class="card-content">
-                            <p> {{ $moment->content }} </p>
+                            <p> {{$momentVO->moment->content }} </p>
                         </div>
                         <!--Actions here-->
                         <div class="card-action">
+                            <div class="valign-wrapper">
+                                @if($momentVO->hasVoted)
+                                    <button class="btn-flat" onclick="unVote({{$momentVO->moment->id.",".Session::get('user')->id}})">
+                                        <i id="{{$momentVO->moment->id}}.star" class="orange-text material-icons">thumb_up</i>
+                                    </button>
+                                @endif
+                                @if(!$momentVO->hasVoted)
+                                    <button class="btn-flat" onclick="vote({{$momentVO->moment->id.",".Session::get('user')->id}})">
+                                        <i id="{{$momentVO->moment->id}}.star" class=" material-icons">thumb_up</i>
+                                    </button>
+                                @endif
+                                <span style="font-size: 2.2em;">{{$momentVO->count}}</span>
+                            </div>
                             <label>
-                                <i class="material-icons">thumb_up</i>
-                                <span style="font-size: 2.2em;">18</span>
-                            </label>
-                            <label>
-                                <span class="text_post_date right">发表于&nbsp{{$moment->created_at}}</span>
+                                <span class="text_post_date right">发表于&nbsp{{$momentVO->moment->created_at}}</span>
                             </label>
                         </div>
                     </div>
@@ -168,41 +179,48 @@
 
                         <span class="blue-text lighten-2" style="font-size: 1.2em;font-weight:300">推荐动态</span>
 
-                        @foreach( $moments as $moment)
-                            <!--Moments come here-->
+                    @foreach( $momentVOs as $momentVO)
+                        <!--Moments come here-->
                             <div class="card">
                                 <!--Avatar here-->
                                 <div class="row" style="margin-bottom: 0px">
-                                    <div class="col s4 " style="padding:5px">
-                                        <img  class="avatar_img_moment" src="{{ $moment->Author->avatar }}" alt="Contact Person">
+                                    <div class="col s4" style="padding:5px">
+                                        <img  class="avatar_img_moment" src="{{ $momentVO->moment->Author->avatar }}" alt="Contact Person">
                                     </div>
                                     <div class="input-field col s8" style="padding-left: 0px;">
-                                        <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $moment->Author->nick_name }}</span><br>
+                                        <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $momentVO->moment->Author->nick_name }}</span><br>
                                         <span class="grey-text lighten-2" style="font-size: 1em;font-weight:300">@NanJing</span>
                                     </div>
                                 </div>
                                 <hr style=" opacity:0.3;">
                                 <!--img here-->
                                 <div class="card-image">
-                                    <img src="{{$moment->picture}}">
+                                    <img src="{{$momentVO->moment->picture}}">
                                 </div>
                                 <!--discription here-->
                                 <div class="card-content">
-                                    <p> {{ $moment->content }} </p>
+                                    <p> {{$momentVO->moment->content }} </p>
                                 </div>
                                 <!--Actions here-->
                                 <div class="card-action">
+                                    <div class="valign-wrapper">
+                                        @if($momentVO->hasVoted)
+                                            <button class="btn-flat" onclick="unVote({{$momentVO->moment->id.",".Session::get('user')->id}})">
+                                                <i id="{{$momentVO->moment->id}}.star" class="orange-text material-icons">thumb_up</i>
+                                            </button>
+                                        @endif
+                                        @if(!$momentVO->hasVoted)
+                                            <button class="btn-flat" onclick="vote({{$momentVO->moment->id.",".Session::get('user')->id}})">
+                                                <i id="{{$momentVO->moment->id}}.star" class=" material-icons">thumb_up</i>
+                                            </button>
+                                        @endif
+                                        <span style="font-size: 2.2em;">{{$momentVO->count}}</span>
+                                    </div>
                                     <label>
-                                        <i class="material-icons">thumb_up</i>
-                                        <span style="font-size: 2.2em;">18</span>
-                                    </label>
-
-                                    <label>
-                                        <span class="text_post_date right">发表于&nbsp{{$moment->created_at}}</span>
+                                        <span class="text_post_date right">发表于&nbsp{{$momentVO->moment->created_at}}</span>
                                     </label>
                                 </div>
                             </div>
-
                         @endforeach
                     </div>
                 </div>
@@ -228,5 +246,6 @@
 
 <script type="text/javascript" src="{{URL::asset('js/jquery-2.2.4.min.js') }}"></script>
 <script type="text/javascript" src="{{URL::asset('js/materialize.min.js') }}"></script>
+<script type="text/javascript" src="{{URL::asset('js/moments_board.js') }}"></script>
 </body>
 </html>
