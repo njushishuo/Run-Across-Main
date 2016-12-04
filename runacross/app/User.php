@@ -50,4 +50,17 @@ class User extends Model
         return $users;
     }
 
+
+    public function searchUserByNickName($userId,$key){
+        $users = User::where('nick_name','like','%'.$key.'%')
+                        ->where('id','<>',$userId)->get();
+        if($users!=null){
+            if(count($users)==0){
+                $users=null;
+            }
+        }
+        return $users;
+
+    }
+
 }

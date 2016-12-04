@@ -59,25 +59,14 @@
             <!--二级功能按钮-->
             <hr>
             <div class="row white" style="margin: 0px" >
-                <div class="col s1 offset-s4">
-                    <a href="/user/{{Session::get('user')->id}}/userInfo" >
-                        <span class="blue-text center-align waves-effect waves-light">个人资料</span>
-                    </a>
-                </div>
-
-                <div class="col s1 ">
-                    <a href="/user/{{Session::get('user')->id}}/deviceRecords/default" >
-                        <span class="blue-text center-align waves-effect waves-light">运动记录</span>
+                <div class="col s1 offset-s5">
+                    <a href="/competitions" >
+                        <span class="blue-text center-align waves-effect waves-light">竞赛场</span>
                     </a>
                 </div>
                 <div class="col s1 ">
-                    <a href="/user/{{Session::get('user')->id}}/statistics" >
-                        <span class="blue-text center-align waves-effect waves-light">数据统计</span>
-                    </a>
-                </div>
-                <div class="col s1 ">
-                    <a href="/user/{{Session::get('user')->id}}/friends" >
-                        <span class="blue-text center-align waves-effect waves-light">我的朋友</span>
+                    <a href="/user/{{Session::get('user')->id}}/competitions" >
+                        <span class="blue-text center-align waves-effect waves-light">我的竞赛</span>
                     </a>
                 </div>
             </div>
@@ -535,10 +524,10 @@
 
         <!--Add Button-->
         <div class="col s12 m2 l2">
-            <div class="fixed-action-btn " style="bottom: 45px;right:150px">
-                <a data-target="createComp" class="modal-trigger btn-floating btn-large waves-effect waves-light red">
-                    <i class="large material-icons">mode_edit</i>
-                </a>
+            <div class="fixed-action-btn " style="bottom: 80px;right:150px">
+                <button onclick="checkLevel({{Session::get('user')->level}})"  class="btn-floating btn-large waves-effect waves-light red">
+                    <i class="material-icons ">add</i>
+                </button>
             </div>
         </div>
     </div>

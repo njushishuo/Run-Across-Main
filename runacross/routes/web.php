@@ -67,7 +67,7 @@ Route::get('/user/{userId}/statistics','UserStatsController@getUserStats');
 
 /*User-Friends*/
 Route::get('/user/{userId}/friends','UserFriendController@getUserFriends');
-Route::get('/search','UserFriendController@search');
+Route::post('/search','UserFriendController@search');
 
 Route::post('/user/{userId}/watch/{watchId}','UserFriendController@follow');
 Route::delete('/user/{userId}/watch/{watchId}','UserFriendController@unfollow');

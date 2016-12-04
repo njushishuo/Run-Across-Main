@@ -8,6 +8,8 @@ $(document).ready(function () {
 
 
 function updateInfo(userId){
+
+
     $.ajax({
 
         type: "post",
@@ -18,10 +20,10 @@ function updateInfo(userId){
             console.log(msg);
 
             if(msg.result){
-                 //  alert("更新成功");
+
                 window.location.href='/user/'+userId+'/userInfo';
             }else{
-                alert("更新失败");
+                alert(msg.info);
             }
 
         }

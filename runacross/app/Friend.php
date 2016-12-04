@@ -45,4 +45,18 @@ class Friend extends Model
     }
 
 
+    public function  unfollow($userId, $followId){
+
+        Friend::where('user_id',$userId)->where('follow_id',$followId)->delete();
+    }
+
+    public function  follow($userId, $followId){
+
+        $record =new Friend();
+        $record->user_id = $userId;
+        $record->follow_id = $followId;
+        $record->save();
+    }
+
+
 }

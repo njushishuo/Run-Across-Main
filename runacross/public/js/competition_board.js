@@ -50,3 +50,13 @@ function joinTmCmpt( competitionId , userId ) {
         }
     });
 }
+
+
+
+function checkLevel(userLevel) {
+    if(userLevel<3){
+     alert("只有3级以上才可以发起竞赛哦！");
+    }else{
+       $('#createComp').openModal();
+    }
+}

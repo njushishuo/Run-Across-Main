@@ -26,8 +26,8 @@
                     <ul id="nav-mobile" class="right">
 
                         <li ><a href="/user/{{ Session::get('user')->id }}/related-moments" ><span class="white-text center-align">动态</span></a></li>
-                        <li class="active"><a  href= "/competitions" ><span class="white-text center-align">竞赛</span></a></li>
-                        <li >
+                        <li ><a  href= "/competitions" ><span class="white-text center-align">竞赛</span></a></li>
+                        <li class="active">
                             <a class="dropdown-button" href="" data-activates='dropdown'>
                                 <div class="valign-wrapper">
                                     <img  class="valign  circle" style="width: 40px ; height: 40px;"  src="{{ Session::get('user')->avatar }} " alt="ME">

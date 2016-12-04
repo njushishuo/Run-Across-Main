@@ -16,3 +16,26 @@
     font-weight: 400;
     font-size: 1em;
 }
+
+.text_label {
+    font-family: "Microsoft Yahei";
+    font-weight: 400;
+    font-size: 1.2em;
+    color:black;
+    opacity: 0.7;
+}
+
+.text_empty {
+    font-family: "Microsoft Yahei";
+    font-weight: 300;
+    font-size: 1em;
+    color:grey;
+}
+
+.text_follow_count{
+    font-family: "Microsoft Yahei";
+    font-weight: 400;
+    font-size: 1.4em;
+    color:orange;
+
+}

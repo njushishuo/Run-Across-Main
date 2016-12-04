@@ -38,7 +38,15 @@ class UserInfoController extends Controller
         $nick_name = $inputs['nick_name'];
         $gender = $inputs['gender'];
         $birthday = $inputs['birthday'];
+
         $email = $inputs['email'];
+
+
+        $pattern = "/^([0-9A-Za-z\\-_\\.]+)@([0-9a-z]+\\.[a-z]{2,3}(\\.[a-z]{2})?)$/i";
+        if ( !preg_match( $pattern, $email ) ){
+            return ['result'=>false,'info'=>'请输入正确的邮箱格式' ];
+        }
+
         $talent = $inputs['talent'];
         $bio = $inputs['bio'];
 
