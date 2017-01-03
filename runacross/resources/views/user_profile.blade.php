@@ -83,86 +83,138 @@
                 <div class="col s12 m12 l10 offset-l1">
                     <div class="card white lighten-1">
                         <div class="card-content">
-                            <!--更换头像-->
-                            <form action="#">
-                                <div class="row">
-                                    <div class="col s3 offset-s1 ">
-                                        <img class="avatar_img_update" src="{{Session::get('user')->avatar}}" alt="头像" >
-                                    </div>
-                                    <div class="col s3 offset-s1 ">
-                                        <br> <br> <br>
-                                        <div class="file-field input-field">
-                                            <div class="waves-effect waves-light btn-large white lighten-2">
-                                                <span class="grey-text" >上传新头像</span>
-                                                <input type="file">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <!--基础信息-->
                             <div class="row">
-                                <form  id="basicInfoForm" method="post"
-                                       class="col s10 offset-s1 black-text">
-                                    <div class="row" style="margin:0px">
-                                        <div class="input-field col s12">
-                                            <input value="{{Session::get('user')->nick_name}}"
-                                                   id="nick_name" name="nick_name" type="text" class="validate" >
-                                            <label for="nick_name">昵称</label>
-                                        </div>
-                                    </div>
+                                <div class="col s10 offset-s1 black-text" >
+                                    <!--更换头像-->
                                     <div class="row" >
-                                        <div class="input-field col s3" style="margin-top: 0px ">
-                                            <input checked="checked" id="male" name="gender" type="radio"  />
-                                            <label for="male">男生</label>
+                                        <div class="col s4 ">
+                                            <img class="avatar_img_update" src="{{Session::get('user')->avatar}}" alt="头像" >
                                         </div>
-                                        <div class="input-field col s3" style="margin-top: 0px">
-                                            <input  id="famale" name="gender" type="radio"  />
-                                            <label for="famale">女生</label>
-                                        </div>
+
                                     </div>
-                                    <br/>
+
                                     <div class="row">
-                                        <div class="input-field col s12">
-                                            <input value="{{Session::get('user')->birthday}}" id="birthday" name="birthday" type="date"
-                                                   class="datepicker"/>
-                                            <label for="birthday">生日</label>
+                                        <div class="col s12">
+                                            <form  method="post" enctype="multipart/form-data">
+                                                <div class="row">
+                                                    <div class="file-field input-field ">
+                                                        <div class="col s3 " >
+                                                            <div   class="btn lighten-2 waves-effect waves-light">
+                                                                选择文件
+                                                                <input id="avatar" name="avatar" type="file"  />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col s9">
+                                                            <input id="filename" class="file-path validate" type="text"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" >
+                                                    <div class="input-field col s12">
+                                                        <button type="button" onclick=""
+                                                                class="center btn lighten-2 waves-effect waves-light " >
+                                                            上传文件
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
+
+
+
+                                    <!--更换基础信息-->
                                     <div class="row">
-                                        <div class="input-field col s12">
-                                            <input value="{{Session::get('user')->email}}" id="email" name="email" type="email" class="validate">
-                                            <label for="email">邮箱</label>
+                                        <div class="col s12">
+                                            <form  id="basicInfoForm" method="post">
+                                                <div class="row" style="margin:0px">
+                                                    <div class="input-field col s12">
+                                                        <input value="{{Session::get('user')->nick_name}}"
+                                                               id="nick_name" name="nick_name" type="text" class="validate" >
+                                                        <label for="nick_name">昵称</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row" >
+                                                    @if(Session::get('user')->gender=='male')
+                                                        <div class="input-field col s3" style="margin-top: 0px ">
+                                                            <input checked="checked" id="male" value="male" name="gender" type="radio"  />
+                                                            <label for="male">男生</label>
+                                                        </div>
+                                                        <div class="input-field col s3" style="margin-top: 0px">
+                                                            <input  id="famale" name="gender" value="female" type="radio"  />
+                                                            <label for="famale">女生</label>
+                                                        </div>
+                                                    @endif
+                                                    @if(Session::get('user')->gender=='female')
+                                                        <div class="input-field col s3" style="margin-top: 0px ">
+                                                            <input id="male" value="male" name="gender" type="radio"  />
+                                                            <label for="male">男生</label>
+                                                        </div>
+                                                        <div class="input-field col s3" style="margin-top: 0px">
+                                                            <input checked="checked" id="famale" name="gender" value="female" type="radio"  />
+                                                            <label for="famale">女生</label>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                                <br/>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input value="{{Session::get('user')->birthday}}" id="birthday" name="birthday" type="date"
+                                                               class="datepicker"/>
+                                                        <label for="birthday">生日</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input value="{{Session::get('user')->email}}" id="email" name="email" type="email" class="validate">
+                                                        <label for="email">邮箱</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s3" style="margin-top: 0px">
+                                                        @if(Session::get('user')->talent=='short_distance')
+                                                            <input checked="checked" type="radio" value="short_distance" id="short_distance" name="talent" />
+                                                        @else
+                                                            <input type="radio" value="short_distance" id="short_distance" name="talent" />
+                                                        @endif
+                                                        <label for="short_distance">短跑</label>
+                                                    </div>
+                                                    <div class="input-field col s3" style="margin-top: 0px">
+                                                        @if(Session::get('user')->talent=='medium_distance')
+                                                            <input checked="checked" type="radio" value="medium_distance" id="medium_distance" name="talent"/>
+                                                        @else
+                                                            <input type="radio" value="medium_distance" id="medium_distance" name="talent"/>
+                                                        @endif
+                                                        <label for="medium_distance">中长跑</label>
+                                                    </div>
+                                                    <div class="input-field col s3" style="margin-top: 0px">
+                                                        @if(Session::get('user')->talent=='long_distance')
+                                                            <input checked="checked" type="radio" value="long_distance" id="long_distance" name="talent"/>
+                                                        @else
+                                                            <input type="radio" value="long_distance" id="long_distance" name="talent"/>
+                                                        @endif
+                                                        <label for="long_distance">长跑</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input value="{{Session::get('user')->biography}}"  id="bio" name="bio" type="text" class="validate"    >
+                                                        </input>
+                                                        <label for="bio">自我介绍</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s4 offset-s4">
+                                                        <button type="button" onclick="updateInfo({{Session::get('user')->id}})" class="center btn yellow lighten-2 waves-effect waves-light " >
+                                                            更新个人信息
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="input-field col s3" style="margin-top: 0px">
-                                            <input type="radio" value="short_distance" id="short_distance" name="talent" checked="checked"/>
-                                            <label for="short_distance">短跑</label>
-                                        </div>
-                                        <div class="input-field col s3" style="margin-top: 0px">
-                                            <input type="radio" value="medium_distance" id="medium_distance" name="talent"/>
-                                            <label for="medium_distance">中长步</label>
-                                        </div>
-                                        <div class="input-field col s3" style="margin-top: 0px">
-                                            <input type="radio" value="long_distance" id="long_distance" name="talent"/>
-                                            <label for="long_distance">长跑</label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                            <textarea  id="bio" name="bio" class="materialize-textarea"></textarea>
-                                            <label for="bio">自我介绍</label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="input-field col s4 offset-s4">
-                                            <button type="button" onclick="updateInfo({{Session::get('user')->id}})" class="center btn yellow lighten-2 waves-effect waves-light " >
-                                                更新个人信息
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
+
+                                </div>
                             </div>
                         </div>
                     </div>
