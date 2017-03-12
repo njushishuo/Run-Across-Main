@@ -79,7 +79,9 @@
                     <div class="card white">
                         <div class="card-content black-text">
 
-                            <form  method="post" id="postForm" action="/user/{{Session::get('user')->id}}/related-moments">
+                            <form  method="post" id="postForm"
+                                   action="/user/{{Session::get('user')->id}}/related-moments"
+                                   enctype="multipart/form-data"  target="upload_target"  onsubmit="jupload();">
                                 <!--Photo add bt-->
                                 <div class="row" style="margin-bottom: 0px">
                                     <div class="col s12">
@@ -87,7 +89,7 @@
                                             <a href="">
                                                 <i class="small material-icons">add_a_photo</i>
                                                 <span class="white blue-text lighten-1" style="font-size: 2em;font-weight: 300">图片</span>
-                                                <input type="file" multiple/>
+                                                <input type="file" name="image"/>
                                             </a>
                                         </div>
                                     </div>
@@ -108,6 +110,8 @@
                                         <div class="row">
                                             <div class="col s12">
                                                 <!--TODO display picture-->
+                                                <div style="visibility: hidden" > <!-- a gif image to show that the process wasn't finished -->
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

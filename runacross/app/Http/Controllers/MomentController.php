@@ -51,13 +51,42 @@ class MomentController extends Controller
 
 
     public function createMomentBoard(Request $request, $userId){
+
+        if(isset($_FILES['image'])){
+            $errors= array();
+            $file_name = $_FILES['image']['name'];
+            $file_size = $_FILES['image']['size'];
+            $file_tmp = $_FILES['image']['tmp_name'];
+            $file_type = $_FILES['image']['type'];
+            $tmp=explode('.',$_FILES['image']['name']);
+            $file_ext= end($tmp);
+
+            $expensions= array("jpeg","jpg","png");
+
+            if(in_array($file_ext,$expensions)=== false){
+                $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+            }
+
+            if($file_size > 2097152) {
+                $errors[]='File size must be excately 2 MB';
+            }
+
+            if(empty($errors)==true) {
+                move_uploaded_file($file_tmp,"uploads/".$file_name);
+                echo "Success";
+            }else{
+                print_r($errors);
+            }
+        }
+
+
+
         $moment = new Moment();
         $moment->content = $request->input('moment_content');
-        $moment->picture = "http://cdnimg.erun360.com/Utility/Uploads/2016-01-14/678ecb7b-3eec-4036-bbdb-83e5f8d0782a.jpg";
+        $moment->picture = "http://localhost:8000/uploads/".$file_name;
         $moment->author_id = $userId;
         $moment->created_at = date('y-m-d H:i:s',time()+8*60*60);
         $moment->save();
-
         $url = "/user/".$userId."/related-moments";
         return redirect($url);
 
