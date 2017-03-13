@@ -27,15 +27,13 @@ Route::post('/login','LoginController@postLogin');
 /*Related-Moments*/
 
 Route::get('/user/{userId}/related-moments','MomentController@getRelatedMoments');
-Route::post('/user/{userId}/related-moments','MomentController@createMomentBoard');
+Route::post('/user/{userId}/related-moments','MomentController@createMoment');
 Route::post('/moment/{momentId}/user/{userId}','MomentController@vote');
 Route::delete('/moment/{momentId}/user/{userId}','MomentController@unVote');
 
 /*My-Moments*/
 Route::get('/user/{userId}/moments','MomentController@getMyMoments');
-
-Route::post('/user/{userId}/moments','MomentController@createMomentMine');
-
+Route::post('/user/{userId}/moments','MomentController@createMoment');
 Route::delete('user/{userId}/moments/{momentId}','MomentController@deleteMoment');
 
 
@@ -56,6 +54,7 @@ Route::delete('/competitions/{competitionId}/{userId}','CompetitionController@qu
 /*User-Profile*/
 Route::get('/user/{userId}/userInfo','UserInfoController@getUserInfo');
 Route::post('/user/{userId}/userInfo','UserInfoController@updateUserInfo');
+Route::post('/user/{userId}/userInfo/avatar','UserInfoController@updateAvatar');
 
 /*User-Record*/
 Route::get('/user/{userId}/deviceRecords/default','DeviceRecordController@getDeviceRecord');

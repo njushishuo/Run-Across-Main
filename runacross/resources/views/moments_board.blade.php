@@ -75,13 +75,12 @@
                 <!--Moments Create board and list-->
                 <div class="col s12 m12 l8" >
                     <!--Post new moment board-->
-
                     <div class="card white">
                         <div class="card-content black-text">
 
                             <form  method="post" id="postForm"
                                    action="/user/{{Session::get('user')->id}}/related-moments"
-                                   enctype="multipart/form-data"  target="upload_target"  onsubmit="jupload();">
+                                   enctype="multipart/form-data"  target="upload_target"  >
                                 <!--Photo add bt-->
                                 <div class="row" style="margin-bottom: 0px">
                                     <div class="col s12">
@@ -111,6 +110,7 @@
                                             <div class="col s12">
                                                 <!--TODO display picture-->
                                                 <div style="visibility: hidden" > <!-- a gif image to show that the process wasn't finished -->
+
                                                 </div>
                                             </div>
                                         </div>
@@ -146,9 +146,11 @@
                         </div>
                         <hr style=" opacity:0.3;">
                         <!--img here-->
+                        @if($momentVO->moment->picture!=null)
                         <div class="card-image">
                             <img src="{{$momentVO->moment->picture}}">
                         </div>
+                        @endif
                         <!--discription here-->
                         <div class="card-content">
                             <p> {{$momentVO->moment->content }} </p>
@@ -198,9 +200,11 @@
                                 </div>
                                 <hr style=" opacity:0.3;">
                                 <!--img here-->
+                                @if($momentVO->moment->picture!=null)
                                 <div class="card-image">
                                     <img src="{{$momentVO->moment->picture}}">
                                 </div>
+                                @endif
                                 <!--discription here-->
                                 <div class="card-content">
                                     <p> {{$momentVO->moment->content }} </p>

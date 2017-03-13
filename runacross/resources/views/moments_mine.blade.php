@@ -99,7 +99,7 @@
                                     <div class="col s12">
                                         <div class="row">
                                             <div class="col s12 m12 l2">
-                                                <img class="avatar_img_create" src="{{URL::asset('img/avatar4.jpg') }}" alt="用户头像">
+                                                <img class="avatar_img_create" src="{{session('user')->avatar }}" alt="用户头像">
                                             </div>
                                             <div class="input-field col s12 m12 l10">
                                                 <label for="moment_content">想说点什么?</label>
@@ -149,9 +149,11 @@
                             </div>
                             <hr style=" opacity:0.3;">
                             <!--img here-->
-                            <div class="card-image">
-                                <img src="{{$momentVO->moment->picture}}">
-                            </div>
+                            @if($momentVO->moment->picture!=null)
+                                <div class="card-image">
+                                    <img src="{{$momentVO->moment->picture}}">
+                                </div>
+                            @endif
                             <!--discription here-->
                             <div class="card-content">
                                 <p> {{$momentVO->moment->content }} </p>

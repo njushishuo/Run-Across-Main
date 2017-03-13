@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Util\FileUploader;
 use Illuminate\Http\Request;
 use Log;
 
@@ -10,11 +11,13 @@ class UserInfoController extends Controller
 {
 
     protected $User;
+    protected $FileUploader;
 
-    public function __construct(User $user)
+    public function __construct(User $user, FileUploader $fileUploader )
     {
 
         $this->User=$user;
+        $this->FileUploader = $fileUploader;
     }
 
 
@@ -56,6 +59,38 @@ class UserInfoController extends Controller
         $user->email = $email;
         $user->talent= $talent;
         $user->biography=$bio;
+
+        $user->save();
+        $request->session()->forget('user');
+        $request->session()->put('user',$user);
+
+        Log::info($user);
+
+        return ['result'=>$result ];
+    }
+
+
+    public function updateAvatar($userId , Request $request){
+
+        $user = User::find($userId);
+
+        if($user!=null){
+            $result = true;
+        }else{
+            $result=false;
+        }
+
+
+        $file_name = $this->FileUploader->uploadPicture();
+
+        if($file_name==null){
+            $user->avatar = null;
+            Log::info("file_name:".$file_name);
+            $result=false;
+        }else{
+            $user->avatar = "http://".$_SERVER['HTTP_HOST']."/uploads/".$file_name;
+        }
+
 
         $user->save();
         $request->session()->forget('user');

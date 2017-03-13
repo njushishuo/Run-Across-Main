@@ -7,8 +7,34 @@ $(document).ready(function () {
 
 
 
-function updateInfo(userId){
+function updateAvatar(userId) {
 
+    var form = document.getElementById("avatarForm");
+    var formData = new FormData(form);
+    $.ajax({
+        type: 'POST',
+        url: '/user/' + userId + '/userInfo/avatar',
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (msg) {
+
+            if (msg.result) {
+
+                alert(msg.result);
+                window.location.href = '/user/' + userId + '/userInfo';
+            } else {
+                alert("error");
+            }
+
+        }
+    })
+}
+
+
+
+function updateInfo(userId){
 
     $.ajax({
 

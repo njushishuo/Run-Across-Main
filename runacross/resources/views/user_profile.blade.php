@@ -95,13 +95,13 @@
 
                                     <div class="row">
                                         <div class="col s12">
-                                            <form  method="post" enctype="multipart/form-data">
+                                            <form  id="avatarForm" method="post" enctype="multipart/form-data"  target="upload_target">
                                                 <div class="row">
                                                     <div class="file-field input-field ">
                                                         <div class="col s3 " >
                                                             <div   class="btn lighten-2 waves-effect waves-light">
                                                                 选择文件
-                                                                <input id="avatar" name="avatar" type="file"  />
+                                                                <input id="avatar" type="file" name="image"  />
                                                             </div>
                                                         </div>
                                                         <div class="col s9">
@@ -111,7 +111,7 @@
                                                 </div>
                                                 <div class="row" >
                                                     <div class="input-field col s12">
-                                                        <button type="button" onclick=""
+                                                        <button type="button" onclick="updateAvatar({{Session::get('user')->id}})"
                                                                 class="center btn lighten-2 waves-effect waves-light " >
                                                             上传文件
                                                         </button>
