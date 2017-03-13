@@ -159,8 +159,8 @@
                                                 <br/>
                                                 <div class="row">
                                                     <div class="input-field col s12">
-                                                        <input value="{{Session::get('user')->birthday}}" id="birthday" name="birthday" type="date"
-                                                               class="datepicker"/>
+
+                                                        <input value="{{Session::get('user')->birthday}}" id="birthday" name="birthday" type="date" class="datepicker" />
                                                         <label for="birthday">生日</label>
                                                     </div>
                                                 </div>

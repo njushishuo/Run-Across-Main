@@ -18,18 +18,20 @@ function updateAvatar(userId) {
         cache: false,
         contentType: false,
         processData: false,
+
         success: function (msg) {
 
             if (msg.result) {
 
-                alert(msg.result);
                 window.location.href = '/user/' + userId + '/userInfo';
             } else {
+
                 alert("error");
             }
 
         }
     })
+    
 }
 
 
