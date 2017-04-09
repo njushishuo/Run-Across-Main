@@ -78,6 +78,7 @@
                         <span class="blue-text center-align waves-effect waves-light">我的朋友</span>
                     </a>
                 </div>
+
             </div>
             <hr>
 
@@ -87,7 +88,7 @@
                         <div class="card-content">
                             <div class="row">
                                 <div class="col s6" >
-                                    <input id="datePicker" type="text"   placeholder="12 December,2016"
+                                    <input id="datePicker" type="text"   placeholder="{{$record->date}}"
                                            class="datepicker picker__input" style="max-width: 150px">
                                 </div>
                                 <div class="col s6 ">

@@ -54,25 +54,20 @@
 
 
 <main>
+
+    <!--二级功能按钮-->
+    <div class="row">
+        <div class="col l4 offset-l4">
+            <ul class="tabs">
+                <li class="tab col s3"><a target="_self"  href="/user/{{Session::get('user')->id}}/related-moments">好友动态</a></li>
+                <li class="tab col s3"><a target="_self" class="active" href="/user/{{Session::get('user')->id}}/moments">我的动态</a></li>
+            </ul>
+        </div>
+    </div>
+
     <div class="row white">
         <!--Content Board-->
-        <div class="col s12  m12 l8 offset-l2 " style="padding: 5px;">
-            <!--二级功能按钮-->
-            <hr>
-            <div class="row white" style="margin: 0px" >
-                <div class="col s1 offset-s5">
-                    <a href="/user/{{Session::get('user')->id}}/related-moments" >
-                        <span class="blue-text center-align waves-effect waves-light">动态板</span>
-                    </a>
-                </div>
-                <div class="col s1 ">
-                    <a href="/user/{{Session::get('user')->id}}/moments" >
-                        <span class="blue-text center-align waves-effect waves-light">我的动态</span>
-                    </a>
-                </div>
-            </div>
-            <hr>
-
+        <div class="col s12  m12 l10 offset-l1 " style="padding: 5px;">
             <div class="row ">
                 <!--Moments Create board and list-->
                 <div class="col s12 m12 l8 offset-l2" >
@@ -88,7 +83,7 @@
                                             <a href="">
                                                 <i class="small material-icons">add_a_photo</i>
                                                 <span class="white blue-text lighten-1" style="font-size: 2em;font-weight: 300">图片</span>
-                                                <input type="file" multiple/>
+                                                <input type="file" name="image" multiple/>
                                             </a>
                                         </div>
                                     </div>
@@ -147,7 +142,6 @@
                                     >删除</button>
                                 </div>
                             </div>
-                            <hr style=" opacity:0.3;">
                             <!--img here-->
                             @if($momentVO->moment->picture!=null)
                                 <div class="card-image">
@@ -220,5 +214,6 @@
 <script type="text/javascript" src="{{URL::asset('js/materialize.min.js') }}"></script>
 <script type="text/javascript" src="{{URL::asset('js/moments_mine.js') }}"></script>
 <script type="text/javascript" src="{{URL::asset('js/moments_board.js') }}"></script>
+<script type="text/javascript" src="{{URL::asset('js/common.js') }}"></script>
 </body>
 </html>

@@ -61,7 +61,7 @@
                                             <label for="username" >用户名</label>
                                         </div>
                                         <div class="container input-field" >
-                                            <input  name="password" type="text" class="validate" >
+                                            <input  name="password" type="password" class="validate " >
                                             <label for="password">密码</label>
                                         </div>
                                         <div class="container input-field center">
@@ -87,7 +87,7 @@
                                             <label for="username" >用户名</label>
                                         </div>
                                         <div class="container input-field" >
-                                            <input  name="r_password" type="text" class="validate" >
+                                            <input  name="r_password" type="password" class="validate" >
                                             <label for="password">密码</label>
                                         </div>
                                         <div class="container input-field center">

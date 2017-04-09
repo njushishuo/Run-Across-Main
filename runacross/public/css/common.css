@@ -50,3 +50,17 @@ body{
     padding-bottom: 0;
 }
 
+/*#ee6e73*/
+
+.tabs .tab a{
+    color:#2196f3 ;
+}
+/*#f9c9cb*/
+.tabs .tab a:hover {
+    color:#90caf9
+}
+
+/*#f6b2b5*/
+.tabs .indicator{
+    background-color:#64b5f6;
+}
