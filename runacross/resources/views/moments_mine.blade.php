@@ -71,49 +71,6 @@
             <div class="row ">
                 <!--Moments Create board and list-->
                 <div class="col s12 m12 l8 offset-l2" >
-                    <!--Post new moment board-->
-                    <div class="card white">
-                        <div class="card-content black-text">
-                            <form  method="post" id="postForm" action="/user/{{Session::get('user')->id}}/moments">
-                                <!--Photo add bt-->
-                                <div class="row" style="margin-bottom: 0px">
-                                    <div class="col s12">
-                                        <div class="file-field input-field">
-                                            <a href="">
-                                                <i class="small material-icons">add_a_photo</i>
-                                                <span class="white blue-text lighten-1" style="font-size: 2em;font-weight: 300">图片</span>
-                                                <input type="file" name="image" multiple/>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr style=" opacity:0.3;">
-                                <!--Avatar and prompt-->
-                                <div class="row">
-                                    <div class="col s12">
-                                        <div class="row">
-                                            <div class="col s12 m12 l2">
-                                                <img class="avatar_img_create" src="{{session('user')->avatar }}" alt="用户头像">
-                                            </div>
-                                            <div class="input-field col s12 m12 l10">
-                                                <label for="moment_content">想说点什么?</label>
-                                                <textarea id="moment_content" name="moment_content" class="materialize-textarea" style="padding: 5px"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr style=" opacity:0.3;">
-                                <!--Post bt-->
-                                <div class="row">
-                                    <div class="col s12 input-field center">
-                                        <button type="submit"  class="btn blue lighten-2 waves-effect waves-light " >
-                                            发 表
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
 
                 @foreach( $momentVOs as $momentVO)
                     <!--Moments come here-->

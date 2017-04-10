@@ -75,3 +75,7 @@ body {
 main {
     flex: 1 0 auto;
 }
+
+i.material-icons.right{
+    margin:0px;
+}

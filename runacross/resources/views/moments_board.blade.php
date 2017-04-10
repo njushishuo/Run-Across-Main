@@ -34,7 +34,7 @@
                                 <div class="valign-wrapper">
                                     <img  class="valign  circle" style="width: 40px ; height: 40px;"  src="{{ Session::get('user')->avatar  }} " alt="ME">
                                     <span class="valign white-text"> &nbsp {{ Session::get('user')->nick_name }}</span>
-                                    <i class="material-icons right">arrow_drop_down</i>
+                                    <i class="material-icons right" >arrow_drop_down</i>
                                 </div>
                             </a>
                         </li>
@@ -78,7 +78,7 @@
                                    enctype="multipart/form-data"  target="upload_target"  >
                                 <!--Photo add bt-->
                                 <div class="row" style=" margin-bottom: 0px;">
-                                    <div class="col s12">
+                                    <div class="col s12 l12">
                                         <div class="file-field input-field">
                                             <a href="">
                                                 <i class="small material-icons">add_a_photo</i>
@@ -89,8 +89,8 @@
                                     </div>
                                 </div>
                                 <br/>
-                            {{--<hr style=" opacity:0.3;">--}}
-                            <!--Avatar and prompt-->
+                                {{--<hr style=" opacity:0.3;">--}}
+                                <!--Avatar and prompt-->
                                 <div class="row" style="margin-bottom: 0px">
                                     <div class="col s12">
                                         <div class="row">
@@ -100,13 +100,14 @@
                                             <div class="input-field col s12 m12 l10">
                                                 <label for="moment_content">想说点什么?</label>
                                                 <textarea id="moment_content" name="moment_content" class="materialize-textarea" style="padding: 5px"></textarea>
-                                                <div class="row" >
-                                                    <div class="col s12 input-field right-align ">
+                                                <div class="row">
+                                                    <div class="col s12 l12 right input-field right-align ">
                                                         <button type="submit"  class="btn blue lighten-2 waves-effect waves-light " >
                                                             发 表
                                                         </button>
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
