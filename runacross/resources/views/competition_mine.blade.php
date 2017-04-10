@@ -80,12 +80,12 @@
                                     <div class="card" style="margin-bottom: 0px">
                                         <!--Avatar here-->
                                         <div class="row" style="margin-bottom: 0px">
-                                            <div class="col s2 l2" style="padding:5px">
+                                            <div class="col s4 l2" style="padding:5px">
                                                 <img  class="avatar_img_competition" src="{{$createdVOs[$i]->cmptVO->competition->author->avatar}}" alt="Contact Person">
                                             </div>
-                                            <div class="input-field col s10 l10 left-align" style="padding-left: 0px;">
-                                                <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $createdVOs[$i]->cmptVO->competition->author->nick_name }}</span><br>
-                                                <span class="grey-text lighten-2" style="font-size: 1em;font-weight:300">{{ $createdVOs[$i]->cmptVO->created_at }}</span>
+                                            <div class="input-field col s8 l10 left-align" style="padding-left: 0px;">
+                                                <span class="blue-text lighten-2 text_avatar" >{{ $createdVOs[$i]->cmptVO->competition->author->nick_name }}</span><br>
+                                                <span class="grey-text lighten-2 text_avatar" >{{ $createdVOs[$i]->cmptVO->created_at }}</span>
                                             </div>
                                         </div>
 
@@ -291,12 +291,12 @@
                                     <div class="card" style="margin-bottom: 0px">
                                         <!--Avatar here-->
                                         <div class="row" style="margin-bottom: 0px">
-                                            <div class="col s2 l2" style="padding:5px">
+                                            <div class="col s4 l2" style="padding:5px">
                                                 <img  class="avatar_img_competition" src="{{$joinedVOs[$i]->cmptVO->competition->author->avatar}}" alt="Contact Person">
                                             </div>
-                                            <div class="input-field col s10 l10 left-align" style="padding-left: 0px;">
-                                                <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $joinedVOs[$i]->cmptVO->competition->author->nick_name }}</span><br>
-                                                <span class="grey-text lighten-2" style="font-size: 1em;font-weight:300">{{ $joinedVOs[$i]->cmptVO->created_at }}</span>
+                                            <div class="input-field col s8 l10 left-align" style="padding-left: 0px;">
+                                                <span class="blue-text lighten-2 text_avatar" >{{ $joinedVOs[$i]->cmptVO->competition->author->nick_name }}</span><br>
+                                                <span class="grey-text lighten-2 text_avatar" >{{ $joinedVOs[$i]->cmptVO->created_at }}</span>
                                             </div>
                                         </div>
 

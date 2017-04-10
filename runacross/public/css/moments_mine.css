@@ -1,18 +1,19 @@
 .avatar_img_create {
-    height:80px;
-    width: 80px;
+    height:100px;
+    width: 100px;
 }
 
 .avatar_img_moment{
-    height:70px;
-    width: 70px;
+    height:80px;
+    width: 80px;
     margin:5px;
 }
 
 
-.text_post_date{
+.text_avatar{
+    font-size: 1em;
+    font-weight:300
 
-    font-size: 1.2em;
 }
 
 .modal{

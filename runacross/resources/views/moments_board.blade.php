@@ -72,13 +72,12 @@
                 <div class="col s12 l8" >
                     <!--Post new moment board-->
                     <div class="card white">
-                        <div class="card-content black-text">
-
+                        <div class="card-content black-text" style="padding-bottom: 0px;">
                             <form  method="post" id="postForm"
                                    action="/user/{{Session::get('user')->id}}/related-moments"
                                    enctype="multipart/form-data"  target="upload_target"  >
                                 <!--Photo add bt-->
-                                <div class="row" style="margin-bottom: 0px">
+                                <div class="row" style=" margin-bottom: 0px;">
                                     <div class="col s12">
                                         <div class="file-field input-field">
                                             <a href="">
@@ -89,9 +88,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <hr style=" opacity:0.3;">
-                                <!--Avatar and prompt-->
-                                <div class="row">
+                                <br/>
+                            {{--<hr style=" opacity:0.3;">--}}
+                            <!--Avatar and prompt-->
+                                <div class="row" style="margin-bottom: 0px">
                                     <div class="col s12">
                                         <div class="row">
                                             <div class="col s12 m12 l2">
@@ -100,29 +100,19 @@
                                             <div class="input-field col s12 m12 l10">
                                                 <label for="moment_content">想说点什么?</label>
                                                 <textarea id="moment_content" name="moment_content" class="materialize-textarea" style="padding: 5px"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col s12">
-                                                <!--TODO display picture-->
-                                                <div style="visibility: hidden" > <!-- a gif image to show that the process wasn't finished -->
-
+                                                <div class="row" >
+                                                    <div class="col s12 input-field right-align ">
+                                                        <button type="submit"  class="btn blue lighten-2 waves-effect waves-light " >
+                                                            发 表
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <hr style=" opacity:0.3;">
-                                <!--Post bt-->
-                                <div class="row">
-                                    <div class="col s12 input-field center">
-                                        <button type="submit"  class="btn blue lighten-2 waves-effect waves-light " >
-                                            发 表
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
 
+                            </form>
                         </div>
                     </div>
 
@@ -132,12 +122,12 @@
                     <div class="card">
                         <!--Avatar here-->
                         <div class="row" style="margin-bottom: 0px">
-                            <div class="col s12 m12 l2" style="padding:5px">
+                            <div class="col s4 l2" style="padding:5px">
                                 <img  class="avatar_img_moment" src="{{ $momentVO->moment->Author->avatar }}" alt="Contact Person">
                             </div>
-                            <div class="input-field col s12 m12 l10" style="padding-left: 0px;">
-                                <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $momentVO->moment->Author->nick_name }}</span><br>
-                                <span class="grey-text lighten-2" style="font-size: 1em;font-weight:300">@NanJing</span>
+                            <div class="input-field col s8 l10" style="padding-left: 0px;">
+                                <span class="blue-text lighten-2 text_avatar" >{{ $momentVO->moment->Author->nick_name }}</span><br>
+                                <span class="grey-text lighten-2 text_avatar" >{{ $momentVO->created_at }}</span>
                             </div>
                         </div>
 
@@ -166,9 +156,6 @@
                                 @endif
                                 <span style="font-size: 2.2em;">{{$momentVO->count}}</span>
                             </div>
-                            <label>
-                                <span class="text_post_date right">发表于&nbsp{{$momentVO->moment->created_at}}</span>
-                            </label>
                         </div>
                     </div>
                     @endforeach
@@ -186,12 +173,12 @@
                             <div class="card">
                                 <!--Avatar here-->
                                 <div class="row" style="margin-bottom: 0px">
-                                    <div class="col s4" style="padding:5px">
+                                    <div class="col s4 l4" style="padding:5px">
                                         <img  class="avatar_img_moment" src="{{ $momentVO->moment->Author->avatar }}" alt="Contact Person">
                                     </div>
-                                    <div class="input-field col s8" style="padding-left: 0px;">
-                                        <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $momentVO->moment->Author->nick_name }}</span><br>
-                                        <span class="grey-text lighten-2" style="font-size: 1em;font-weight:300">@NanJing</span>
+                                    <div class="input-field col s8 l6" style="padding-left: 0px;">
+                                        <span class="blue-text lighten-2 text_avatar" >{{ $momentVO->moment->Author->nick_name }}</span><br>
+                                        <span class="grey-text lighten-2 text_avatar" >{{$momentVO->created_at}}</span>
                                     </div>
                                 </div>
                                 <!--img here-->
@@ -219,9 +206,6 @@
                                         @endif
                                         <span style="font-size: 2.2em;">{{$momentVO->count}}</span>
                                     </div>
-                                    <label>
-                                        <span class="text_post_date right">发表于&nbsp{{$momentVO->moment->created_at}}</span>
-                                    </label>
                                 </div>
                             </div>
                         @endforeach

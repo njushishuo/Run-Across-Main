@@ -15,9 +15,7 @@ class CompetitionVO
     public function __construct($competition)
     {
         $this->competition = $competition;
-        Log::info($this->competition->created_at);
         $this->created_at = date('Y-m-d',(int)$this->competition->created_at);
-        Log::info($this->created_at."!!!!!!!!!!");
         $this->start_at = date('Y-m-d',(int)$this->competition->start_at);
         $this->end_at = date('Y-m-d',(int)$this->competition->end_at);
 

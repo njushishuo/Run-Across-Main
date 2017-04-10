@@ -10,9 +10,10 @@
 }
 
 
-.text_post_date{
+.text_avatar{
+    font-size: 1em;
+    font-weight:300
 
-    font-size: 1.2em;
 }
 
 .btn-flat{

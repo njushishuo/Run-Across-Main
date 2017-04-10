@@ -74,7 +74,6 @@
                     <!--Post new moment board-->
                     <div class="card white">
                         <div class="card-content black-text">
-
                             <form  method="post" id="postForm" action="/user/{{Session::get('user')->id}}/moments">
                                 <!--Photo add bt-->
                                 <div class="row" style="margin-bottom: 0px">
@@ -101,11 +100,6 @@
                                                 <textarea id="moment_content" name="moment_content" class="materialize-textarea" style="padding: 5px"></textarea>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col s12">
-                                                <!--TODO display picture-->
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <hr style=" opacity:0.3;">
@@ -118,25 +112,22 @@
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                     </div>
-
-
 
                 @foreach( $momentVOs as $momentVO)
                     <!--Moments come here-->
                         <div class="card">
                             <!--Avatar here-->
                             <div class="row" style="margin-bottom: 0px">
-                                <div class="col s2" style="padding:5px">
+                                <div class="col s4 l2" style="padding:5px">
                                     <img  class="avatar_img_moment" src="{{ $momentVO->moment->Author->avatar }}" alt="Contact Person">
                                 </div>
-                                <div class="input-field col s2" style="padding-left: 0px;">
-                                    <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $momentVO->moment->Author->nick_name }}</span><br>
-                                    <span class="grey-text lighten-2" style="font-size: 1em;font-weight:300">@NanJing</span>
+                                <div class="input-field col s4 l8" style="padding-left: 0px;">
+                                    <span class="blue-text lighten-2 text_avatar" >{{ $momentVO->moment->Author->nick_name }}</span><br>
+                                    <span class="grey-text lighten-2 text_avatar" >{{ $momentVO->created_at }}</span>
                                 </div>
-                                <div class="input-field col s6" style="padding-left: 0px;">
+                                <div class="input-field col s4 l2" style="padding-left: 0px;">
                                     <button data-target="{{$momentVO->moment->id.'modal'}}"
                                             class="right btn red lighten-1  modal-trigger white-text  waves-effect waves-light"
                                     >删除</button>
@@ -167,9 +158,6 @@
                                     @endif
                                     <span style="font-size: 2.2em;">{{$momentVO->count}}</span>
                                 </div>
-                                <label>
-                                    <span class="text_post_date right">发表于&nbsp{{$momentVO->moment->created_at}}</span>
-                                </label>
                             </div>
                         </div>
 
@@ -186,17 +174,10 @@
                         </div>
 
                 @endforeach
-
-
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </main>
 
 <footer class="blue lighten-1 grey-text text-lighten-4">

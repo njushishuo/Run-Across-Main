@@ -85,8 +85,8 @@
                                                 <img  class="avatar_img_competition" src="{{$idvCmptVOs[$i]->competition->author->avatar}}" alt="Contact Person">
                                             </div>
                                             <div class="input-field col s10 l10 left-align" style="padding-left: 0px;">
-                                                <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $idvCmptVOs[$i]->competition->author->nick_name }}</span><br>
-                                                <span class="grey-text lighten-2" style="font-size: 1em;font-weight:300">{{ $idvCmptVOs[$i]->created_at }}</span>
+                                                <span class="blue-text lighten-2 text_avatar" >{{ $idvCmptVOs[$i]->competition->author->nick_name }}</span><br>
+                                                <span class="grey-text lighten-2 text_avatar" >{{ $idvCmptVOs[$i]->created_at }}</span>
                                             </div>
                                         </div>
 
@@ -204,8 +204,8 @@
                                             <img  class="avatar_img_competition" src="{{$tmCmptVOs[$i]->competition->author->avatar}}" alt="Contact Person">
                                         </div>
                                         <div class="input-field col s10 l10 left-align" style="padding-left: 0px;">
-                                            <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $tmCmptVOs[$i]->competition->author->nick_name }}</span><br>
-                                            <span class="grey-text lighten-2" style="font-size: 1em;font-weight:300">{{ $tmCmptVOs[$i]->created_at }}</span>
+                                            <span class="blue-text lighten-2 text_avatar" >{{ $tmCmptVOs[$i]->competition->author->nick_name }}</span><br>
+                                            <span class="grey-text lighten-2 text_avatar" >{{ $tmCmptVOs[$i]->created_at }}</span>
                                         </div>
                                     </div>
 

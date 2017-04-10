@@ -68,7 +68,7 @@ class MomentController extends Controller
         }
 
         $moment->author_id = $userId;
-        $moment->created_at = date('y-m-d H:i:s',time()+8*60*60);
+        $moment->created_at = time();
         $moment->save();
         $url = $_SERVER["HTTP_REFERER"];
         return redirect($url);

@@ -11,6 +11,12 @@
     margin-top:5px;
 }
 
+.text_avatar{
+    font-size: 1em;
+    font-weight:300
+
+}
+
 .btn-flat{
     padding-left:10px;
     padding-right:10px;
