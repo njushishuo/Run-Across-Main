@@ -200,13 +200,9 @@
 </main>
 
 <footer class="blue lighten-1 grey-text text-lighten-4">
-    <div class="row">
-        <div class="col s4 offset-s8">
-            <div class="container">
-                <p class="grey-text text-lighten-4">
-                    欢迎注册并使用本网站 © 2016 Copyright
-                </p>
-            </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2017   Copyright
         </div>
     </div>
 </footer>

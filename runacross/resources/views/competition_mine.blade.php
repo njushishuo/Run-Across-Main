@@ -13,9 +13,6 @@
 </head>
 
 <body>
-
-
-
 <header>
     <div class="row">
         <div class="col s12" style="padding: 0px">
@@ -51,27 +48,21 @@
         </div>
     </div>
 </header>
-
 <main>
+
+    {{--二级功能列表--}}
+    <div class="row">
+        <div class="col l4 offset-l4">
+            <ul class="tabs">
+                <li class="tab col s3"><a target="_self"  href="/competitions" >竞赛场</a></li>
+                <li class="tab col s3"><a target="_self" class="active" href="/user/{{Session::get('user')->id}}/competitions">我的竞赛</a></li>
+                <li class="tab col s3"><a target="_self"  href="/competitions/creation">新建竞赛</a></li>
+            </ul>
+        </div>
+    </div>
     <div class="row white">
         <!--Content Board-->
         <div class="col s12  m10 l8 offset-l2 " style="padding: 5px;">
-            <!--二级功能按钮-->
-            <hr>
-            <div class="row white" style="margin: 0px" >
-                <div class="col s1 offset-s5">
-                    <a href="/competitions" >
-                        <span class="blue-text center-align waves-effect waves-light">竞赛场</span>
-                    </a>
-                </div>
-                <div class="col s1 ">
-                    <a href="/user/{{Session::get('user')->id}}/competitions" >
-                        <span class="blue-text center-align waves-effect waves-light">我的竞赛</span>
-                    </a>
-                </div>
-            </div>
-            <hr>
-
             <div class="row ">
                 <div class="col s10 " >
                     <!--Competitions list here-->
@@ -86,64 +77,65 @@
                         <div class="row">
                             <div class="col s12">
                                 @for($i=0; $i<count($createdVOs);$i++)
-                                    <div class="card center-align" style="padding: 0px">
-                                        @if( !($createdVOs[$i]->cmptVO->hasBegun) )
-                                            <div class="row yellow white-text">
-                                                <div class="col s12">
-                                                    <span class="text_compete">等待中</span>
-                                                </div>
+                                    <div class="card" style="margin-bottom: 0px">
+                                        <!--Avatar here-->
+                                        <div class="row" style="margin-bottom: 0px">
+                                            <div class="col s2 l2" style="padding:5px">
+                                                <img  class="avatar_img_competition" src="{{$createdVOs[$i]->cmptVO->competition->author->avatar}}" alt="Contact Person">
                                             </div>
-                                        @endif
-                                        @if( ($createdVOs[$i]->cmptVO->hasBegun)&& (!$createdVOs[$i]->cmptVO->hasEnded))
-                                            <div class="row green white-text">
-                                                <div class="col s12">
-                                                    <span class="text_compete">进行中</span>
-                                                </div>
+                                            <div class="input-field col s10 l10 left-align" style="padding-left: 0px;">
+                                                <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $createdVOs[$i]->cmptVO->competition->author->nick_name }}</span><br>
+                                                <span class="grey-text lighten-2" style="font-size: 1em;font-weight:300">{{ $createdVOs[$i]->cmptVO->created_at }}</span>
                                             </div>
-                                        @endif
-                                        @if( ($createdVOs[$i]->cmptVO->hasEnded) )
-                                            <div class="row grey white-text">
-                                                <div class="col s12">
-                                                    <span class="text_compete">已结束</span>
-                                                </div>
+                                        </div>
+
+                                        <!--img here-->
+                                        @if($createdVOs[$i]->cmptVO->competition->picture!=null)
+                                            <div class="card-image">
+                                                <img src="{{$createdVOs[$i]->cmptVO->competition->picture}}">
                                             </div>
                                         @endif
                                         <div class="card-content ">
-                                            <div class="row" style="margin-bottom: 0px">
-                                                <div class="col s12 m2 ">
-                                                    <!--<span>Creator</span><br>-->
-                                                    <img src="{{$createdVOs[$i]->cmptVO->competition->author->avatar}}" class="avatar_img_competition circle">
+                                            <div class="row">
+                                                <div class="row" >
+                                                    <div class="col-s12 l12">
+                                                        <p class="text_compete">{{ $createdVOs[$i]->cmptVO->competition->title}}</p>
+                                                    </div>
                                                 </div>
-                                                <div class="col s12 m3 ">
-                                                    <span>标题</span><br>
-                                                    <p  style="margin: 0px">
-                                                        <span class="text_compete">{{ $createdVOs[$i]->cmptVO->competition->title}}</span>
-                                                    </p>
-                                                </div>
-                                                <div class="col s12 m2">
-                                                    <span>类型</span><br>
-                                                    @if( $createdVOs[$i]->cmptVO->competition->type=='individual')
-                                                        <span class="text_compete">个人赛</span>
-                                                    @endif
-                                                    @if( $createdVOs[$i]->cmptVO->competition->type=='team')
-                                                        <span class="text_compete">团队赛</span>
-                                                    @endif
+                                                <div class="row" style="margin-bottom: 0px">
+                                                    <div class="col s12 l12 " style="padding-left: 0px">
+                                                        {{--类别--}}
+                                                        <div class="chip">
+                                                            <div class="valign-wrapper">
+                                                                <i class=" material-icons">person</i>
+                                                                @if( $createdVOs[$i]->cmptVO->competition->type=='individual')
+                                                                    <span class="text_compete">个人竞赛</span>
+                                                                @endif
+                                                                @if( $createdVOs[$i]->cmptVO->competition->type=='team')
+                                                                    <span class="text_compete">团队竞赛</span>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                        {{--奖金--}}
+                                                        <div class="chip">
+                                                            <div class="valign-wrapper">
+                                                                <i class=" material-icons">attach_money</i> <span class="text_compete">{{$createdVOs[$i]->cmptVO->competition->reward}}</span>
+                                                            </div>
+                                                        </div>
+                                                        {{--开始日期--}}
+                                                        <div class="chip">
+                                                            <div class="valign-wrapper">
+                                                                <i class=" material-icons">alarm</i> <span class="text_compete">{{$createdVOs[$i]->cmptVO->start_at}}</span>
+                                                            </div>
+                                                        </div>
+                                                        {{--结束日期--}}
+                                                        <div class="chip">
+                                                            <div class="valign-wrapper">
+                                                                <i class=" material-icons">alarm</i> <span class="text_compete">{{$createdVOs[$i]->cmptVO->end_at}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                                                </div>
-                                                <div class="col s12 m3">
-                                                    @if( !($createdVOs[$i]->cmptVO->hasBegun) )
-                                                        <span>距离开始时间</span><br>
-                                                    @endif
-                                                    @if( $createdVOs[$i]->cmptVO->hasBegun )
-                                                        <span>距离结束时间</span><br>
-                                                    @endif
-                                                    <span class="text_compete green-text">{{$createdVOs[$i]->cmptVO->hour}}</span><span>h</span>
-                                                    <span class="text_compete green-text">{{$createdVOs[$i]->cmptVO->min}}</span><span>m</span>
-                                                    <span class="text_compete green-text">{{$createdVOs[$i]->cmptVO->sec}}</span><span>s</span>
-                                                </div>
-                                                <div class="col s12 m2">
-                                                    <span>奖金</span><br>
-                                                    <span class="text_compete yellow-text">{{$createdVOs[$i]->cmptVO->competition->reward}}</span>
                                                 </div>
 
                                             </div>
@@ -296,65 +288,71 @@
                         <div class="row">
                             <div class="col s12">
                                 @for($i=0; $i<count($joinedVOs);$i++)
-                                    <div class="card center-align" style="padding: 0px">
-                                        @if( !($joinedVOs[$i]->cmptVO->hasBegun) )
-                                            <div class="row yellow white-text">
-                                                <div class="col s12">
-                                                    <span class="text_compete">等待中</span>
-                                                </div>
+                                    <div class="card" style="margin-bottom: 0px">
+                                        <!--Avatar here-->
+                                        <div class="row" style="margin-bottom: 0px">
+                                            <div class="col s2 l2" style="padding:5px">
+                                                <img  class="avatar_img_competition" src="{{$joinedVOs[$i]->cmptVO->competition->author->avatar}}" alt="Contact Person">
                                             </div>
-                                        @endif
-                                        @if( ($joinedVOs[$i]->cmptVO->hasBegun)&& (!$joinedVOs[$i]->cmptVO->hasEnded))
-                                            <div class="row green white-text">
-                                                <div class="col s12">
-                                                    <span class="text_compete">进行中</span>
-                                                </div>
+                                            <div class="input-field col s10 l10 left-align" style="padding-left: 0px;">
+                                                <span class="blue-text lighten-2" style="font-size: 1em;font-weight:300">{{ $joinedVOs[$i]->cmptVO->competition->author->nick_name }}</span><br>
+                                                <span class="grey-text lighten-2" style="font-size: 1em;font-weight:300">{{ $joinedVOs[$i]->cmptVO->created_at }}</span>
                                             </div>
-                                        @endif
-                                        @if( ($joinedVOs[$i]->cmptVO->hasEnded) )
-                                            <div class="row grey white-text">
-                                                <div class="col s12">
-                                                    <span class="text_compete">已结束</span>
-                                                </div>
+                                        </div>
+
+                                        <!--img here-->
+                                        @if($joinedVOs[$i]->cmptVO->competition->picture!=null)
+                                            <div class="card-image">
+                                                <img src="{{$joinedVOs[$i]->cmptVO->competition->picture}}">
                                             </div>
                                         @endif
                                         <div class="card-content ">
-                                            <div class="row" style="margin-bottom: 0px">
-                                                <div class="col s12 m2 ">
-                                                    <!--<span>Creator</span><br>-->
-                                                    <img src="{{$joinedVOs[$i]->cmptVO->competition->author->avatar}}" class="avatar_img_competition circle">
+                                            <div class="row">
+                                                <div class="row" >
+                                                    <div class="col-s12 l12">
+                                                        <p class="text_compete">{{ $joinedVOs[$i]->cmptVO->competition->title}}</p>
+                                                    </div>
                                                 </div>
-                                                <div class="col s12 m3 ">
-                                                    <span>标题</span><br>
-                                                    <p  style="margin: 0px">
-                                                        <span class="text_compete">{{ $joinedVOs[$i]->cmptVO->competition->title}}</span>
-                                                    </p>
-                                                </div>
-                                                <div class="col s12 m2">
-                                                    <span>类型</span><br>
-                                                    @if( $joinedVOs[$i]->cmptVO->competition->type=='individual')
-                                                        <span class="text_compete">个人赛</span>
-                                                    @endif
-                                                    @if( $joinedVOs[$i]->cmptVO->competition->type=='team')
-                                                        <span class="text_compete">团队赛</span>
-                                                    @endif
+                                                <div class="row" style="margin-bottom: 0px">
+                                                    <div class="col s12 l12 " style="padding-left: 0px">
+
+
+                                                        {{--类别--}}
+                                                        <div class="chip">
+                                                            <div class="valign-wrapper">
+                                                                <i class=" material-icons">person</i>
+                                                                @if( $joinedVOs[$i]->cmptVO->competition->type=='individual')
+                                                                    <span class="text_compete">个人竞赛</span>
+                                                                @endif
+                                                                @if( $joinedVOs[$i]->cmptVO->competition->type=='team')
+                                                                    <span class="text_compete">团队竞赛</span>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+
+
+                                                        {{--奖金--}}
+                                                        <div class="chip">
+                                                            <div class="valign-wrapper">
+                                                                <i class=" material-icons">attach_money</i> <span class="text_compete">{{$joinedVOs[$i]->cmptVO->competition->reward}}</span>
+                                                            </div>
+                                                        </div>
+                                                        {{--开始日期--}}
+                                                        <div class="chip">
+                                                            <div class="valign-wrapper">
+                                                                <i class=" material-icons">alarm</i> <span class="text_compete">{{$joinedVOs[$i]->cmptVO->start_at}}</span>
+                                                            </div>
+                                                        </div>
+                                                        {{--结束日期--}}
+                                                        <div class="chip">
+                                                            <div class="valign-wrapper">
+                                                                <i class=" material-icons">alarm</i> <span class="text_compete">{{$joinedVOs[$i]->cmptVO->end_at}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
                                                 </div>
-                                                <div class="col s12 m3">
-                                                    @if( !($joinedVOs[$i]->cmptVO->hasBegun) )
-                                                        <span>距离开始时间</span><br>
-                                                    @endif
-                                                    @if( $joinedVOs[$i]->cmptVO->hasBegun )
-                                                        <span>距离结束时间</span><br>
-                                                    @endif
-                                                    <span class="text_compete green-text">{{$joinedVOs[$i]->cmptVO->hour}}</span><span>h</span>
-                                                    <span class="text_compete green-text">{{$joinedVOs[$i]->cmptVO->min}}</span><span>m</span>
-                                                    <span class="text_compete green-text">{{$joinedVOs[$i]->cmptVO->sec}}</span><span>s</span>
-                                                </div>
-                                                <div class="col s12 m2">
-                                                    <span>奖金</span><br>
-                                                    <span class="text_compete yellow-text">{{$joinedVOs[$i]->cmptVO->competition->reward}}</span>
-                                                </div>
+
                                             </div>
                                         </div>
                                         <div class="card-action  " style="padding: 10px">
@@ -519,87 +517,14 @@
                     </div>
                 </div>
             </div>
-
-        </div>
-
-        <!--Add Button-->
-        <div class="col s12 m2 l2">
-            <div class="fixed-action-btn " style="bottom: 80px;right:150px">
-                <button onclick="checkLevel({{Session::get('user')->level}})"  class="btn-floating btn-large waves-effect waves-light red">
-                    <i class="material-icons ">add</i>
-                </button>
-            </div>
         </div>
     </div>
-
-
-    <!-- Modal Structure -->
-    <div id="createComp" class="modal">
-        <div class="modal-content">
-            <!--基础信息-->
-            <div class="row">
-                <div class="col s10 offset-s1 black-text">
-                    <span class="text_create">创建竞赛</span>
-                    <form method="post" id="createCmptForm" action="/user/{{Session::get('user')->id}}/competitions" >
-                        <div class="row" style="margin:0px">
-                            <div class="input-field col s12">
-                                <input  id="title" name="title" type="text" class="validate" >
-                                <label for="title">标题</label>
-                            </div>
-                        </div>
-                        <div class="row" style="margin:0px">
-                            <div class="input-field col s12">
-                                <input  id="reward" name="reward" type="text" class="validate" >
-                                <label for="reward">赏金</label>
-                            </div>
-                        </div>
-
-                        <div class="row" >
-                            <div class="input-field col s12 m6 l6" style="margin-top: 0px" >
-                                <input id="type_idv" name="type" type="radio" checked="checked" value="individual" />
-                                <label for="type_idv">个人赛</label>
-                            </div>
-                            <div class="input-field col s12 m6 l6" style="margin-top: 0px">
-                                <input id="type_team" name="type" type="radio"  value="team"/>
-                                <label for="type_team">团队赛</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <label for="start_at">开始时间</label><br/>
-                                <input id="start_at" name="start_at" type="datetime-local" >
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <label for="end_at">结束时间</label><br/>
-                                <input id="end_at" name="end_at" type="datetime-local" >
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col s4 offset-s4">
-                                <button class="btn yellow lighten-2 waves-effect waves-light " type="submit">
-                                    发布
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
 </main>
 
 <footer class="blue lighten-1 grey-text text-lighten-4">
-    <div class="row">
-        <div class="col s4 offset-s8">
-            <div class="container">
-                <p class="grey-text text-lighten-4">
-                    © 2016 Copyright
-                </p>
-            </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2017   Copyright
         </div>
     </div>
 </footer>

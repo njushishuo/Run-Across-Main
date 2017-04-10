@@ -8,6 +8,7 @@ use App\TeamCmpt;
 use App\VO\Cmpt_RecordsVO;
 use App\VO\CompetitionVO;
 use App\VO\UserVO;
+use App\Util\FileUploader;
 use Illuminate\Http\Request;
 
 use Log;
@@ -17,12 +18,14 @@ class CompetitionController extends Controller
     protected $Competition;
     protected $IndividualCmpt;
     protected $TeamCmpt;
+    protected $FileUploader;
 
-    public function __construct(Competition $competition , IndividualCmpt $individualCmpt , TeamCmpt $teamCmpt)
+    public function __construct(Competition $competition , IndividualCmpt $individualCmpt , TeamCmpt $teamCmpt, FileUploader $fileUploader)
     {
         $this->Competition = $competition;
         $this->IndividualCmpt = $individualCmpt;
         $this->TeamCmpt = $teamCmpt;
+        $this->FileUploader = $fileUploader;
     }
 
 
@@ -57,8 +60,6 @@ class CompetitionController extends Controller
             $competitionId = $teamCompetitions[$i]->id;
             $teamPlayers[$i] =$this->TeamCmpt->getMemberRecords($competitionId);
         }
-
-
 
 
         return view('competition_board',['idvCmptVOs'=>$individualCompetitionVOs,
@@ -137,22 +138,37 @@ class CompetitionController extends Controller
 /*---------------------------------------------------------------------------------------------------------*/
 
 
+
+    public function getCreatePage(){
+
+        return view('competition_creation');
+
+    }
+
     /**
      * @param Request $request
      * @param $userId
      * @return \Illuminate\Http\RedirectResponse|
      */
     public function createCmpt(Request $request , $userId){
+
         $input = $request->all();
-        Log::info($input);
         $competition = new Competition();
+
+        $file_name = $this->FileUploader->uploadPicture();
+        if($file_name==null){
+            $competition->picture = null;
+        }else{
+            $competition->picture = "http://".$_SERVER['HTTP_HOST']."/uploads/".$file_name;
+        }
+
         $competition->type =$input['type'];
         $competition->title = $input['title'];
         $competition->reward = $input['reward'];
         $competition->author_id = $userId;
         $competition->start_at =$this->handleDateString($input['start_at']);
         $competition->end_at =$this->handleDateString($input['end_at']);
-        $competition->created_at =time()+8*3600;
+        $competition->created_at = time();
         $competition->save();
 
         Log::info("id: $competition->id");
@@ -167,14 +183,9 @@ class CompetitionController extends Controller
 
 
     private function handleDateString($inputDate){
-        str_replace('T',' ',$inputDate);
-        $inputDate.":00";
+
         Log::info($inputDate);
         $time = strtotime($inputDate);
-        $converted = date("Y-m-d H:i:s",$time);
-        Log::info("$inputDate convert to");
-        Log::info($converted);
-        Log::info("time : $time");
         return $time;
     }
 

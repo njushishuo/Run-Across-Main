@@ -46,6 +46,8 @@ Route::get('/user/{userId}/competitions','CompetitionController@getCompetitionsB
 Route::delete('/competitions/{competitionId}','CompetitionController@deleteCompetition');
 
 /*Competitions-Common*/
+
+Route::get('/competitions/creation','CompetitionController@getCreatePage');
 Route::post('/user/{userId}/competitions','CompetitionController@createCmpt');
 Route::post('/competitions/{competitionId}/{userId}','CompetitionController@joinIdvCmpt');
 Route::post('/competitions/{competitionId}/{userId}/{team}','CompetitionController@joinTeamCmpt');
