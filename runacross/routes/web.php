@@ -56,14 +56,11 @@ Route::delete('/competitions/{competitionId}/{userId}','CompetitionController@qu
 /*User-Profile*/
 Route::get('/user/{userId}/userInfo','UserInfoController@getUserInfo');
 Route::post('/user/{userId}/userInfo','UserInfoController@updateUserInfo');
-Route::post('/user/{userId}/userInfo/avatar','UserInfoController@updateAvatar');
 
 /*User-Record*/
 Route::get('/user/{userId}/deviceRecords/default','DeviceRecordController@getDeviceRecord');
 Route::get('/user/{userId}/deviceRecords/{date}','DeviceRecordController@getDeviceRecordByDate');
 Route::put('/user/{userId}/deviceRecords/{date}','DeviceRecordController@getRecordAjax');
-
-
 Route::post('/deviceRecords','DeviceRecordController@saveDeviceRecord');
 
 /*User-Statistics*/

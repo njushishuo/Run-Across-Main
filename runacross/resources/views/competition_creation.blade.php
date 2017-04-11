@@ -105,19 +105,19 @@
                                         <label for="title">标题</label>
                                     </div>
                                     <div class="input-field col s12 l6">
-                                        <input  id="reward" name="reward" type="text" class="validate" >
+                                        <input  id="reward" name="reward" type="number" class="validate" >
                                         <label for="reward">赏金</label>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="input-field col s12 l6" style="margin-top: 0px;">
-                                        <label for="start_at">开始日期</label><br/>
                                         <input id="start_at" name="start_at" type="date" class="datepicker"  >
+                                        <label for="start_at">开始日期</label>
                                     </div>
                                     <div class="input-field col s12 l6" style="margin-top: 0px" >
-                                        <label for="end_at">结束日期</label><br/>
                                         <input id="end_at" name="end_at" type="date" class="datepicker" >
+                                        <label for="end_at">结束日期</label>
                                     </div>
                                 </div>
 

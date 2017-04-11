@@ -30,6 +30,8 @@ class CompetitionController extends Controller
 
 
 
+
+
 /*---------------------------------------------------------------------------------------------------------*/
 
     /**
@@ -159,7 +161,7 @@ class CompetitionController extends Controller
         if($file_name==null){
             $competition->picture = null;
         }else{
-            $competition->picture = "http://".$_SERVER['HTTP_HOST']."/uploads/".$file_name;
+            $competition->picture = $this->FileUploader->getFilePathByFileName($file_name);
         }
 
         $competition->type =$input['type'];

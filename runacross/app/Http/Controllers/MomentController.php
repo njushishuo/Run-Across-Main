@@ -64,7 +64,7 @@ class MomentController extends Controller
         if($file_name==null){
             $moment->picture = null;
         }else{
-            $moment->picture = "http://".$_SERVER['HTTP_HOST']."/uploads/".$file_name;
+            $moment->picture = $this->FileUploader->getFilePathByFileName($file_name);
         }
 
         $moment->author_id = $userId;

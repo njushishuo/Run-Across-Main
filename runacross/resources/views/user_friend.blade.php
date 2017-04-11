@@ -52,160 +52,136 @@
 
 
 <main>
+    <!--二级功能按钮-->
+    <div class="row">
+        <div class="col l4 offset-l4">
+            <ul class="tabs">
+                <li class="tab col s3"><a target="_self"  href="/user/{{Session::get('user')->id}}/userInfo">个人资料</a></li>
+                <li class="tab col s3"><a target="_self"  href="/user/{{Session::get('user')->id}}/deviceRecords/default">运动记录</a></li>
+                <li class="tab col s3"><a target="_self"  href="/user/{{Session::get('user')->id}}/statistics">数据统计</a></li>
+                <li class="tab col s3"><a target="_self" class="active" href="/user/{{Session::get('user')->id}}/friends">我的朋友</a></li>
+            </ul>
+        </div>
+    </div>
     <div class="row white">
         <div class="col s12  m12 l8 offset-l2 " style="padding: 5px;">
 
-            <!--二级功能按钮-->
-            <hr>
-            <div class="row white" style="margin: 0px" >
-                <div class="col s1 offset-s4">
-                    <a href="/user/{{Session::get('user')->id}}/userInfo" >
-                        <span class="blue-text center-align waves-effect waves-light">个人资料</span>
-                    </a>
-                </div>
-
-                <div class="col s1 ">
-                    <a href="/user/{{Session::get('user')->id}}/deviceRecords/default" >
-                        <span class="blue-text center-align waves-effect waves-light">运动记录</span>
-                    </a>
-                </div>
-                <div class="col s1 ">
-                    <a href="/user/{{Session::get('user')->id}}/statistics" >
-                        <span class="blue-text center-align waves-effect waves-light">数据统计</span>
-                    </a>
-                </div>
-                <div class="col s1 ">
-                    <a href="/user/{{Session::get('user')->id}}/friends" >
-                        <span class="blue-text center-align waves-effect waves-light">我的朋友</span>
-                    </a>
-                </div>
-            </div>
-            <hr>
             <div class="row ">
                 <!--follow list-->
-                <div class="col s12 m12 l8 offset-l2" >
-                    <div class="card">
-                        <div class="card-content" >
-                            <div class="row">
-                                <div class="col s12">
-                                    {{--搜索用户--}}
-                                    <form action="/search" method="post" , id = "searchForm">
-                                        <div class="row">
-                                            <div class="col s6">
-                                                <span class="text_label">搜搜看吧</span>
-                                            </div>
-                                            <div class="col s6">
-                                                <button type="submit"
-                                                        class="btn yellow lighten-1 float right" >
-                                                    Go
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <input  id="nick_name" name="nick_name" type="text" class="validate">
-                                                <label for="nick_name">昵称</label>
-                                            </div>
-                                        </div>
-                                    </form>
-
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <span class="text_label">搜索结果</span>
-                                        </div>
-
+                <div class="col s12 m12 l12 " >
+                    <div class="row">
+                        <div class="card">
+                            {{--搜索用户--}}
+                            <form action="/search" method="post"  id = "searchForm">
+                                <div class="row valign-wrapper" style="margin-bottom: 0px">
+                                    <div class="input-field col s10 l10">
+                                        <input placeholder="昵称: shishuo" id="nick_name" name="nick_name" type="text" class="validate">
                                     </div>
+                                    <div class="col s10 l2">
+                                        <button type="submit" class="btn waves-effect waves-light">
+                                            <i class="small material-icons">search</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
-                                    <div class="row">
-                                        <div class="col s12">
-                                            @if($result!=null)
-                                            <ul class="collection">
-                                                @for($i=0;$i<count($result);$i++)
-                                                    <li class="collection-item">
-                                                        <div class="row " style="margin-bottom: 0px">
-                                                            <div class="col s8">
-                                                                <div class="valign-wrapper">
-                                                                    <img src="{{$result[$i]->avatar}}" alt="" class="valign avatar_img_friends ">
-                                                                    <p>
-                                                            <span class="text_username blue-text">
-                                                               {{$result[$i]->nick_name}}
-                                                            </span>
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col s4" style="padding: 0px">
-                                                                <br>
-                                                                <button onclick="follow({{Session::get('user')->id.",".$result[$i]->id}})"
-                                                                        class="btn blue lighten-1 float right" >
-                                                                    关注
-                                                                </button>
+                    <div class="row">
+                        <div class="col s12 l6">
+                            {{--搜索结果--}}
+
+                            <div class="card">
+                                <div class="row">
+                                    <span class="text_label">搜索结果</span>
+                                </div>
+                                <div class="row">
+                                    @if($result!=null)
+                                        <ul class="collection">
+                                            @for($i=0;$i<count($result);$i++)
+                                                <li class="collection-item">
+                                                    <div class="row " style="margin-bottom: 0px">
+                                                        <div class="col s8">
+                                                            <div class="valign-wrapper">
+                                                                <img src="{{$result[$i]->avatar}}" alt="" class="valign avatar_img_friends ">
+                                                                <p>
+                                                <span class="text_username blue-text">
+                                                   {{$result[$i]->nick_name}}
+                                                </span>
+                                                                </p>
                                                             </div>
                                                         </div>
-                                                    </li>
-                                                @endfor
-                                            </ul>
-                                            @endif
-                                            @if($result==null)
-                                                <span class="text_empty">什么都没有</span>
-                                            @endif
-                                        </div>
-                                    </div>
+                                                        <div class="col s4" style="padding: 0px">
+                                                            <br>
+                                                            <button onclick="follow({{Session::get('user')->id.",".$result[$i]->id}})"
+                                                                    class="btn blue lighten-1 float right" >
+                                                                关注
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            @endfor
+                                        </ul>
+                                    @endif
+                                    @if($result==null)
+                                        <span class="text_empty">什么都没有</span>
+                                    @endif
                                 </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="card">
-                        <div class="card-content" >
-                            <div class="row">
-                                <div class="col s12">
-                                    {{--followees 被用户关注的人--}}
-                                    <div class=" row">
-                                        <div class="col s12">
-                                            <span class="text_label">我的</span>
-                                            <span class="text_follow_count">{{count($followees)}}</span>
-                                            <span class="text_label">个关注</span>
-                                        </div>
-                                    </div>
-                                    <div class=" row">
-                                        <div class="col s12">
-                                            @if($followees!=null)
-                                                <ul class="collection">
-                                                    @for($i=0;$i<count($followees);$i++)
-                                                        <li class="collection-item">
-                                                            <div class="row " style="margin-bottom: 0px">
-                                                                <div class="col s8">
-                                                                    <div class="valign-wrapper">
-                                                                        <img src="{{$followees[$i]->avatar}}" alt="" class="valign avatar_img_friends ">
-                                                                        <p>
-                                                            <span class="text_username blue-text">
-                                                               {{$followees[$i]->nick_name}}
-                                                            </span>
-                                                                        </p>
-                                                                    </div>
+                            </div>
+
+                        </div>
+                        <div class="col s12 l6">
+                            <div class="card">
+                                {{--followees 被用户关注的人--}}
+                                <div class="row">
+                                    <span class="text_label">我的关注</span>
+                                    {{--<span class="text_follow_count">{{count($followees)}}</span>--}}
+                                    {{--<span class="text_label"></span>--}}
+                                </div>
+                                <div class="row">
+                                    @if($followees!=null)
+                                        <ul class="collection">
+                                            @for($i=0;$i<count($followees);$i++)
+                                                <a class="collection-item">
+                                                    <div class="row " style="margin-bottom: 0px">
+                                                        <div class="col s12 l8">
+                                                            <div class="valign-wrapper">
+                                                                <div class="col s4 l4" style="padding:5px">
+                                                                    <img src="{{$followees[$i]->avatar}}" alt="" class=" avatar_img_friends ">
                                                                 </div>
-                                                                <div class="col s4" style="padding: 0px">
-                                                                    <br>
-                                                                    <button onclick="unfollow({{Session::get('user')->id.",".$followees[$i]->id}})"
-                                                                            class="btn red lighten-1 float right" >
-                                                                        取消关注
-                                                                    </button>
+                                                                <div class="input-field col s8 l8" style="padding-left: 0px;">
+                                                                    <span class="grey-text lighten-2 text_avatar" >{{ $followees[$i]->nick_name }}</span><br>
+                                                                    <span class="grey-text lighten-2 text_avatar" >{{ $followees[$i]->addr }}</span>
                                                                 </div>
                                                             </div>
-                                                        </li>
-                                                    @endfor
-                                                </ul>
-                                            @endif
-                                            @if($followees==null)
-                                                <span class="text_empty">你还没有关注过他人哦</span>
-                                            @endif
-
-                                        </div>
-                                    </div>
+                                                        </div>
+                                                        <div class="col s12 l4" style="padding: 0px">
+                                                            <br>
+                                                            <button onclick="unfollow({{Session::get('user')->id.",".$followees[$i]->id}})"
+                                                                    class="btn red lighten-1 float right" >
+                                                                取消关注
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            @endfor
+                                        </ul>
+                                    @endif
+                                    @if($followees==null)
+                                        <span class="text_empty">你还没有关注过他人哦</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
+
+
+
+
+
                 </div>
             </div>
         </div>

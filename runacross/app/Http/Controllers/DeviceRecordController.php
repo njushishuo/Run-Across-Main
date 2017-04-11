@@ -22,7 +22,7 @@ class DeviceRecordController extends Controller
         Log::info('default');
         $record = $this->Record->getLatestRecord($userId);
         Log::info($record);
-        return view('user_record',['record'=>$record]);
+        return view('user_record',['record'=>$record ,'date'=>$record->date]);
 
 
     }
@@ -33,7 +33,7 @@ class DeviceRecordController extends Controller
         $record = $this->Record->getRecord($userId,$date);
         Log::info($record);
 
-        return view('user_record',['record'=>$record]);
+        return view('user_record',['record'=>$record ,'date'=>$date]);
 
    }
 

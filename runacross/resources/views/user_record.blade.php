@@ -51,49 +51,34 @@
 
 
 <main>
+
+    <!--二级功能按钮-->
+    <div class="row">
+        <div class="col l4 offset-l4">
+            <ul class="tabs">
+                <li class="tab col s3"><a target="_self"  href="/user/{{Session::get('user')->id}}/userInfo">个人资料</a></li>
+                <li class="tab col s3"><a target="_self" class="active" href="/user/{{Session::get('user')->id}}/deviceRecords/default">运动记录</a></li>
+                <li class="tab col s3"><a target="_self"  href="/user/{{Session::get('user')->id}}/statistics">数据统计</a></li>
+                <li class="tab col s3"><a target="_self"  href="/user/{{Session::get('user')->id}}/friends">我的朋友</a></li>
+            </ul>
+        </div>
+    </div>
     <div class="row white">
         <div class="col s12  m12 l8 offset-l2 " style="padding: 5px;">
-
-            <!--二级功能按钮-->
-            <hr>
-            <div class="row white" style="margin: 0px" >
-                <div class="col s1 offset-s4">
-                    <a href="/user/{{Session::get('user')->id}}/userInfo" >
-                        <span class="blue-text center-align waves-effect waves-light">个人资料</span>
-                    </a>
-                </div>
-
-                <div class="col s1 ">
-                    <a href="/user/{{Session::get('user')->id}}/deviceRecords/default" >
-                        <span class="blue-text center-align waves-effect waves-light">运动记录</span>
-                    </a>
-                </div>
-                <div class="col s1 ">
-                    <a href="/user/{{Session::get('user')->id}}/statistics" >
-                        <span class="blue-text center-align waves-effect waves-light">数据统计</span>
-                    </a>
-                </div>
-                <div class="col s1 ">
-                    <a href="/user/{{Session::get('user')->id}}/friends" >
-                        <span class="blue-text center-align waves-effect waves-light">我的朋友</span>
-                    </a>
-                </div>
-
-            </div>
-            <hr>
-
             <div class="row">
                 <div class="col s12 m12 l10 offset-l1">
                     <div class="card">
-                        <div class="card-content">
-                            <div class="row">
-                                <div class="col s6" >
-                                    <input id="datePicker" type="text"   placeholder="{{$record->date}}"
+                        <div class="card-content ">
+                            <div class="row valign-wrapper  ">
+                                <div class="col s6 l3 input-field" >
+                                    <input id="record_date" type="text"  value="{{$date}}"
                                            class="datepicker picker__input" style="max-width: 150px">
+                                    <label for="record_date">日期</label>
                                 </div>
-                                <div class="col s6 ">
+                                <div class="col s6 l9">
                                     <button onclick="updateRecord({{Session::get('user')->id}})"
-                                            class="right waves-effect waves-light btn">查看</button>
+                                            class=" waves-effect waves-light btn">查看
+                                    </button>
                                 </div>
                             </div>
                             @if($record!=null)

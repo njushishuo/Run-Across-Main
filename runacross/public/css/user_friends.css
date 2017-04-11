@@ -1,20 +1,8 @@
 .avatar_img_friends {
-    height:70px;
-    width: 80px;
-    padding-right:10px;
+    height:60px;
+    width: 60px;
+    padding-right:0px;
 
-}
-
-.text_username {
-    font-family: "Microsoft Yahei";
-    font-weight: 400;
-    font-size: 1.2em;
-}
-
-.text_userloc {
-    font-family: "Microsoft Yahei";
-    font-weight: 400;
-    font-size: 1em;
 }
 
 .text_label {
@@ -31,11 +19,16 @@
     font-size: 1em;
     color:grey;
 }
+.text_avatar{
+    font-size: 1em;
+    font-weight:300
+}
 
-.text_follow_count{
-    font-family: "Microsoft Yahei";
-    font-weight: 400;
-    font-size: 1.4em;
-    color:orange;
+.collection{
+    border:none;
+}
 
+.collection.collection-item{
+    border:none;
+    border-bottom: 0px;
 }

@@ -47,4 +47,10 @@ class FileUploader{
 
         Log::info("loader: end");
     }
+
+
+    public function getFilePathByFileName($filename){
+
+        return "/uploads/".$filename;
+    }
 }
