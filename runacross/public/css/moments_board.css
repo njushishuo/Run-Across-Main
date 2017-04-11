@@ -19,3 +19,17 @@
 .btn-flat{
     padding:5px;
 }
+
+
+button.btn-flat{
+    padding-top: 0px;
+    padding-bottom: 5px;
+}
+
+i.material-icons{
+    font-size: 1.5em;
+}
+
+.text_vote{
+    font-size: 1.5em;
+}

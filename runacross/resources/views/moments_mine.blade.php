@@ -104,16 +104,16 @@
                             <div class="card-action">
                                 <div class="valign-wrapper">
                                     @if($momentVO->hasVoted)
-                                        <button class="btn-flat" onclick="unVote({{$momentVO->moment->id.",".Session::get('user')->id}})">
-                                            <i id="{{$momentVO->moment->id}}.star" class="orange-text material-icons">thumb_up</i>
+                                        <button class="btn-flat " onclick="vote({{$momentVO->moment->id.",".Session::get('user')->id}})">
+                                            <i id="{{$momentVO->moment->id."star"}}" class="red-text material-icons">thumb_up</i>
                                         </button>
                                     @endif
                                     @if(!$momentVO->hasVoted)
                                         <button class="btn-flat" onclick="vote({{$momentVO->moment->id.",".Session::get('user')->id}})">
-                                            <i id="{{$momentVO->moment->id}}.star" class=" material-icons">thumb_up</i>
+                                            <i id="{{$momentVO->moment->id."star"}}" class="black-text material-icons">thumb_up</i>
                                         </button>
                                     @endif
-                                    <span style="font-size: 2.2em;">{{$momentVO->count}}</span>
+                                    <span class="text_vote" id="{{$momentVO->moment->id."span"}}">{{$momentVO->count}}</span>
                                 </div>
                             </div>
                         </div>
