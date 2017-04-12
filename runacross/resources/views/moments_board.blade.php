@@ -72,22 +72,21 @@
                 <div class="col s12 l8" >
                     <!--Post new moment board-->
                     <div class="card white">
-                        <div class="card-content black-text" style="padding-bottom: 0px;">
+                        <div class="card-content" style="padding-bottom: 0px;">
                             <form  method="post" id="postForm"
                                    action="/user/{{Session::get('user')->id}}/related-moments"
                                    enctype="multipart/form-data"  target="upload_target"  >
                                 <!--Photo add bt-->
                                 <div class="row" style=" margin-bottom: 0px;">
                                     <div class="col s12 l12">
-                                        <div class="file-field input-field">
-                                            <a href="">
-                                                <i class="large material-icons">add_a_photo</i>
-                                                <span class="white blue-text lighten-1" style="font-size: 2em;font-weight: 300">图片</span>
-                                                <input type="file" name="image"/>
-                                            </a>
+                                        <div class="file-field input-field blue-text valign-wrapper">
+                                            <input type="file" name="image"/>
+                                            <i class=" material-icons large " style="font-size: 2em">add_a_photo</i>
+                                            <span class="white lighten-1" style="font-size: 1.5em;font-weight: 300">图片</span>
                                         </div>
                                     </div>
                                 </div>
+
                                 <br/>
                                 {{--<hr style=" opacity:0.3;">--}}
                                 <!--Avatar and prompt-->
@@ -170,7 +169,7 @@
                 <div class="col s12 m12 l4">
                     <div class="card z-depth-0">
 
-                        <span class="blue-text lighten-2" style="font-size: 1.2em;font-weight:300">推荐动态</span>
+                        <span class="" style="font-size: 1.2em;font-weight:300">推荐动态</span>
 
                     @foreach( $momentVOs as $momentVO)
                         <!--Moments come here-->
