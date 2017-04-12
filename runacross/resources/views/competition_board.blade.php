@@ -137,16 +137,23 @@
                                             <div class="row" style="margin-bottom:0px">
                                                 <div class="col s2 offset-s8">
                                                     <a data-target="{{$idvCmptVOs[$i]->competition->id}}"
-                                                       class="btn-flat modal-trigger waves-effect waves-light">
+                                                       class="btn modal-trigger waves-effect waves-light">
                                                         竞赛成员
                                                     </a>
                                                 </div>
                                                 <div class="col s2 ">
                                                     {{--加入个人竞赛--}}
-                                                    <button onclick="joinIdvCmpt(
-                                                    {{$idvCmptVOs[$i]->competition->id.",".Session::get('user')->id}} )" class=" btn-flat  waves-effect waves-light">
-                                                        加入竞赛
-                                                    </button>
+                                                    @if($idvCmptVOs[$i]->hasJoined)
+                                                        <a  class="disabled btn">
+                                                            加入竞赛
+                                                        </a>
+                                                    @endif
+                                                    @if(!$idvCmptVOs[$i]->hasJoined)
+                                                        <a onclick="joinIdvCmpt(
+                                                        {{$idvCmptVOs[$i]->competition->id.",".Session::get('user')->id}} )" class=" btn  waves-effect waves-light">
+                                                            加入竞赛
+                                                        </a>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -157,17 +164,18 @@
                                             <ul class="collection">
                                                 @for($j=0;$j<count($idvPlayers[$i]);$j++)
                                                     <li class="collection-item">
-                                                        <div class="row" style="margin-bottom: 0px">
+                                                        <div class="row valign-wrapper" style="margin-bottom: 0px">
+
                                                             <div class="col s4" style="padding:5px">
-                                                                <img  class="avatar_img_competition" src="{{ $idvPlayers[$i][$j]->user->avatar }}" alt="Contact Person">
+                                                                <img  class="avatar_member" src="{{ $idvPlayers[$i][$j]->user->avatar }}" alt="Contact Person">
                                                             </div>
 
-                                                            <div class="input-field col s4" style="padding-left: 0px;">
+                                                            <div class=" col s4" style="padding-left: 0px;">
                                                                 <span class="text_stride" style="font-size: 1em;font-weight:300">步数:</span>
                                                                 <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $idvPlayers[$i][$j]->stride_count }}</span>
                                                             </div>
 
-                                                            <div class="input-field col s4" style="padding-left: 0px;">
+                                                            <div class=" col s4" style="padding-left: 0px;">
                                                                 <span class="text_rank" style="font-size: 1em;font-weight:300">名次:</span>
                                                                 <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $j+1 }}</span>
                                                             </div>
@@ -255,15 +263,22 @@
                                         <div class="row" style="margin-bottom:0px">
                                             <div class="col s2 offset-s8">
                                                 <a data-target="{{$tmCmptVOs[$i]->competition->id}}"
-                                                   class="btn-flat modal-trigger waves-effect waves-light">
+                                                   class="btn modal-trigger waves-effect waves-light">
                                                     竞赛成员
                                                 </a>
                                             </div>
                                             <div class="col s2 ">
                                                 {{--加入团队竞赛--}}
+                                                @if($tmCmptVOs[$i]->hasJoined)
                                                 <a data-target="team_confirm_modal"
-                                                    class=" btn-flat modal-trigger waves-effect waves-light">加入竞赛
+                                                    class=" btn disabled">加入竞赛
                                                 </a>
+                                                @endif
+                                                @if(!$tmCmptVOs[$i]->hasJoined)
+                                                    <a data-target="team_confirm_modal"
+                                                       class=" btn modal-trigger waves-effect waves-light">加入竞赛
+                                                    </a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -286,17 +301,17 @@
                                                     @for($j=0;$j<count($teamPlayers[$i]);$j++)
                                                         @if($teamPlayers[$i][$j]->team == 'red')
                                                             <li class="collection-item">
-                                                                <div class="row" style="margin-bottom: 0px">
+                                                                <div class="row valign-wrapper" style="margin-bottom: 0px">
                                                                     <div class="col s4" style="padding:5px">
-                                                                        <img  class="avatar_img_competition" src="{{ $teamPlayers[$i][$j]->user->avatar }}" alt="Contact Person">
+                                                                        <img  class="avatar_member" src="{{ $teamPlayers[$i][$j]->user->avatar }}" alt="Contact Person">
                                                                     </div>
 
-                                                                    <div class="input-field col s4" style="padding-left: 0px;">
+                                                                    <div class=" col s4" style="padding-left: 0px;">
                                                                         <span class="text_stride" style="font-size: 1em;font-weight:300">步数:</span>
                                                                         <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $teamPlayers[$i][$j]->stride_count }}</span>
                                                                     </div>
 
-                                                                    <div class="input-field col s4" style="padding-left: 0px;">
+                                                                    <div class=" col s4" style="padding-left: 0px;">
                                                                         <span class="text_rank" style="font-size: 1em;font-weight:300">名次:</span>
                                                                         <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $j+1 }}</span>
                                                                     </div>
@@ -311,17 +326,17 @@
                                                     @for($j=0;$j<count($teamPlayers[$i]);$j++)
                                                         @if($teamPlayers[$i][$j]->team == 'blue')
                                                             <li class="collection-item">
-                                                                <div class="row" style="margin-bottom: 0px">
+                                                                <div class="row valign-wrapper" style="margin-bottom: 0px">
                                                                     <div class="col s4" style="padding:5px">
-                                                                        <img  class="avatar_img_competition" src="{{ $teamPlayers[$i][$j]->user->avatar }}" alt="Contact Person">
+                                                                        <img  class="avatar_member" src="{{ $teamPlayers[$i][$j]->user->avatar }}" alt="Contact Person">
                                                                     </div>
 
-                                                                    <div class="input-field col s4" style="padding-left: 0px;">
+                                                                    <div class=" col s4" style="padding-left: 0px;">
                                                                         <span class="text_stride" style="font-size: 1em;font-weight:300">步数:</span>
                                                                         <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $teamPlayers[$i][$j]->stride_count }}</span>
                                                                     </div>
 
-                                                                    <div class="input-field col s4" style="padding-left: 0px;">
+                                                                    <div class=" col s4" style="padding-left: 0px;">
                                                                         <span class="text_rank" style="font-size: 1em;font-weight:300">名次:</span>
                                                                         <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $j+1 }}</span>
                                                                     </div>

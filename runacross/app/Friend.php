@@ -27,6 +27,17 @@ class Friend extends Model
     /*--------------Friend Board-------------------------------------------------*/
 
     /**
+     *
+     * @param $userId
+     * @return mixed
+     */
+    public function hasFollowed($followId,$userId){
+        $records = Friend::where('follow_id',$followId)->where('user_id',$userId)->get();
+        $result = count($records)==0? false:true;
+        return $result;
+    }
+
+    /**
      * 获得观察用户的人
      * @param $userId
      */

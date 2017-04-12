@@ -22,7 +22,6 @@ function updateRecord(userId) {
             console.log(msg);
 
             if(msg.result){
-                alert("更新成功");
                 window.location.href="/user/"+userId+"/deviceRecords/"+date;
             }else{
               //  alert("更新失败");

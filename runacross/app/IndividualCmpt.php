@@ -24,6 +24,17 @@ class IndividualCmpt extends Model
         return $this->hasOne('App\User','id','user_id');
     }
 
+
+    public function hasJoinedIdvCmp($cmpId , $userId){
+
+        $competitions = IndividualCmpt::where('competition_id',$cmpId)
+            ->where('user_id',$userId)
+            ->get();
+        $result = count($competitions)==0? false: true;
+        return  $result;
+
+    }
+
     /**
      * @param $id 竞赛Id
      * 返回当前每个成员的状态记录的数组, comptid,userid,stride;
@@ -31,12 +42,6 @@ class IndividualCmpt extends Model
     public function getMemberRecords($id){
 
         $records = IndividualCmpt::where('competition_id',$id)->orderBy('stride_count','desc')->get();
-
-//        Log::info($records[0]);
-//
-//        Log::info('尝试使用$record->user');
-//
-//        Log::alert($records[0]->user);
 
         return $records;
     }

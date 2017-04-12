@@ -19,10 +19,15 @@ class DeviceRecordController extends Controller
     public function getDeviceRecord($userId){
 
 
-        Log::info('default');
         $record = $this->Record->getLatestRecord($userId);
-        Log::info($record);
-        return view('user_record',['record'=>$record ,'date'=>$record->date]);
+
+        if($record==null){
+            $date= '1 March, 2017';
+        }else{
+            $date = $record->date;
+        }
+
+        return view('user_record',['record'=>$record ,'date'=>$date]);
 
 
     }

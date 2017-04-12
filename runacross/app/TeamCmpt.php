@@ -24,6 +24,14 @@ class TeamCmpt extends Model
         return $this->hasOne('App\User','id','user_id');
     }
 
+    public function hasJoinedIdvCmp($cmpId , $userId){
+        $competitions = TeamCmpt::where('competition_id',$cmpId)
+            ->where('user_id',$userId)
+            ->get();
+        $result = count($competitions)==0? false: true;
+        return  $result;
+    }
+
     /**
      * @param $id 竞赛Id
      * 返回当前每个成员的状态记录的数组, comptid,userid,team,stride;

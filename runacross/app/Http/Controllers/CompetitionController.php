@@ -12,6 +12,7 @@ use App\Util\FileUploader;
 use Illuminate\Http\Request;
 
 use Log;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class CompetitionController extends Controller
 {
@@ -37,7 +38,7 @@ class CompetitionController extends Controller
     /**
      * 竞赛板界面
      */
-    public function getAllCmpts(){
+    public function getAllCmpts( Request $request){
 
         Log::info("getAllComt");
 
@@ -49,7 +50,9 @@ class CompetitionController extends Controller
 
         for ($i=0;$i<count($individualCompetitions);$i++){
 
-            $individualCompetitionVOs[$i] = new CompetitionVO($individualCompetitions[$i]);
+            $hasJoined =$this->IndividualCmpt->
+            hasJoinedIdvCmp($individualCompetitions[$i]->id, $request->session()->get('user')->id);
+            $individualCompetitionVOs[$i] = new CompetitionVO($individualCompetitions[$i],$hasJoined);
             $competitionId = $individualCompetitions[$i]->id;
             $individualPlayers[$i] = $this->IndividualCmpt->getMemberRecords($competitionId);
         }
@@ -57,8 +60,9 @@ class CompetitionController extends Controller
         $teamCompetitionVOs = array();
         $teamPlayers =array();
         for ($i=0;$i<count($teamCompetitions);$i++){
-
-            $teamCompetitionVOs[$i] = new CompetitionVO($teamCompetitions[$i]);
+            $hasJoined =$this->TeamCmpt->
+            hasJoinedIdvCmp($teamCompetitions[$i]->id, $request->session()->get('user')->id);
+            $teamCompetitionVOs[$i] = new CompetitionVO($teamCompetitions[$i],$hasJoined);
             $competitionId = $teamCompetitions[$i]->id;
             $teamPlayers[$i] =$this->TeamCmpt->getMemberRecords($competitionId);
         }

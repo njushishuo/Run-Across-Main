@@ -74,10 +74,11 @@
                             </div>
                         </div>
                         <!--Created Competitions List-->
+                        @if($createdVOs!=null && count($createdVOs)>0)
                         <div class="row">
                             <div class="col s12">
                                 @for($i=0; $i<count($createdVOs);$i++)
-                                    <div class="card" style="margin-bottom: 0px">
+                                    <div class="card" id="{{$createdVOs[$i]->cmptVO->competition->id}}" style="margin-bottom: 0px">
                                         <!--Avatar here-->
                                         <div class="row" style="margin-bottom: 0px">
                                             <div class="col s4 l2" style="padding:5px">
@@ -144,14 +145,13 @@
                                             <div class="row" style="margin-bottom:0px">
                                                 <div class="col s2 offset-s8">
                                                     <a data-target="{{'created'.$createdVOs[$i]->cmptVO->competition->id}}"
-                                                       class="btn-flat modal-trigger waves-effect waves-light">
+                                                       class="btn modal-trigger waves-effect waves-light">
                                                         竞赛成员
                                                     </a>
                                                 </div>
                                                 <div class="col s2 ">
-                                                    {{--取消竞赛--}}
-                                                    <a data-target="{{'delete_confirm_modal'.$createdVOs[$i]->cmptVO->competition->id}}"
-                                                       class="btn-flat modal-trigger waves-effect waves-light">
+                                                    <a onclick="deleteCmpt({{$createdVOs[$i]->cmptVO->competition->id}})"
+                                                       class="btn  waves-effect waves-light">
                                                         取消竞赛
                                                     </a>
                                                 </div>
@@ -262,20 +262,11 @@
                                             </div>
                                         </div>
                                     @endif
-                                    {{--确认取消--}}
-                                    <div id="{{'delete_confirm_modal'.$createdVOs[$i]->cmptVO->competition->id}}" class="modal">
-                                        <div class="modal-content">
-                                            <span>确定取消竞赛吗？</span>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button  class="modal-action modal-close  waves-effect waves-green btn-flat">取消</button>
-                                            <button onclick="deleteCmpt({{$createdVOs[$i]->cmptVO->competition->id}})"
-                                                    class="modal-action modal-close  waves-effect waves-green btn-flat">确定</button>
-                                        </div>
-                                    </div>
+
                                 @endfor
                             </div>
                         </div>
+                        @endif
                     </div>
                     <div id="participated" class="section scrollspy">
                         <!--Header-->
@@ -284,11 +275,13 @@
                                 <span class="black-text lighten-2" style="font-size: 1.5em" >我参与的</span>
                             </div>
                         </div>
-                        <!--Joined Competitions List-->
+                        {{--<!--Joined Competitions List-->--}}
+
+                        @if($joinedVOs!=null&&count($joinedVOs)>0)
                         <div class="row">
                             <div class="col s12">
                                 @for($i=0; $i<count($joinedVOs);$i++)
-                                    <div class="card" style="margin-bottom: 0px">
+                                    <div class="card" id="{{$joinedVOs[$i]->cmptVO->competition->id}}" style="margin-bottom: 0px">
                                         <!--Avatar here-->
                                         <div class="row" style="margin-bottom: 0px">
                                             <div class="col s4 l2" style="padding:5px">
@@ -316,8 +309,6 @@
                                                 <div class="row" style="margin-bottom: 0px">
                                                     <div class="col s12 l12 " style="padding-left: 0px">
 
-
-                                                        {{--类别--}}
                                                         <div class="chip">
                                                             <div class="valign-wrapper">
                                                                 <i class=" material-icons">person</i>
@@ -329,21 +320,18 @@
                                                                 @endif
                                                             </div>
                                                         </div>
-
-
-                                                        {{--奖金--}}
                                                         <div class="chip">
                                                             <div class="valign-wrapper">
                                                                 <i class=" material-icons">attach_money</i> <span class="text_compete">{{$joinedVOs[$i]->cmptVO->competition->reward}}</span>
                                                             </div>
                                                         </div>
-                                                        {{--开始日期--}}
+
                                                         <div class="chip">
                                                             <div class="valign-wrapper">
                                                                 <i class=" material-icons">alarm</i> <span class="text_compete">{{$joinedVOs[$i]->cmptVO->start_at}}</span>
                                                             </div>
                                                         </div>
-                                                        {{--结束日期--}}
+
                                                         <div class="chip">
                                                             <div class="valign-wrapper">
                                                                 <i class=" material-icons">alarm</i> <span class="text_compete">{{$joinedVOs[$i]->cmptVO->end_at}}</span>
@@ -359,14 +347,13 @@
                                             <div class="row" style="margin-bottom:0px">
                                                 <div class="col s2 offset-s8">
                                                     <a data-target="{{'joined'.$joinedVOs[$i]->cmptVO->competition->id}}"
-                                                       class="btn-flat modal-trigger waves-effect waves-light">
+                                                       class="btn modal-trigger waves-effect waves-light">
                                                         竞赛成员
                                                     </a>
                                                 </div>
                                                 <div class="col s2 ">
-                                                    {{--退出竞赛--}}
-                                                    <a data-target="{{'quit_confirm_modal'.$joinedVOs[$i]->cmptVO->competition->id}}"
-                                                       class="btn-flat modal-trigger waves-effect waves-light">
+                                                    <a onclick="quitCmpt( {{ $joinedVOs[$i]->cmptVO->competition->id.",".Session::get('user')->id }} )"
+                                                       class="btn waves-effect waves-light">
                                                         退出竞赛
                                                     </a>
                                                 </div>
@@ -382,17 +369,17 @@
                                             <ul class="collection">
                                                 @for($j=0;$j<count($joinedVOs[$i]->playerRecords);$j++)
                                                     <li class="collection-item">
-                                                        <div class="row" style="margin-bottom: 0px">
+                                                        <div class="row valign-wrapper" style="margin-bottom: 0px">
                                                             <div class="col s4" style="padding:5px">
-                                                                <img  class="avatar_img_competition" src="{{ $joinedVOs[$i]->playerRecords[$j]->user->avatar }}" alt="Contact Person">
+                                                                <img  class="avatar_member" src="{{ $joinedVOs[$i]->playerRecords[$j]->user->avatar }}" alt="Contact Person">
                                                             </div>
 
-                                                            <div class="input-field col s4" style="padding-left: 0px;">
+                                                            <div class=" col s4" style="padding-left: 0px;">
                                                                 <span class="text_stride" style="font-size: 1em;font-weight:300">步数:</span>
                                                                 <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $joinedVOs[$i]->playerRecords[$j]->stride_count }}</span>
                                                             </div>
 
-                                                            <div class="input-field col s4" style="padding-left: 0px;">
+                                                            <div class="col s4" style="padding-left: 0px;">
                                                                 <span class="text_rank" style="font-size: 1em;font-weight:300">名次:</span>
                                                                 <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $j+1 }}</span>
                                                             </div>
@@ -406,6 +393,7 @@
                                         </div>
                                     </div>
                                     @endif
+
                                     @if($joinedVOs[$i]->cmptVO->competition->type=='team')
                                     <!-- Modal Structure -->
                                     {{--团队赛成员列表--}}
@@ -425,17 +413,17 @@
                                                         @for($j=0;$j<count($joinedVOs[$i]->playerRecords);$j++)
                                                             @if($joinedVOs[$i]->playerRecords[$j]->team == 'red')
                                                                 <li class="collection-item">
-                                                                    <div class="row" style="margin-bottom: 0px">
+                                                                    <div class="row valign-wrapper" style="margin-bottom: 0px">
                                                                         <div class="col s4" style="padding:5px">
-                                                                            <img  class="avatar_img_competition" src="{{ $joinedVOs[$i]->playerRecords[$j]->user->avatar }}" alt="Contact Person">
+                                                                            <img  class="avatar_member" src="{{ $joinedVOs[$i]->playerRecords[$j]->user->avatar }}" alt="Contact Person">
                                                                         </div>
 
-                                                                        <div class="input-field col s4" style="padding-left: 0px;">
+                                                                        <div class="col s4" style="padding-left: 0px;">
                                                                             <span class="text_stride" style="font-size: 1em;font-weight:300">步数:</span>
                                                                             <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $joinedVOs[$i]->playerRecords[$j]->stride_count }}</span>
                                                                         </div>
 
-                                                                        <div class="input-field col s4" style="padding-left: 0px;">
+                                                                        <div class="col s4" style="padding-left: 0px;">
                                                                             <span class="text_rank" style="font-size: 1em;font-weight:300">名次:</span>
                                                                             <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $j+1 }}</span>
                                                                         </div>
@@ -450,17 +438,17 @@
                                                         @for($j=0;$j<count($joinedVOs[$i]->playerRecords);$j++)
                                                             @if($joinedVOs[$i]->playerRecords[$j]->team == 'blue')
                                                                 <li class="collection-item">
-                                                                    <div class="row" style="margin-bottom: 0px">
+                                                                    <div class="row valign-wrapper" style="margin-bottom: 0px">
                                                                         <div class="col s4" style="padding:5px">
-                                                                            <img  class="avatar_img_competition" src="{{$joinedVOs[$i]->playerRecords[$j]->user->avatar }}" alt="Contact Person">
+                                                                            <img  class="avatar_member" src="{{$joinedVOs[$i]->playerRecords[$j]->user->avatar }}" alt="Contact Person">
                                                                         </div>
 
-                                                                        <div class="input-field col s4" style="padding-left: 0px;">
+                                                                        <div class=" col s4" style="padding-left: 0px;">
                                                                             <span class="text_stride" style="font-size: 1em;font-weight:300">步数:</span>
                                                                             <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $joinedVOs[$i]->playerRecords[$j]->stride_count }}</span>
                                                                         </div>
 
-                                                                        <div class="input-field col s4" style="padding-left: 0px;">
+                                                                        <div class=" col s4" style="padding-left: 0px;">
                                                                             <span class="text_rank" style="font-size: 1em;font-weight:300">名次:</span>
                                                                             <span class="grey-text lighten-1" style="font-size: 1em;font-weight:300">{{ $j+1 }}</span>
                                                                         </div>
@@ -477,20 +465,10 @@
                                         </div>
                                     </div>
                                     @endif
-                                    {{--确认退出--}}
-                                    <div id="{{'quit_confirm_modal'.$joinedVOs[$i]->cmptVO->competition->id}}" class="modal">
-                                        <div class="modal-content">
-                                            <span>确定要退出竞赛吗？</span>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button  class="modal-action modal-close  waves-effect waves-green btn-flat">取消</button>
-                                            <button onclick="quitCmpt( {{ $joinedVOs[$i]->cmptVO->competition->id.",".Session::get('user')->id }} )"
-                                                    class="  waves-effect waves-green btn-flat">确定</button>
-                                        </div>
-                                    </div>
                                 @endfor
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
 

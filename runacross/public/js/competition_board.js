@@ -16,7 +16,7 @@ function joinIdvCmpt(competitionId , userId) {
         success: function(msg){
             console.log(msg);
             if(msg.result){
-                alert(msg.info);
+                showToasts();
                 window.location.reload();
             }else{
                 alert("加入失败");
@@ -42,7 +42,7 @@ function joinTmCmpt( competitionId , userId ) {
             console.log(msg);
             if(msg.result){
                 $('team_confirm_modal').closeModal();
-                alert(msg.info);
+                showToasts();
                 window.location.reload();
             }else{
                 alert("加入失败");
@@ -53,10 +53,7 @@ function joinTmCmpt( competitionId , userId ) {
 
 
 
-function checkLevel(userLevel) {
-    if(userLevel<3){
-     alert("只有3级以上才可以发起竞赛哦！");
-    }else{
-       $('#createComp').openModal();
-    }
+function showToasts() {
+    var $toastContent = $('<span>加入成功</span>');
+    Materialize.toast($toastContent, 2000);
 }

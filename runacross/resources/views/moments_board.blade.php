@@ -81,7 +81,7 @@
                                     <div class="col s12 l12">
                                         <div class="file-field input-field">
                                             <a href="">
-                                                <i class="small material-icons">add_a_photo</i>
+                                                <i class="large material-icons">add_a_photo</i>
                                                 <span class="white blue-text lighten-1" style="font-size: 2em;font-weight: 300">图片</span>
                                                 <input type="file" name="image"/>
                                             </a>
@@ -178,7 +178,7 @@
                                 <!--Avatar here-->
                                 <div class="row" style="margin-bottom: 0px">
                                     <div class="col s4 l4" style="padding:5px">
-                                        <img  class="avatar_img_moment" src="{{ $momentVO->moment->Author->avatar }}" alt="Contact Person">
+                                        <img  class="avatar_img_moment_right" src="{{ $momentVO->moment->Author->avatar }}" alt="Contact Person">
                                     </div>
                                     <div class="input-field col s8 l6" style="padding-left: 0px;">
                                         <span class="blue-text lighten-2 text_avatar" >{{ $momentVO->moment->Author->nick_name }}</span><br>

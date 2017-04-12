@@ -32,3 +32,9 @@
     border:none;
     border-bottom: 0px;
 }
+
+.btn{
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size:1em;
+}

@@ -5,6 +5,8 @@ $(document).ready(function(){
     //对话框
     $('.modal-trigger').leanModal();
 });
+
+
 function deleteCmpt(competitionId) {
 
     $.ajax({
@@ -14,14 +16,19 @@ function deleteCmpt(competitionId) {
         success: function(msg){
             console.log(msg);
 
-            alert(msg.info);
-
             if(msg.result) {
-                window.location.reload();
+                var $toastContent = $('<span>取消成功</span>');
+                Materialize.toast($toastContent, 1000);
+                $('#'+competitionId).remove();
+
             }
         }
     });
 }
+
+
+
+
 
 function quitCmpt(competitionId , userId) {
 
@@ -32,21 +39,12 @@ function quitCmpt(competitionId , userId) {
         success: function(msg){
             console.log(msg);
 
-            $('quit_confirm_modal'+competitionId).closeModal();
-
-            alert(msg.info);
-
             if(msg.result) {
-                window.location.reload();
+                var $toastContent = $('<span>退出成功</span>');
+                Materialize.toast($toastContent, 1000);
+                $('#'+competitionId).remove();
             }
         }
     });
 }
 
-function checkLevel(userLevel) {
-    if(userLevel<3){
-        alert("只有3级以上才可以发起竞赛哦！");
-    }else{
-        $('#createComp').openModal();
-    }
-}

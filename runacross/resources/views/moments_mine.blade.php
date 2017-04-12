@@ -74,7 +74,7 @@
 
                 @foreach( $momentVOs as $momentVO)
                     <!--Moments come here-->
-                        <div class="card">
+                        <div class="card" id="{{$momentVO->moment->id}}" >
                             <!--Avatar here-->
                             <div class="row" style="margin-bottom: 0px">
                                 <div class="col s4 l2" style="padding:5px">
@@ -85,9 +85,9 @@
                                     <span class="grey-text lighten-2 text_avatar" >{{ $momentVO->created_at }}</span>
                                 </div>
                                 <div class="input-field col s4 l2" style="padding-left: 0px;">
-                                    <button data-target="{{$momentVO->moment->id.'modal'}}"
-                                            class="right btn red lighten-1  modal-trigger white-text  waves-effect waves-light"
-                                    >删除</button>
+                                    {{--<button )"--}}
+                                    <a onclick="showToasts({{Session::get('user')->id.",".$momentVO->moment->id}})"
+                                       class=" btn lighten-1 waves-effect waves-light">删除</a>
                                 </div>
                             </div>
                             <!--img here-->
@@ -118,23 +118,13 @@
                             </div>
                         </div>
 
-                        <div id="{{$momentVO->moment->id.'modal'}}" class="modal modal-fixed-footer">
-                            <div class="modal-content">
-                                <h3>动态删除提醒</h3>
-                                <p>确定删除此动态吗？</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button class=" modal-action modal-close waves-effect waves-green btn-flat">否</button>
-                                <button onclick="deleteMomentById( {{ Session::get('user')->id.",".$momentVO->moment->id }} )"
-                                        class=" modal-action modal-close waves-effect waves-green btn-flat">是</button>
-                            </div>
-                        </div>
-
                 @endforeach
                 </div>
             </div>
         </div>
     </div>
+
+
 </main>
 
 <footer class="blue lighten-1 grey-text text-lighten-4">

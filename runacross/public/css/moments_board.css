@@ -9,6 +9,12 @@
     margin:5px;
 }
 
+.avatar_img_moment_right{
+    height:60px;
+    width: 60px;
+    margin:5px;
+}
+
 
 .text_avatar{
     font-size: 1em;

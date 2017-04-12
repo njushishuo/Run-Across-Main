@@ -79,3 +79,20 @@ main {
 i.material-icons.right{
     margin:0px;
 }
+
+
+#toast-container {
+    top: 20% ;
+    right: auto !important;
+    bottom: auto !important;
+    left:80%;
+}
+
+.toast{
+    padding-top: 0px;
+    padding-bottom:0px;
+    padding-left:20px;
+    padding-right:20px;
+    height:36px;
+    min-height:36px;
+}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Friend;
 use App\Record;
 use App\User;
+use App\VO\UserVO;
 use Illuminate\Http\Request;
 use Log;
 
@@ -37,8 +38,19 @@ class UserFriendController extends Controller
         $userId = $request->session()->get('user')->id;
         $followeeIds = $this->Friend->getFolloweeIds($userId);
         $followees = $this->User->getUserByIds($followeeIds);
-        $result = $this->User->searchUserByNickName($userId,$keyword);
-        return view('user_friend',['followees'=>$followees ,'result'=>$result]);
+        $results = $this->User->searchUserByNickName($userId,$keyword);
+
+        $resultVOs = array();
+        for($i=0;$i<count($results);$i++){
+
+            $hasFollowed = $this->Friend->hasFollowed($results[$i]->id,$userId);
+            $userVO = new UserVO($results[$i],$hasFollowed);
+            $resultVOs[]=$userVO;
+        }
+
+
+
+        return view('user_friend',['followees'=>$followees ,'result'=>$resultVOs]);
     }
 
     public function follow($userId,$watchId){

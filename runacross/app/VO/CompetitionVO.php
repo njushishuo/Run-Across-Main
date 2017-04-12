@@ -11,13 +11,15 @@ class CompetitionVO
     public $created_at;
     public $start_at;
     public $end_at;
+    public $hasJoined;
 
-    public function __construct($competition)
+    public function __construct($competition , $hasJoined = true)
     {
         $this->competition = $competition;
         $this->created_at = date('Y-m-d',(int)$this->competition->created_at);
         $this->start_at = date('Y-m-d',(int)$this->competition->start_at);
         $this->end_at = date('Y-m-d',(int)$this->competition->end_at);
+        $this->hasJoined = $hasJoined;
 
         $curTime = time()+8*60*60;
 

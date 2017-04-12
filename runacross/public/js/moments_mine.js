@@ -18,8 +18,9 @@ function deleteMomentById(userId , momentId) {
             console.log(msg);
 
             if(msg.result){
-                   //alert("删除成功");
-                window.location.href = msg.url;
+
+               // window.location.href = msg.url;
+                 $('#'+momentId).remove();
             }else{
                 alert("删除失败");
             }
@@ -27,4 +28,12 @@ function deleteMomentById(userId , momentId) {
         }
     });
     
+}
+
+
+function showToasts(userId , momentId) {
+    var $toastContent = $('<span>删除成功</span>');
+    Materialize.toast($toastContent, 1000);
+    deleteMomentById(userId,momentId);
+
 }

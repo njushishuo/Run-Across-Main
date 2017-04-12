@@ -73,7 +73,7 @@
                                 <div class="col s6 l3 input-field" >
                                     <input id="record_date" type="text"  value="{{$date}}"
                                            class="datepicker picker__input" style="max-width: 150px">
-                                    <label for="record_date">日期</label>
+                                    {{--<label for="record_date">日期</label>--}}
                                 </div>
                                 <div class="col s6 l9">
                                     <button onclick="updateRecord({{Session::get('user')->id}})"

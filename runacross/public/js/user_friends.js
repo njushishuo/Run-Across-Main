@@ -2,13 +2,7 @@
 
 function follow(userId, followId) {
 
-    userDetial = {
-        username:'',
-        age:'',
-        goal:'',
-        location:'',
-        followId :null
-    }
+
 
     $.ajax({
         type: "post",
@@ -18,12 +12,9 @@ function follow(userId, followId) {
             console.log(msg);
 
             if(msg.result){
-                userDetial.followId = followId;
+
                 window.location.reload();
-            }else{
-
             }
-
         }
     });
 }

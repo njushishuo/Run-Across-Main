@@ -30,8 +30,9 @@ class Competition extends Model
                                     ->orderBy('created_at','desc')
                                     ->get();
         return  $competitions;
-
     }
+
+
 
     /**
      * 返回系统中全部的活跃中的个人竞赛(尚未开始与尚未结束的竞赛),按创建时间降序

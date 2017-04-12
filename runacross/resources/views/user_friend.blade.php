@@ -99,27 +99,36 @@
                                     @if($result!=null)
                                         <ul class="collection">
                                             @for($i=0;$i<count($result);$i++)
-                                                <li class="collection-item">
+                                                <a class="collection-item">
                                                     <div class="row " style="margin-bottom: 0px">
-                                                        <div class="col s8">
+                                                        <div class="col s12 l8">
                                                             <div class="valign-wrapper">
-                                                                <img src="{{$result[$i]->avatar}}" alt="" class="valign avatar_img_friends ">
-                                                                <p>
-                                                <span class="text_username blue-text">
-                                                   {{$result[$i]->nick_name}}
-                                                </span>
-                                                                </p>
+                                                                <div class="col s4 l4" style="padding:5px">
+                                                                    <img src="{{$result[$i]->user->avatar}}" alt="" class=" avatar_img_friends ">
+                                                                </div>
+                                                                <div class="input-field col s8 l8" style="padding-left: 0px;">
+                                                                    <span class="grey-text lighten-2 text_avatar" >{{$result[$i]->user->nick_name}}</span><br>
+                                                                    <span class="grey-text lighten-2 text_avatar" >{{ $result[$i]->user->addr }}</span>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col s4" style="padding: 0px">
+                                                        <div class="col s12 l4" style="padding: 0px">
                                                             <br>
-                                                            <button onclick="follow({{Session::get('user')->id.",".$result[$i]->id}})"
-                                                                    class="btn blue lighten-1 float right" >
-                                                                关注
+                                                            @if(!$result[$i]->hasFollowed)
+                                                            <button onclick="follow({{Session::get('user')->id.",".$result[$i]->user->id}})"
+                                                                    class="btn lighten-1 float right" >
+                                                                添加关注
                                                             </button>
+                                                            @endif
+                                                            @if($result[$i]->hasFollowed)
+                                                                <button onclick="follow({{Session::get('user')->id.",".$result[$i]->user->id}})"
+                                                                        class="btn disabled lighten-1 float right" >
+                                                                    添加关注
+                                                                </button>
+                                                            @endif
                                                         </div>
                                                     </div>
-                                                </li>
+                                                </a>
                                             @endfor
                                         </ul>
                                     @endif
@@ -159,7 +168,7 @@
                                                         <div class="col s12 l4" style="padding: 0px">
                                                             <br>
                                                             <button onclick="unfollow({{Session::get('user')->id.",".$followees[$i]->id}})"
-                                                                    class="btn red lighten-1 float right" >
+                                                                    class="btn lighten-1 float right" >
                                                                 取消关注
                                                             </button>
                                                         </div>
